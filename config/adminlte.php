@@ -63,9 +63,9 @@ return [
     |
     */
 
-    'logo' => '<b>Admin</b>LTE',
+    'logo' => '<b>Admin</b>Elib',
     'logo_img' => 'img/logo-elib.png',
-    'logo_img_class' => 'brand-image img-circle elevation-3',
+    'logo_img_class' => 'brand-image img-square elevation-3',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
     'logo_img_alt' => 'Admin Logo',
@@ -110,7 +110,7 @@ return [
         'enabled' => true,
         'img' => [
             'path' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
-            'alt' => 'AdminLTE Preloader Image',
+            'alt' => 'Elib Preloader Image',
             'effect' => 'animation__shake',
             'width' => 60,
             'height' => 60,
@@ -307,9 +307,9 @@ return [
             'text' => 'search',
         ],
         [
-            'text' => 'blog',
-            'url'  => 'admin/blog',
-            'can'  => 'manage-blog',
+            'text' => 'Dashboard',
+            'url'  => 'dashboard',
+            'icon' => 'fas fa-tachometer-alt',
         ],
         [
             'text'    => 'Buku',
@@ -340,6 +340,41 @@ return [
                     'url'  => '#',
                 ],
             ],
+        ],
+        [
+            'text' => 'Data Pengguna',
+            'url'  => 'data pengguna',
+            'icon' => 'fas fa-user-friends',
+        ],
+        [
+            'text' => 'Transaksi',
+            'url'  => 'transaksi',
+            'icon' => 'fas fa-window-restore',
+            'submenu' =>  [
+                [
+                    'text' => 'Pinjam',
+                    'url'  => '#',
+                ],
+                [
+                    'text' => 'Dikembalikan',
+                    'url'  => '#',
+                ],
+            ],
+        ],
+        [
+            'text' => 'Denda',
+            'url'  => 'denda',
+            'icon' => 'fas fa-file-invoice-dollar',
+        ],
+        [
+            'text' => 'Laporan',
+            'url'  => 'laporan',
+            'icon' => 'fas fa-file',
+        ],
+        [
+            'text' => 'Pengaturan',
+            'url'  => 'pengaturan',
+            'icon' => 'fas fa-cogs',
         ],
     ],
 
