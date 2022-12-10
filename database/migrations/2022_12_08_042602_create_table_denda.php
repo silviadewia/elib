@@ -13,9 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('table_rak', function (Blueprint $table) {
+        Schema::create('table_denda', function (Blueprint $table) {
             $table->id();
-            $table->string('nama', 25);
+            $table->decimal('harga',$precision = 10, $scale = 3 );
+            $table->enum('status', ['aktif','tidak']);
             $table->string('dibuat_oleh', 25);
             $table->timestamps();
         });
@@ -28,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('table_rak');
+        Schema::dropIfExists('table_denda');
     }
 };

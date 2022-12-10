@@ -14,13 +14,20 @@ return new class extends Migration
     public function up()
     {
         Schema::create('table_buku', function (Blueprint $table) {
-            $table->id(); //ID ws ono gawan, gaush di tambah
+            $table->id();
             $table->string('kategori', 25);
             $table->string('rak', 25);
             $table->string('pengarang', 25);
-
-            //teruskan
-            $table->timestamps(); //timestamp iki default, isine created_at dan updated_at dadi kue gausah gawe created_at karo updated_at
+            $table->string('penerbit', 25);
+            $table->string('judul_buku', 25);
+            $table->integer('tahun_buku')->unsigned();
+            $table->integer('jumlah_buku')->unsigned();
+            $table->integer('isbn')->unsigned();
+            $table->text('sampul');
+            $table->text('lampiran_buku');
+            $table->text('keterangan_lain');
+            $table->string('dibuat_oleh', 25);
+            $table->timestamps();
         });
     }
 
