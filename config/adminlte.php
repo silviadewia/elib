@@ -308,7 +308,7 @@ return [
         ],
         [
             'text' => 'Dashboard',
-            'url'  => 'dashboard',
+            'url'  => 'home',
             'icon' => 'fas fa-tachometer-alt',
         ],
         [
@@ -317,33 +317,29 @@ return [
             'submenu' => [
                 [
                     'text' => 'Tambah Buku',
-                    'url'  => '#',
+                    'url'  => 'buku/daftar',
                 ],
                 [
                     'text' => 'Tambah Kategori',
-                    'url'  => '#',
+                    'url'  => '/buku/kategori',
                 ],
                 [
                     'text' => 'Tambah Pengarang',
-                    'url'  => '#',
+                    'url'  => '/buku/pengarang',
                 ],
                 [
                     'text' => 'Tambah Rak',
-                    'url'  => '#',
+                    'url'  => '/buku/rak',
                 ],
                 [
                     'text' => 'Tambah Penerbit',
-                    'url'  => '#',
-                ],
-                [
-                    'text' => 'Tambah Denda',
-                    'url'  => '#',
+                    'url'  =>'/buku/penerbit',
                 ],
             ],
         ],
         [
             'text' => 'Data Pengguna',
-            'url'  => 'data pengguna',
+            'url'  => 'pengguna',
             'icon' => 'fas fa-user-friends',
         ],
         [
@@ -353,11 +349,11 @@ return [
             'submenu' =>  [
                 [
                     'text' => 'Pinjam',
-                    'url'  => '#',
+                    'url'  => 'pinjam',
                 ],
                 [
                     'text' => 'Dikembalikan',
-                    'url'  => '#',
+                    'url'  => 'dikembalikan',
                 ],
             ],
         ],
@@ -414,22 +410,42 @@ return [
 
     'plugins' => [
         'Datatables' => [
-            'active' => false,
+            'active' => true,
             'files' => [
                 [
                     'type' => 'js',
-                    'asset' => false,
-                    'location' => '//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js',
+                    'asset' => true,
+                    'location' => '//cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js',
                 ],
                 [
                     'type' => 'js',
-                    'asset' => false,
-                    'location' => '//cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js',
+                    'asset' => true,
+                    'location' => '//cdn.datatables.net/1.13.1/js/dataTables.bootstrap4.min.js',
                 ],
                 [
                     'type' => 'css',
-                    'asset' => false,
-                    'location' => '//cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css',
+                    'asset' => true,
+                    'location' => '//cdn.datatables.net/buttons/2.3.2/css/buttons.bootstrap4.min.css',
+                ],
+                [
+                    'type' => 'css',
+                    'asset' => true,
+                    'location' => '//cdn.datatables.net/1.13.1/css/dataTables.bootstrap4.min.css',
+                ],
+                [
+                    'type' => 'js',
+                    'asset' => true,
+                    'location' => '//cdn.datatables.net/buttons/2.3.2/js/dataTables.buttons.min.js',
+                ],
+                [
+                    'type' => 'js',
+                    'asset' => true,
+                    'location' => '//cdn.datatables.net/buttons/2.3.2/js/buttons.html5.min.js',
+                ],
+                [
+                    'type' => 'js',
+                    'asset' => true,
+                    'location' => '//cdn.datatables.net/buttons/2.3.2/js/buttons.print.min.js',
                 ],
             ],
         ],
