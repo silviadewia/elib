@@ -69,7 +69,7 @@
                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                     aria-label="Alamat: activate to sort column ascending" style="width: 188.188px;">Alamat</th>
                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                    aria-label="Aksi: activate to sort column ascending" style="width: 700.700px;">Aksi</th>
+                    aria-label="Aksi: activate to sort column ascending" style="width: 21000.21000px;">Aksi</th>
             </tr>
         </thead>
         <tbody>

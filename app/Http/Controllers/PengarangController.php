@@ -15,9 +15,10 @@ class PengarangController extends Controller
     public function index()
     {
         $data = [
-            'title' => 'Daftar Pengarang'
+            'title' => 'Daftar pengarang',
+            'pengarang' => pengarang::all(),
         ];
-        return view('Pengarang.index', $data);
+        return view('pengarang.index', $data)->with('i');
     }
 
     /**
@@ -27,6 +28,10 @@ class PengarangController extends Controller
      */
     public function create()
     {
+        $data = [
+            'title' => 'Daftar pengarang'
+        ];
+        return view('pengarang.index', $data); 
         //
     }
 
@@ -38,6 +43,18 @@ class PengarangController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'nama' => 'required'
+        ]);
+
+        # olah sebelum insert
+        $insert = [
+            'nama' => $request->input('nama'),
+            'dibuat_oleh'=>'Auth'::user()->name,
+        ];
+        Pengarang::create($insert);
+
+        return redirect()->route('pengarang.index')->with('success', 'Berhasil tambah pengarang');
         //
     }
 

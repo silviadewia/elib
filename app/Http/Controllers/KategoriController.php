@@ -51,7 +51,7 @@ class KategoriController extends Controller
         # olah sebelum insert
         $insert = [
             'nama' => $request->input('nama'),
-            'dibuat_oleh'=> Auth::user()->name,
+            'dibuat_oleh'=>'Auth'::user()->name,
         ];
         Kategori::create($insert);
 

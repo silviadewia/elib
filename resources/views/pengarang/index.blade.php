@@ -2,11 +2,8 @@
 
 @section('title', $title)
 
-@extends('adminlte::page')
-
-@section('title', $title)
-
 @section('content_header')
+
 <h1>{{$title}}</h1>
 @stop
 
@@ -22,20 +19,40 @@
                     </h3>
                 </div>
                 <div class="card-body">
-                    <form>
+                    @if ($errors->any())
+                    <div class="alert alert-danger">
+                        There were some problems with your input.<br><br>
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    @endif
+
+                    @if ($message = Session::get('success'))
+                    <div class="alert alert-success">
+                        <p>{{ $message }}</p>
+                    </div>
+                    @endif
+
+                    <form method="post" action="{{ route('pengarang.store'); }}">
+                        @csrf
                         <div class="card-body">
                             <div class="form-group">
-                                <label for="nama">Nama Pengarang</label>
-                                <input type="text" class="form-control" id="nama" placeholder="Nama Pengarang">
+                                <label for="nama">Nama pengarang</label>
+                                <input type="text" class="form-control" id="nama" name="nama"
+                                    placeholder="Nama pengarang" autocomplete="off">
                             </div>
                         </div>
 
                         <div class="card-footer">
                             <button type="reset" class="btn btn-default">Batal</button>
-                            <button type="submit" class="btn btn-info  float-right"><i class="fas fa-plus"></i> Simpan</button>
+                            <button type="submit" class="btn btn-info  float-right"><i class="fas fa-plus"></i>
+                                Simpan</button>
                         </div>
-                    </form>
                 </div>
+                </form>
             </div>
         </div>
 
@@ -48,24 +65,45 @@
                     </h3>
                 </div>
                 <div class="card-body">
-                    <table class="table table-bordered table-hover dataTable dtr-inline">
-                        <tr>
-                            <th>#</th>
-                            <th>Kategori</th>
-                            <th>Aksi</th>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>Buku Tamu</td>
-                            <td>
-                                <button class="btn btn-primary btn-sm"><i class="fas fa-pen"></i> </button>
-                                <button class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> </button>
-                            </td>
-                        </tr>
+                    <table class="table table-bordered table-hover dataTable dtr-inline" name="table-pengarang"
+                        id="table-pengarang">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Kategori</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($pengarang as $value)
+                            <tr>
+                                <td>{{ ++$i }}</td>
+                                <td>{{ $value->nama }}</td>
+                                <td>
+                                    <button class="btn btn-primary btn-sm"><i class="fas fa-pen"></i> </button>
+                                    <button class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> </button>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
                     </table>
                 </div>
             </div>
         </div>
     </div>
 </div>
+@stop
+
+@section('js')
+<script>
+    $(document).ready(function () {
+        $('#table-pengarang').DataTable({
+            dom: 'Bfrtip',
+            buttons: [
+                'copy', 'csv', 'excel', 'pdf', 'print'
+            ]
+        });
+    });
+
+</script>
 @stop

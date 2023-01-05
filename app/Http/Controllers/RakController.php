@@ -15,9 +15,10 @@ class RakController extends Controller
     public function index()
     {
         $data = [
-            'title' => 'Daftar Rak'
+            'title' => 'Daftar rak',
+            'rak' => rak::all(),
         ];
-        return view('Rak.index', $data);
+        return view('rak.index', $data)->with('i');
     }
 
     /**
@@ -27,6 +28,10 @@ class RakController extends Controller
      */
     public function create()
     {
+        $data = [
+            'title' => 'Daftar rak'
+        ];
+        return view('rak.index', $data); 
         //
     }
 
@@ -38,6 +43,18 @@ class RakController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'nama' => 'required'
+        ]);
+
+        # olah sebelum insert
+        $insert = [
+            'nama' => $request->input('nama'),
+            'dibuat_oleh'=>'Auth'::user()->name,
+        ];
+        Rak::create($insert);
+
+        return redirect()->route('rak.index')->with('success', 'Berhasil tambah rak');
         //
     }
 

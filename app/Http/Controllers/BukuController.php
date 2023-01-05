@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Buku;
 use Illuminate\Http\Request;
+use Auth;
 
 class BukuController extends Controller
 {
@@ -15,9 +16,11 @@ class BukuController extends Controller
     public function index()
     {
         $data = [
-            'title' => 'Daftar Buku'
+            'title' => 'Daftar Kategori',
+            'Buku' => buku::all(),
         ];
-        return view('buku.index', $data);
+    
+        return view('buku.index', $data)->with('i');
     }
 
     /**
@@ -28,7 +31,7 @@ class BukuController extends Controller
     public function create()
     {
         $data = [
-            'title' => 'Daftar Buku'
+            'title' => 'Daftar buku'
         ];
         return view('buku.index', $data);
     }
@@ -41,11 +44,19 @@ class BukuController extends Controller
      */
     public function store(Request $request)
     {
-        // kita buat validasi 
+        $request->validate([
+            'nama' => 'required'
+        ]);
 
-        // sukses simpen db
+        # olah sebelum insert
+        $insert = [
+            'nama' => $request->input('nama'),
+            'dibuat_oleh'=>'Auth'::user()->name,
+        ];
+        Buku::create($insert);
 
-        // return kan jika sucess
+        return redirect()->route('buku.index')->with('success', 'Berhasil tambah kategori');
+        
     }
 
     /**
