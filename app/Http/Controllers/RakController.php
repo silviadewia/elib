@@ -15,22 +15,27 @@ class RakController extends Controller
     public function index()
     {
         $data = [
-            'title' => 'Daftar Rak'
+            'title' => 'Daftar rak',
+            'rak' => rak::all(),
         ];
-        return view('Rak.index', $data);
+        return view('rak.index', $data)->with('i');
     }
 
-    /**
+    /*
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function create()
     {
+        $data = [
+            'title' => 'Daftar rak'
+        ];
+        return view('rak.index', $data); 
         //
     }
 
-    /**
+    /*
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -38,6 +43,19 @@ class RakController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'nama' => 'required'
+        ]);
+
+
+        # olah sebelum insert
+        $insert = [
+            'nama' => $request->input('nama'),
+            'dibuat_oleh'=>'Auth'::user()->name,
+        ];
+        Rak::create($insert);
+
+        return redirect()->route('rak.index')->with('success', 'Berhasil tambah rak');
         //
     }
 
@@ -67,7 +85,7 @@ class RakController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Rak  $rak
+     * @param  \App\Models\Rak $rak
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Rak $rak)

@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,7 +33,7 @@ Route::prefix('/buku')->group(function(){
 
     Route::get('/pengguna', [App\Http\Controllers\PenggunaController::class, 'index']);
     Route::get('/pinjam', [App\Http\Controllers\PinjamController::class, 'index']);
-    // Route::get('/dashboard',[app\Http\Controllers\DashboardController::class, 'index']);
+    Route::get('/dashboard',[app\Http\Controllers\DashboardController::class, 'index']);
     Route::get('/denda', [App\Http\Controllers\DendaController::class, 'index']);
     Route::get('/laporan',[App\Http\Controllers\LaporanController::class, 'index']);
     Route::get('/pengaturan',[App\Http\Controllers\PengaturanController::class, 'index']);

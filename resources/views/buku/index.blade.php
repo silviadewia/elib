@@ -2,10 +2,6 @@
 
 @section('title', $title)
 
-@extends('adminlte::page')
-
-@section('title', $title)
-
 @section('content_header')
 <h1>{{$title}}</h1>
 @stop
@@ -22,15 +18,23 @@
                     </h3>
                 </div>
                 <div class="card-body">
-                @if ($errors->any())
-                        <div class="alert alert-danger">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
+                    @if ($errors->any())
+                    <div class="alert alert-danger">
+                        There were some problems with your input.<br><br>
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
                     @endif
+
+                    @if ($message = Session::get('success'))
+                    <div class="alert alert-success">
+                        <p>{{ $message }}</p>
+                    </div>
+                    @endif
+
                     <form method="post" action="{{ route('daftar.store'); }}">
                         @csrf
                         <div class="card-body">
@@ -58,24 +62,45 @@
                     </h3>
                 </div>
                 <div class="card-body">
-                    <table class="table table-bordered table-hover dataTable dtr-inline">
-                        <tr>
-                            <th>#</th>
-                            <th>Kategori</th>
-                            <th>Aksi</th>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>Buku Tamu</td>
-                            <td>
-                                <button class="btn btn-primary btn-sm"><i class="fas fa-pen"></i> </button>
-                                <button class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> </button>
-                            </td>
-                        </tr>
+                    <table class="table table-bordered table-hover dataTable dtr-inline" name="table-buku"
+                        id="table-buku">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Kategori</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($buku as $value)
+                            <tr>
+                                <td>{{ ++$i }}</td>
+                                <td>{{ $value->nama }}</td>
+                                <td>
+                                    <button class="btn btn-primary btn-sm"><i class="fas fa-pen"></i> </button>
+                                    <button class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> </button>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
                     </table>
                 </div>
             </div>
         </div>
     </div>
 </div>
+@stop
+
+@section('js')
+<script>
+    $(document).ready(function () {
+        $('#table-buku').DataTable({
+            dom: 'Bfrtip',
+            buttons: [
+                'copy', 'csv', 'excel', 'pdf', 'print'
+            ]
+        });
+    });
+
+</script>
 @stop

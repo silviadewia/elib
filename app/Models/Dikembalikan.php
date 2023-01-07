@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class Dikembalikan extends Model
 {
     use HasFactory;
+   
 }

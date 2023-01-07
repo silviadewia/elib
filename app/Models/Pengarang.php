@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Pengarang extends Model
 {
     use HasFactory;
+    protected $table = 'kategori';
+
+    protected $fillable = [
+        'nama',
+        'dibuat_oleh',
+    ];
 }

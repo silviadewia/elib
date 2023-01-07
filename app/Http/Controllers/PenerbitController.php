@@ -15,10 +15,10 @@ class PenerbitController extends Controller
     public function index()
     {
         $data = [
-            'title' => 'Daftar Penerbit'
+            'title' => 'Daftar penerbit',
+            'pengarang' => Penerbit::all(),
         ];
-        return view('Penerbit.index', $data);
-        //
+        return view('penerbit.index', $data)->with('i');
     }
 
     /**
@@ -28,6 +28,10 @@ class PenerbitController extends Controller
      */
     public function create()
     {
+        $data = [
+            'title' => 'Daftar Penerbit'
+        ];
+        return view('Penerbit.index', $data); 
         //
     }
 
@@ -39,6 +43,18 @@ class PenerbitController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'nama' => 'required'
+        ]);
+
+        # olah sebelum insert
+        $insert = [
+            'nama' => $request->input('nama'),
+            'dibuat_oleh'=>'Auth'::user()->name,
+        ];
+        Penerbit::create($insert);
+
+        return redirect()->route('penerbit.index')->with('success', 'Berhasil tambah penerbit');
         //
     }
 
