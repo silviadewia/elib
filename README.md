@@ -8,3 +8,4 @@
 2. fork repo ini
 3. siapkan composer,laragon usahakan menggunkan php 8.1
 4. clone repo ini di folder kalian 
+5. check
