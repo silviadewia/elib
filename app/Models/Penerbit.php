@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Penerbit extends Model
 {
     use HasFactory;
-    protected $table = 'kategori';
+    protected $table = 'penerbit';
 
     protected $fillable = [
         'nama',

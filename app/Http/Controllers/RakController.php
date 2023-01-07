@@ -21,7 +21,7 @@ class RakController extends Controller
         return view('rak.index', $data)->with('i');
     }
 
-    /**
+    /*
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
@@ -35,7 +35,7 @@ class RakController extends Controller
         //
     }
 
-    /**
+    /*
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -46,6 +46,7 @@ class RakController extends Controller
         $request->validate([
             'nama' => 'required'
         ]);
+
 
         # olah sebelum insert
         $insert = [
@@ -84,7 +85,7 @@ class RakController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Rak  $rak
+     * @param  \App\Models\Rak $rak
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Rak $rak)

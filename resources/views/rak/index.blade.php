@@ -42,7 +42,7 @@
                             <div class="form-group">
                                 <label for="nama">Nama Rak</label>
                                 <input type="text" class="form-control" id="nama" name="nama"
-                                    placeholder="Nama rak" autocomplete="off">
+                                    placeholder="Nama Rak" autocomplete="off">
                             </div>
                         </div>
 
@@ -75,7 +75,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($rak as $value)
+                            @foreach($Rak as $value)
                             <tr>
                                 <td>{{ ++$i }}</td>
                                 <td>{{ $value->nama }}</td>
