@@ -1,7 +1,11 @@
 <?php
+
 namespace App\Http\Controllers;
+
 use App\Models\Kategori;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 class KategoriController extends Controller
 {
     /**
@@ -11,19 +15,17 @@ class KategoriController extends Controller
      */
     public function index()
     {
+        #variabel tampilan
         $data = [
             'title' => 'Daftar Kategori',
             'kategori' => Kategori::all(),
         ];
-    
-        return view('kategori.index', $data)->with('i');
 
-        
         # kembalikan ke tampilan
-        return view('penerbit.index', $data)->with('i');
+        return view('kategori.index', $data)->with('i'); 
     }
 
-  /*
+    /*
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
@@ -34,7 +36,6 @@ class KategoriController extends Controller
         $data = [
             'title' => 'Daftar kategori'
         ];
-        return view('kategori.index', $data); 
 
         # kembalikan ke tampilan
         return view('kategori.index', $data);
@@ -48,26 +49,24 @@ class KategoriController extends Controller
      */
     public function store(Request $request)
     {
+        # validasi data input
         $request->validate([
-            'nama' => 'required'
+            'nama' => 'required|min:3|max:25'
         ]);
-
 
         # olah sebelum insert
         $insert = [
             'nama' => $request->input('nama'),
-            'dibuat_oleh'=>'Auth'::user()->name,
+            'dibuat_oleh'=> Auth::user()->name,
         ];
-        Kategori::create($insert);
 
-        return redirect()->route('kategori.index')->with('success', 'Berhasil tambah kategori');
         # coba insert
         try {
             # proses insert
             Kategori::create($insert);
 
             # kembalikan ke tampilan
-            return redirect()->route('kategori.index')->with('success', 'Berhasil insert kategori');
+            return redirect()->route('kategori.index')->with('success', 'Hi '.Auth::user()->name.', Berhasil tambah kategori');
         } catch (\Exception $e) { # jika gagal
             # kembalikan ke tampilan
             return redirect()->route('kategori.index')->with('failed', 'Gagal insert kategori');
@@ -92,7 +91,6 @@ class KategoriController extends Controller
      */
     public function edit(Kategori $kategori)
     {
-        //
         # variable tampilan
         $data = [
             'title' => 'Edit kategori',
@@ -113,10 +111,9 @@ class KategoriController extends Controller
      */
     public function update(Request $request, Kategori $kategori)
     {
-        //
         # validasi data
         $request->validate([
-            'nama' => 'required'
+            'nama' => 'required|min:3|max:25'
         ]);
 
         # coba update
@@ -124,7 +121,7 @@ class KategoriController extends Controller
             # proses update
             $kategori->update($request->all());
             # kembalikan ke tampilan
-            return redirect()->route('kategori.index')->with('success', 'Berhasil update kategori');
+            return redirect()->route('kategori.index')->with('success', 'Hi '.Auth::user()->name.', Berhasil update kategori');
         } catch (\Exception $e) { # jika gagal
             # kembalikan ke tampilan
             return redirect()->route('kategori.index')->with('failed', 'Gagal update kategori');
@@ -139,13 +136,12 @@ class KategoriController extends Controller
      */
     public function destroy(Kategori $kategori)
     {
-        //
         # coba update
         try {
             # proses delete
             $kategori->delete();
             # kembalikan ke tampilan
-            return redirect()->route('kategori.index')->with('success', 'Berhasil delete kategori');
+            return redirect()->route('kategori.index')->with('success', 'Hi '.Auth::user()->name.', Berhasil delete kategori');
         } catch (\Exception $e) { # jika gagal
             # kembalikan ke tampilan
             return redirect()->route('kategori.index')->with('failed', 'Gagal delete kategori');
