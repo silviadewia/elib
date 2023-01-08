@@ -36,7 +36,7 @@
                     </div>
                     @endif
 
-                    <form method="post" action="{{ route('Rak.store'); }}">
+                    <form method="post" action="{{ route('rak.store'); }}">
                         @csrf
                         <div class="card-body">
                             <div class="form-group">
@@ -66,7 +66,7 @@
                 </div>
                 <div class="card-body">
                     <table class="table table-bordered table-hover dataTable dtr-inline" name="table-Rak"
-                        id="table-Rak">
+                        id="table-rak">
                         <thead>
                             <tr>
                                 <th>#</th>
@@ -75,7 +75,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($Rak as $value)
+                            @foreach($rak as $value)
                             <tr>
                                 <td>{{ ++$i }}</td>
                                 <td>{{ $value->nama }}</td>
@@ -97,7 +97,7 @@
 @section('js')
 <script>
     $(document).ready(function () {
-        $('#table-Rak').DataTable({
+        $('#table-rak').DataTable({
             dom: 'Bfrtip',
             buttons: [
                 'copy', 'csv', 'excel', 'pdf', 'print'

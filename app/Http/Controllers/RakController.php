@@ -16,7 +16,7 @@ class RakController extends Controller
     {
         $data = [
             'title' => 'Daftar rak',
-            'rak' => rak::all(),
+            'rak' => Rak::all(),
         ];
         return view('rak.index', $data)->with('i');
     }

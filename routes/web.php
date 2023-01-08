@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    Route::redirect('/', '/home'); //
 });
 
 Auth::routes();
@@ -31,11 +31,11 @@ Route::prefix('/buku')->group(function(){
     Route::resource('/daftar',  App\Http\Controllers\BukuController::class);
 });
 
-    Route::get('/pengguna', [App\Http\Controllers\PenggunaController::class, 'index']);
-    Route::get('/pinjam', [App\Http\Controllers\PinjamController::class, 'index']);
-    Route::get('/dashboard',[app\Http\Controllers\DashboardController::class, 'index']);
-    Route::get('/denda', [App\Http\Controllers\DendaController::class, 'index']);
-    Route::get('/laporan',[App\Http\Controllers\LaporanController::class, 'index']);
-    Route::get('/pengaturan',[App\Http\Controllers\PengaturanController::class, 'index']);
-    Route::get('/dikembalikan',[App\Http\Controllers\DikembalikanController::class, 'index']);
+Route::get('/pengguna', [App\Http\Controllers\PenggunaController::class, 'index']);
+Route::get('/pinjam', [App\Http\Controllers\PinjamController::class, 'index']);
+Route::get('/dashboard',[app\Http\Controllers\DashboardController::class, 'index']);
+Route::get('/denda', [App\Http\Controllers\DendaController::class, 'index']);
+Route::get('/laporan',[App\Http\Controllers\LaporanController::class, 'index']);
+Route::get('/pengaturan',[App\Http\Controllers\PengaturanController::class, 'index']);
+Route::get('/dikembalikan',[App\Http\Controllers\DikembalikanController::class, 'index']);
  

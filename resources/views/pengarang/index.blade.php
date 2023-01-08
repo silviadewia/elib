@@ -65,7 +65,7 @@
                     </h3>
                 </div>
                 <div class="card-body">
-                    <table class="table table-bordered table-hover dataTable dtr-inline" name="table-pengarang"
+                <table class="table table-bordered table-hover dataTable dtr-inline" name="table-Pengarang"
                         id="table-pengarang">
                         <thead>
                             <tr>
@@ -75,7 +75,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($pengarang as $value)
+                        @foreach($pengarang as $value)
                             <tr>
                                 <td>{{ ++$i }}</td>
                                 <td>{{ $value->nama }}</td>

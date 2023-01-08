@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use Carbon\Carbon;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -17,26 +18,35 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('users')->insert([
-            'name' => 'silvia',
-            'email' => 'callmesil@gmail.com',
-            'password' => Hash::make('kacangbawang'),
-        ],
-        [
-            'name' => 'nawang', 
-            'email' => 'callmenaw@gmail.com',
-            'password' => Hash::make('kacangbawang'), 
-        ],
-        [
-            'name' => 'ardan', 
-            'email' => 'callmedan@gmail.com',
-            'password' => Hash::make('kacangbawang'), 
-        ],
-        [
-            'name' => 'herman', 
-            'email' => 'callmeman@gmail.com',
-            'password' => Hash::make('kacangbawang'), 
-        ],
-    );
+        DB::table('users')->insert(
+            [
+                'name' => 'silvia',
+                'email' => 'callmesil@gmail.com',
+                'password' => Hash::make('kacangbawang'),
+                'created_at' => Carbon::now()->toDateTimeLocalString(),
+                'updated_at' => Carbon::now()->toDateTimeLocalString()
+            ],
+            [
+                'name' => 'nawang',
+                'email' => 'callmenaw@gmail.com',
+                'password' => Hash::make('kacangbawang'),
+                'created_at' => Carbon::now()->toDateTimeLocalString(),
+                'updated_at' => Carbon::now()->toDateTimeLocalString()
+            ],
+            [
+                'name' => 'ardan',
+                'email' => 'callmedan@gmail.com',
+                'password' => Hash::make('kacangbawang'),
+                'created_at' => Carbon::now()->toDateTimeLocalString(),
+                'updated_at' => Carbon::now()->toDateTimeLocalString()
+            ],
+            [
+                'name' => 'herman',
+                'email' => 'callmeman@gmail.com',
+                'password' => Hash::make('kacangbawang'),
+                'created_at' => Carbon::now()->toDateTimeLocalString(),
+                'updated_at' => Carbon::now()->toDateTimeLocalString()
+            ],
+        );
     }
 }

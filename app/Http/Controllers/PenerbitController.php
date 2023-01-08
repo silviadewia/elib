@@ -16,12 +16,12 @@ class PenerbitController extends Controller
     {
         $data = [
             'title' => 'Daftar penerbit',
-            'pengarang' => Penerbit::all(),
+            'penerbit' => Penerbit::all(),
         ];
         return view('penerbit.index', $data)->with('i');
     }
 
-    /**
+    /*
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
@@ -29,13 +29,13 @@ class PenerbitController extends Controller
     public function create()
     {
         $data = [
-            'title' => 'Daftar Penerbit'
+            'title' => 'Daftar penerbit'
         ];
-        return view('Penerbit.index', $data); 
+        return view('penerbit.index', $data); 
         //
     }
 
-    /**
+    /*
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -47,6 +47,7 @@ class PenerbitController extends Controller
             'nama' => 'required'
         ]);
 
+
         # olah sebelum insert
         $insert = [
             'nama' => $request->input('nama'),
@@ -54,7 +55,7 @@ class PenerbitController extends Controller
         ];
         Penerbit::create($insert);
 
-        return redirect()->route('penerbit.index')->with('success', 'Berhasil tambah penerbit');
+        return redirect()->route('penerbit.index')->with('success', 'Berhasil tambah rak');
         //
     }
 
@@ -84,7 +85,7 @@ class PenerbitController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Penerbit  $penerbit
+     * @param  \App\Models\Penerbit $penerbit
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Penerbit $penerbit)
@@ -103,3 +104,4 @@ class PenerbitController extends Controller
         //
     }
 }
+

@@ -16,12 +16,12 @@ class PengarangController extends Controller
     {
         $data = [
             'title' => 'Daftar pengarang',
-            'pengarang' => pengarang::all(),
+            'pengarang' => Pengarang::all(),
         ];
-        return view('pengarang.index', $data)->with('i');
+        return view('Pengarang.index', $data)->with('i');
     }
 
-    /**
+    /*
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
@@ -32,10 +32,9 @@ class PengarangController extends Controller
             'title' => 'Daftar pengarang'
         ];
         return view('pengarang.index', $data); 
-        //
     }
 
-    /**
+    /*
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -47,6 +46,7 @@ class PengarangController extends Controller
             'nama' => 'required'
         ]);
 
+
         # olah sebelum insert
         $insert = [
             'nama' => $request->input('nama'),
@@ -55,7 +55,6 @@ class PengarangController extends Controller
         Pengarang::create($insert);
 
         return redirect()->route('pengarang.index')->with('success', 'Berhasil tambah pengarang');
-        //
     }
 
     /**
@@ -84,7 +83,7 @@ class PengarangController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Pengarang  $pengarang
+     * @param  \App\Models\Pengarang $pengarang
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Pengarang $pengarang)

@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title, $title')
+@section('title', $title)
 
 @section('content_header')
 
@@ -65,7 +65,7 @@
                     </h3>
                 </div>
                 <div class="card-body">
-                    <table class="table table-bordered table-hover dataTable dtr-inline" name="table-penerbit"
+                <table class="table table-bordered table-hover dataTable dtr-inline" name="table-Penerbit"
                         id="table-penerbit">
                         <thead>
                             <tr>
@@ -75,7 +75,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($penerbit as $value)
+                        @foreach($penerbit as $value)
                             <tr>
                                 <td>{{ ++$i }}</td>
                                 <td>{{ $value->nama }}</td>
