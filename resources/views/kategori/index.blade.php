@@ -112,14 +112,14 @@
         var name = $(this).data("name");
         event.preventDefault();
         Swal.fire({
-            title: "Punten, yakin mo delete??",
-            text: "Sekali ilang, ilang terus loh.",
+            title: "kamu yakin?",
+            text: "Setelah di hapus, anda tidak akan dapat memulihkan data ini!",
             icon: "warning",
             type: "warning",
-            buttons: ["Gasido","Yo!"],
+            buttons: ["Batal"],
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Yo, Yakin aku!'
+            confirmButtonText: 'Yakin!'
         }).then((willDelete) => {
             if (willDelete) {
                 form.submit();
