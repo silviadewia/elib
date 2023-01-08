@@ -36,12 +36,13 @@
                     </div>
                     @endif
 
-                    <form method="post" action="{{ route('penerbit.store'); }}">
+                    <form method="post" action="{{ route('rak.update', $edit_rak->id); }}">
                         @csrf
+                        @method('PUT')
                         <div class="card-body">
                             <div class="form-group">
-                                <label for="nama">Nama penerbit</label>
-                                <input type="text" class="form-control" id="nama" name="nama" placeholder="Nama penerbit" autocomplete="off">
+                                <label for="nama">Nama rak</label>
+                                <input type="text" class="form-control" value="{{ $edit_rak->nama }}" id="nama" name="nama" placeholder="Nama rak" autocomplete="off">
                             </div>
                         </div>
 
@@ -64,7 +65,7 @@
                     </h3>
                 </div>
                 <div class="card-body">
-                    <table class="table table-bordered table-hover dataTable dtr-inline" name="table-Penerbit" id="table-penerbit">
+                    <table class="table table-bordered table-hover dataTable dtr-inline" name="table-Rak" id="table-rak">
                         <thead>
                             <tr>
                                 <th>#</th>
@@ -73,17 +74,17 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($penerbit as $value)
+                            @foreach($rak as $value)
 
                             <tr>
                                 <td>{{ ++$i }}</td>
                                 <td>{{ $value->nama }}</td>
                                 <td>
-                                    <form action="{{ route('penerbit.destroy', $value->id) }}" method="post">
-                                        <a href="{{ route('penerbit.edit',$value->id) }}" class="btn btn-primary btn-sm"><i class="fas fa-pen"></i></a>
+                                    <form action="{{ route('rak.destroy', $value->id) }}" method="post">
+                                        <button class="btn btn-primary btn-sm"><i class="fas fa-pen"></i></button>
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-danger btn-sm pas-delete-metu-alert-cantik"><i class="fas fa-trash"></i></button>
+                                        <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>
                                     </form>
                                 </td>
                             </tr>
@@ -100,31 +101,11 @@
 @section('js')
 <script>
     $(document).ready(function() {
-        $('#table-penerbit').DataTable({
+        $('#table-rak').DataTable({
             dom: 'Bfrtip',
             buttons: [
                 'copy', 'csv', 'excel', 'pdf', 'print'
             ]
-        });
-    });
-
-    $('.pas-delete-metu-alert-cantik').click(function(event){
-        var form =  $(this).closest("form");
-        var name = $(this).data("name");
-        event.preventDefault();
-        Swal.fire({
-            title: "Punten, yakin mo delete??",
-            text: "Sekali ilang, ilang terus loh.",
-            icon: "warning",
-            type: "warning",
-            buttons: ["Gasido","Yo!"],
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yo, Yakin aku!'
-        }).then((willDelete) => {
-            if (willDelete) {
-                form.submit();
-            }
         });
     });
 </script>

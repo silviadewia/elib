@@ -1,10 +1,7 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use App\Models\Penerbit;
 use Illuminate\Http\Request;
-
 class PenerbitController extends Controller
 {
     /**
@@ -14,10 +11,14 @@ class PenerbitController extends Controller
      */
     public function index()
     {
+        # variable tampilan
         $data = [
             'title' => 'Daftar penerbit',
             'penerbit' => Penerbit::all(),
         ];
+        return view('Penerbit.index', $data)->with('i');
+
+        # kembalikan ke tampilan
         return view('penerbit.index', $data)->with('i');
     }
 
@@ -28,11 +29,14 @@ class PenerbitController extends Controller
      */
     public function create()
     {
+        # variable tampilan
         $data = [
             'title' => 'Daftar penerbit'
         ];
         return view('penerbit.index', $data); 
-        //
+
+        # kembalikan ke tampilan
+        return view('penerbit.index', $data);
     }
 
     /*
@@ -43,6 +47,7 @@ class PenerbitController extends Controller
      */
     public function store(Request $request)
     {
+        # validasi data
         $request->validate([
             'nama' => 'required'
         ]);
@@ -55,8 +60,18 @@ class PenerbitController extends Controller
         ];
         Penerbit::create($insert);
 
-        return redirect()->route('penerbit.index')->with('success', 'Berhasil tambah rak');
-        //
+        return redirect()->route('penerbit.index')->with('success', 'Berhasil tambah penerbit');
+        # coba insert
+        try {
+            # proses insert
+            Penerbit::create($insert);
+
+            # kembalikan ke tampilan
+            return redirect()->route('penerbit.index')->with('success', 'Berhasil insert penerbit');
+        } catch (\Exception $e) { # jika gagal
+            # kembalikan ke tampilan
+            return redirect()->route('penerbit.index')->with('failed', 'Gagal insert penerbit');
+        }
     }
 
     /**
@@ -69,7 +84,6 @@ class PenerbitController extends Controller
     {
         //
     }
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -79,6 +93,15 @@ class PenerbitController extends Controller
     public function edit(Penerbit $penerbit)
     {
         //
+        # variable tampilan
+        $data = [
+            'title' => 'Edit penerbit',
+            'penerbit' => Penerbit::all(),
+            'edit_penerbit' => $penerbit
+        ];
+
+        # kembalikan ke tampilan
+        return view('penerbit.edit', $data)->with('i');
     }
 
     /**
@@ -91,6 +114,21 @@ class PenerbitController extends Controller
     public function update(Request $request, Penerbit $penerbit)
     {
         //
+        # validasi data
+        $request->validate([
+            'nama' => 'required'
+        ]);
+
+        # coba update
+        try {
+            # proses update
+            $penerbit->update($request->all());
+            # kembalikan ke tampilan
+            return redirect()->route('penerbit.index')->with('success', 'Berhasil update penerbit');
+        } catch (\Exception $e) { # jika gagal
+            # kembalikan ke tampilan
+            return redirect()->route('penerbit.index')->with('failed', 'Gagal update penerbit');
+        }
     }
 
     /**
@@ -102,6 +140,15 @@ class PenerbitController extends Controller
     public function destroy(Penerbit $penerbit)
     {
         //
+        # coba update
+        try {
+            # proses delete
+            $penerbit->delete();
+            # kembalikan ke tampilan
+            return redirect()->route('penerbit.index')->with('success', 'Berhasil delete penerbit');
+        } catch (\Exception $e) { # jika gagal
+            # kembalikan ke tampilan
+            return redirect()->route('penerbit.index')->with('failed', 'Gagal delete penerbit');
+        }
     }
 }
-

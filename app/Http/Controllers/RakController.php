@@ -1,10 +1,7 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use App\Models\Rak;
 use Illuminate\Http\Request;
-
 class RakController extends Controller
 {
     /**
@@ -14,10 +11,14 @@ class RakController extends Controller
      */
     public function index()
     {
+        # variable tampilan
         $data = [
             'title' => 'Daftar rak',
             'rak' => Rak::all(),
         ];
+        return view('Rak.index', $data)->with('i');
+
+        # kembalikan ke tampilan
         return view('rak.index', $data)->with('i');
     }
 
@@ -28,11 +29,14 @@ class RakController extends Controller
      */
     public function create()
     {
+        # variable tampilan
         $data = [
             'title' => 'Daftar rak'
         ];
         return view('rak.index', $data); 
-        //
+
+        # kembalikan ke tampilan
+        return view('rak.index', $data);
     }
 
     /*
@@ -43,6 +47,7 @@ class RakController extends Controller
      */
     public function store(Request $request)
     {
+        # validasi data
         $request->validate([
             'nama' => 'required'
         ]);
@@ -56,7 +61,17 @@ class RakController extends Controller
         Rak::create($insert);
 
         return redirect()->route('rak.index')->with('success', 'Berhasil tambah rak');
-        //
+        # coba insert
+        try {
+            # proses insert
+            Rak::create($insert);
+
+            # kembalikan ke tampilan
+            return redirect()->route('rak.index')->with('success', 'Berhasil insert rak');
+        } catch (\Exception $e) { # jika gagal
+            # kembalikan ke tampilan
+            return redirect()->route('rak.index')->with('failed', 'Gagal insert rak');
+        }
     }
 
     /**
@@ -69,7 +84,6 @@ class RakController extends Controller
     {
         //
     }
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -79,6 +93,15 @@ class RakController extends Controller
     public function edit(Rak $rak)
     {
         //
+        # variable tampilan
+        $data = [
+            'title' => 'Edit rak',
+            'rak' => Rak::all(),
+            'edit_rak' => $rak
+        ];
+
+        # kembalikan ke tampilan
+        return view('rak.edit', $data)->with('i');
     }
 
     /**
@@ -91,6 +114,21 @@ class RakController extends Controller
     public function update(Request $request, Rak $rak)
     {
         //
+        # validasi data
+        $request->validate([
+            'nama' => 'required'
+        ]);
+
+        # coba update
+        try {
+            # proses update
+            $rak->update($request->all());
+            # kembalikan ke tampilan
+            return redirect()->route('rak.index')->with('success', 'Berhasil update rak');
+        } catch (\Exception $e) { # jika gagal
+            # kembalikan ke tampilan
+            return redirect()->route('rak.index')->with('failed', 'Gagal update rak');
+        }
     }
 
     /**
@@ -102,5 +140,15 @@ class RakController extends Controller
     public function destroy(Rak $rak)
     {
         //
+        # coba update
+        try {
+            # proses delete
+            $rak->delete();
+            # kembalikan ke tampilan
+            return redirect()->route('rak.index')->with('success', 'Berhasil delete rak');
+        } catch (\Exception $e) { # jika gagal
+            # kembalikan ke tampilan
+            return redirect()->route('rak.index')->with('failed', 'Gagal delete rak');
+        }
     }
 }

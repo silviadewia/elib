@@ -3,6 +3,7 @@
 @section('title', $title)
 
 @section('content_header')
+
 <h1>{{$title}}</h1>
 @stop
 
@@ -39,9 +40,8 @@
                         @csrf
                         <div class="card-body">
                             <div class="form-group">
-                                <label for="nama">Nama Kategori</label>
-                                <input type="text" class="form-control" id="nama" name="nama"
-                                    placeholder="Nama Kategori" autocomplete="off">
+                                <label for="nama">Nama kategori</label>
+                                <input type="text" class="form-control" id="nama" name="nama" placeholder="Nama kategori" autocomplete="off">
                             </div>
                         </div>
 
@@ -64,8 +64,7 @@
                     </h3>
                 </div>
                 <div class="card-body">
-                    <table class="table table-bordered table-hover dataTable dtr-inline" name="table-kategori"
-                        id="table-kategori">
+                    <table class="table table-bordered table-hover dataTable dtr-inline" name="table-Kategori" id="table-kategori">
                         <thead>
                             <tr>
                                 <th>#</th>
@@ -75,12 +74,17 @@
                         </thead>
                         <tbody>
                             @foreach($kategori as $value)
+
                             <tr>
                                 <td>{{ ++$i }}</td>
                                 <td>{{ $value->nama }}</td>
                                 <td>
-                                    <button class="btn btn-primary btn-sm"><i class="fas fa-pen"></i> </button>
-                                    <button class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> </button>
+                                    <form action="{{ route('kategori.destroy', $value->id) }}" method="post">
+                                        <a href="{{ route('kategori.edit',$value->id) }}" class="btn btn-primary btn-sm"><i class="fas fa-pen"></i></a>
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger btn-sm pas-delete-metu-alert-cantik"><i class="fas fa-trash"></i></button>
+                                    </form>
                                 </td>
                             </tr>
                             @endforeach
@@ -92,10 +96,9 @@
     </div>
 </div>
 @stop
-
 @section('js')
 <script>
-    $(document).ready(function () {
+    $(document).ready(function() {
         $('#table-kategori').DataTable({
             dom: 'Bfrtip',
             buttons: [
@@ -104,5 +107,24 @@
         });
     });
 
+    $('.pas-delete-metu-alert-cantik').click(function(event){
+        var form =  $(this).closest("form");
+        var name = $(this).data("name");
+        event.preventDefault();
+        Swal.fire({
+            title: "Punten, yakin mo delete??",
+            text: "Sekali ilang, ilang terus loh.",
+            icon: "warning",
+            type: "warning",
+            buttons: ["Gasido","Yo!"],
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yo, Yakin aku!'
+        }).then((willDelete) => {
+            if (willDelete) {
+                form.submit();
+            }
+        });
+    });
 </script>
 @stop

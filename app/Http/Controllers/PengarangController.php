@@ -1,10 +1,7 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use App\Models\Pengarang;
 use Illuminate\Http\Request;
-
 class PengarangController extends Controller
 {
     /**
@@ -19,6 +16,7 @@ class PengarangController extends Controller
             'title' => 'Daftar pengarang',
             'pengarang' => Pengarang::all(),
         ];
+        return view('Pengarang.index', $data)->with('i');
 
         # kembalikan ke tampilan
         return view('pengarang.index', $data)->with('i');
@@ -35,6 +33,7 @@ class PengarangController extends Controller
         $data = [
             'title' => 'Daftar pengarang'
         ];
+        return view('pengarang.index', $data); 
 
         # kembalikan ke tampilan
         return view('pengarang.index', $data);
@@ -53,12 +52,15 @@ class PengarangController extends Controller
             'nama' => 'required'
         ]);
 
+
         # olah sebelum insert
         $insert = [
             'nama' => $request->input('nama'),
-            'dibuat_oleh' => 'Auth'::user()->name,
+            'dibuat_oleh'=>'Auth'::user()->name,
         ];
+        Pengarang::create($insert);
 
+        return redirect()->route('pengarang.index')->with('success', 'Berhasil tambah pengarang');
         # coba insert
         try {
             # proses insert
@@ -82,7 +84,6 @@ class PengarangController extends Controller
     {
         //
     }
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -91,6 +92,7 @@ class PengarangController extends Controller
      */
     public function edit(Pengarang $pengarang)
     {
+        //
         # variable tampilan
         $data = [
             'title' => 'Edit pengarang',
@@ -111,6 +113,7 @@ class PengarangController extends Controller
      */
     public function update(Request $request, Pengarang $pengarang)
     {
+        //
         # validasi data
         $request->validate([
             'nama' => 'required'
@@ -136,6 +139,7 @@ class PengarangController extends Controller
      */
     public function destroy(Pengarang $pengarang)
     {
+        //
         # coba update
         try {
             # proses delete

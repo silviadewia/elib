@@ -308,7 +308,7 @@ return [
         ],
         [
             'text' => 'Dashboard',
-            'url'  => 'home',
+            'url'  => 'dashboard',
             'icon' => 'fas fa-tachometer-alt',
         ],
         [
@@ -475,11 +475,11 @@ return [
             ],
         ],
         'Sweetalert2' => [
-            'active' => false,
+            'active' => true,
             'files' => [
                 [
                     'type' => 'js',
-                    'asset' => false,
+                    'asset' => true,
                     'location' => '//cdn.jsdelivr.net/npm/sweetalert2@8',
                 ],
             ],
