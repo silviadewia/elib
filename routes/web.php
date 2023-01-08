@@ -20,7 +20,8 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::prefix('/buku')->group(function(){
+
+Route::middleware('auth')->prefix('/buku')->group(function(){
     Route::redirect('/', '/dashboard'); // alihkan ke home jika dipanggil domain.com/buku
     Route::resource('/kategori',App\Http\Controllers\KategoriController::class);
     Route::resource('/pengarang',App\Http\Controllers\PengarangController::class);
@@ -29,11 +30,11 @@ Route::prefix('/buku')->group(function(){
     Route::resource('/daftar',  App\Http\Controllers\BukuController::class);
 });
 
-Route::get('/pengguna', [App\Http\Controllers\PenggunaController::class, 'index']);
-Route::get('/pinjam', [App\Http\Controllers\PinjamController::class, 'index']);
-Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])->name('home');;
-Route::get('/denda', [App\Http\Controllers\DendaController::class, 'index']);
-Route::get('/laporan',[App\Http\Controllers\LaporanController::class, 'index']);
-Route::get('/pengaturan',[App\Http\Controllers\PengaturanController::class, 'index']);
-Route::get('/dikembalikan',[App\Http\Controllers\DikembalikanController::class, 'index']);
+Route::middleware('auth')->get('/pengguna', [App\Http\Controllers\PenggunaController::class, 'index']);
+Route::middleware('auth')->get('/pinjam', [App\Http\Controllers\PinjamController::class, 'index']);
+Route::middleware('auth')->get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])->name('home');;
+Route::middleware('auth')->get('/denda', [App\Http\Controllers\DendaController::class, 'index']);
+Route::middleware('auth')->get('/laporan',[App\Http\Controllers\LaporanController::class, 'index']);
+Route::middleware('auth')->get('/pengaturan',[App\Http\Controllers\PengaturanController::class, 'index']);
+Route::middleware('auth')->get('/dikembalikan',[App\Http\Controllers\DikembalikanController::class, 'index']);
  
