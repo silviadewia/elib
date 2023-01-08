@@ -36,12 +36,13 @@
                     </div>
                     @endif
 
-                    <form method="post" action="{{ route('pengarang.store'); }}">
+                    <form method="post" action="{{ route('pengarang.update', $edit_pengarang->id); }}">
                         @csrf
+                        @method('PUT')
                         <div class="card-body">
                             <div class="form-group">
                                 <label for="nama">Nama pengarang</label>
-                                <input type="text" class="form-control" id="nama" name="nama" placeholder="Nama pengarang" autocomplete="off">
+                                <input type="text" class="form-control" value="{{ $edit_pengarang->nama }}" id="nama" name="nama" placeholder="Nama pengarang" autocomplete="off">
                             </div>
                         </div>
 
@@ -80,7 +81,7 @@
                                 <td>{{ $value->nama }}</td>
                                 <td>
                                     <form action="{{ route('pengarang.destroy', $value->id) }}" method="post">
-                                        <a href="{{ route('pengarang.edit',$value->id) }}" class="btn btn-primary btn-sm"><i class="fas fa-pen"></i></a>
+                                        <button class="btn btn-primary btn-sm"><i class="fas fa-pen"></i></button>
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>
