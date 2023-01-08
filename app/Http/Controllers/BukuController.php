@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Buku;
 use Illuminate\Http\Request;
-use Auth;
+
 
 class BukuController extends Controller
 {
@@ -16,8 +16,8 @@ class BukuController extends Controller
     public function index()
     {
         $data = [
-            'title' => 'Daftar Kategori',
-            'Buku' => buku::all(),
+            'title' => 'Daftar Buku',
+            'buku' => Buku::all(),
         ];
     
         return view('buku.index', $data)->with('i');

@@ -9,7 +9,7 @@
 @section('content')
 <div class="containe-fluid">
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-12">
             <div class="card card-primary card-outline">
                 <div class="card-header">
                     <h3 class="card-title">
@@ -18,56 +18,23 @@
                     </h3>
                 </div>
                 <div class="card-body">
-                    @if ($errors->any())
-                    <div class="alert alert-danger">
-                        There were some problems with your input.<br><br>
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                    @endif
-
-                    @if ($message = Session::get('success'))
-                    <div class="alert alert-success">
-                        <p>{{ $message }}</p>
-                    </div>
-                    @endif
-
-                    <form method="post" action="{{ route('daftar.store'); }}">
-                        @csrf
-                        <div class="card-body">
-                            <div class="form-group">
-                                <label for="nama">Nama Buku</label>
-                                <input type="text" class="form-control" id="nama" placeholder="Nama Buku">
-                            </div>
-                        </div>
-
-                        <div class="card-footer">
-                            <button type="reset" class="btn btn-default">Batal</button>
-                            <button type="submit" class="btn btn-info  float-right"><i class="fas fa-plus"></i> Simpan</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-6">
-            <div class="card card-primary card-outline">
-                <div class="card-header">
-                    <h3 class="card-title">
-                        <i class="fas fa-edit"></i>
-                        Buttons
-                    </h3>
-                </div>
-                <div class="card-body">
-                    <table class="table table-bordered table-hover dataTable dtr-inline" name="table-buku"
-                        id="table-buku">
+                    <table class="table table-bordered table-hover dataTable dtr-inline" name="table-buku" id="table-buku">
                         <thead>
                             <tr>
-                                <th>#</th>
+                                <th>No</th>
+                                <th>Sampul</th>
+                                <th>ISBN</th>
+                                <th>Judul</th>
                                 <th>Kategori</th>
+                                <th>Rak</th>
+                                <th>Penerbit</th>
+                                <th>Pengarang</th>
+                                <th>Tahun</th>
+                                <th>Jumlah Buku</th>
+                                <th>Lampiran Buku</th>
+                                <th>keterangan Lain</th>
+                                <th>Dibuat Oleh</th>
+                                <th>Pinjam</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -75,7 +42,21 @@
                             @foreach($buku as $value)
                             <tr>
                                 <td>{{ ++$i }}</td>
-                                <td>{{ $value->nama }}</td>
+                                <td>{{ $value->sampul }}</td>
+                                <td>{{ $value->isbn }}</td>
+                                <td>{{ $value->judul_buku }}</td>
+                                <td>{{ $value->kategori }}</td>
+                                <td>{{ $value->rak }}</td>
+                                <td>{{ $value->penerbit }}</td>
+                                <td>{{ $value->pengarang }}</td>
+                                <td>{{ $value->tahun_buku }}</td>
+                                <td>{{ $value->jumlah_buku }}</td>
+                                <td>{{ $value->lampiran_buku }}</td>
+                                <td>{{ $value->keterangan_lain }}</td>
+                                <td>{{ $value->dibuat_oleh }}</td>
+                                <td>1</td>
+
+                                # aksi
                                 <td>
                                     <button class="btn btn-primary btn-sm"><i class="fas fa-pen"></i> </button>
                                     <button class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> </button>
