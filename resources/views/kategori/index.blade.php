@@ -15,7 +15,7 @@
                 <div class="card-header">
                     <h3 class="card-title">
                         <i class="fas fa-edit"></i>
-                        Buttons
+                        Tabel Kategori
                     </h3>
                 </div>
                 <div class="card-body">
@@ -43,7 +43,7 @@
                 <div class="card-header">
                     <h3 class="card-title">
                         <i class="fas fa-edit"></i>
-                        Buttons
+                        Tabel Hasil
                     </h3>
                 </div>
                 <div class="card-body">
