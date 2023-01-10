@@ -19,6 +19,23 @@
                     </h3>
                 </div>
                 <div class="card-body">
+                    @if ($errors->any())
+                    <div class="alert alert-danger">
+                        There were some problems with your input.<br><br>
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    @endif
+
+                    @if ($message = Session::get('success'))
+                    <div class="alert alert-success">
+                        <p>{{ $message }}</p>
+                    </div>
+                    @endif
+
                     <form method="post" action="{{ route('pengarang.store'); }}">
                         @csrf
                         <div class="card-body">
@@ -96,38 +113,19 @@
         var name = $(this).data("name");
         event.preventDefault();
         Swal.fire({
-            title: "PERHATIAN",
-            text: "Setelah di hapus, anda tidak akan dapat memulihkan data ini!",
-            icon: 'question',
-            showCancelButton: true,
+            title: "Punten, yakin mo delete??",
+            text: "Sekali ilang, ilang terus loh.",
+            icon: "warning",
+            type: "warning",
+            buttons: ["Gasido","Yo!"],
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Yakin!'
+            confirmButtonText: 'Yo, Yakin aku!'
         }).then((willDelete) => {
             if (willDelete) {
                 form.submit();
             }
         });
     });
-
-    const Toast = Swal.mixin({
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-                toast.addEventListener('mouseenter', Swal.stopTimer)
-                toast.addEventListener('mouseleave', Swal.resumeTimer)
-            }
-        })
-        
-    @if ($message = Session::get('success'))
-        Toast.fire( 'Sukses !!!', '{{ $message }}', 'success')
-    @endif
-
-    @if ($errors->any())
-        Toast.fire( 'Eror !!!', '{{ $errors->first() }}', 'error')
-    @endif
 </script>
 @stop

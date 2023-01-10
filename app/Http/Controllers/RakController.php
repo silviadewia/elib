@@ -1,11 +1,7 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use App\Models\Rak;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-
 class RakController extends Controller
 {
     /**
@@ -15,14 +11,15 @@ class RakController extends Controller
      */
     public function index()
     {
-        #variabel tampilan
+        # variable tampilan
         $data = [
-            'title' => 'Daftar Rak',
+            'title' => 'Daftar rak',
             'rak' => Rak::all(),
         ];
+        return view('Rak.index', $data)->with('i');
 
         # kembalikan ke tampilan
-        return view('rak.index', $data)->with('i'); 
+        return view('rak.index', $data)->with('i');
     }
 
     /*
@@ -36,6 +33,7 @@ class RakController extends Controller
         $data = [
             'title' => 'Daftar rak'
         ];
+        return view('rak.index', $data); 
 
         # kembalikan ke tampilan
         return view('rak.index', $data);
@@ -49,29 +47,31 @@ class RakController extends Controller
      */
     public function store(Request $request)
     {
-        # validasi data input
+        # validasi data
         $request->validate([
-            'nama' => 'required|min:3|max:25'
+            'nama' => 'required'
         ]);
 
 
         # olah sebelum insert
         $insert = [
             'nama' => $request->input('nama'),
-            'dibuat_oleh'=> Auth::user()->name,
+            'dibuat_oleh'=>'Auth'::user()->name,
         ];
+        Rak::create($insert);
 
+        return redirect()->route('rak.index')->with('success', 'Berhasil tambah rak');
         # coba insert
         try {
             # proses insert
             Rak::create($insert);
 
             # kembalikan ke tampilan
-            return redirect()->route('rak.index')->with('success', 'Hi '.Auth::user()->name.', Berhasil tambah rak');
+            return redirect()->route('rak.index')->with('success', 'Berhasil insert rak');
         } catch (\Exception $e) { # jika gagal
             # kembalikan ke tampilan
-            return redirect()->route('rak.index')->with('failed', 'Gagal insert [rak]');
-        } 
+            return redirect()->route('rak.index')->with('failed', 'Gagal insert rak');
+        }
     }
 
     /**
@@ -84,7 +84,7 @@ class RakController extends Controller
     {
         //
     }
-     /**
+    /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\Rak  $rak
@@ -92,6 +92,7 @@ class RakController extends Controller
      */
     public function edit(Rak $rak)
     {
+        //
         # variable tampilan
         $data = [
             'title' => 'Edit rak',
@@ -112,9 +113,10 @@ class RakController extends Controller
      */
     public function update(Request $request, Rak $rak)
     {
+        //
         # validasi data
         $request->validate([
-            'nama' => 'required|min:3|max:25'
+            'nama' => 'required'
         ]);
 
         # coba update
@@ -122,7 +124,7 @@ class RakController extends Controller
             # proses update
             $rak->update($request->all());
             # kembalikan ke tampilan
-            return redirect()->route('rak.index')->with('success', 'Hi '.Auth::user()->name.', Berhasil update rak');
+            return redirect()->route('rak.index')->with('success', 'Berhasil update rak');
         } catch (\Exception $e) { # jika gagal
             # kembalikan ke tampilan
             return redirect()->route('rak.index')->with('failed', 'Gagal update rak');
@@ -137,12 +139,13 @@ class RakController extends Controller
      */
     public function destroy(Rak $rak)
     {
+        //
         # coba update
         try {
             # proses delete
             $rak->delete();
             # kembalikan ke tampilan
-            return redirect()->route('rak.index')->with('success', 'Hi '.Auth::user()->name.', Berhasil delete rak');
+            return redirect()->route('rak.index')->with('success', 'Berhasil delete rak');
         } catch (\Exception $e) { # jika gagal
             # kembalikan ke tampilan
             return redirect()->route('rak.index')->with('failed', 'Gagal delete rak');
