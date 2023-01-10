@@ -102,13 +102,14 @@
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
             confirmButtonText: 'Yakin!'
-        }).then((willDelete) => {
-            if (willDelete) {
+               }).then((diHapus) => {
+            if (diHapus.value) {
                 form.submit();
             }
         });
     });
-const Toast = Swal.mixin({
+    
+    const Toast = Swal.mixin({
             toast: true,
             position: 'top-end',
             showConfirmButton: false,
