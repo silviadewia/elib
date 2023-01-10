@@ -1,7 +1,11 @@
 <?php
+
 namespace App\Http\Controllers;
+
 use App\Models\Pengarang;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 class PengarangController extends Controller
 {
     /**
@@ -11,15 +15,14 @@ class PengarangController extends Controller
      */
     public function index()
     {
-        # variable tampilan
+        #variabel tampilan
         $data = [
-            'title' => 'Daftar pengarang',
+            'title' => 'Daftar Pengarang',
             'pengarang' => Pengarang::all(),
         ];
-        return view('Pengarang.index', $data)->with('i');
 
         # kembalikan ke tampilan
-        return view('pengarang.index', $data)->with('i');
+        return view('pengarang.index', $data)->with('i'); 
     }
 
     /*
@@ -33,7 +36,6 @@ class PengarangController extends Controller
         $data = [
             'title' => 'Daftar pengarang'
         ];
-        return view('pengarang.index', $data); 
 
         # kembalikan ke tampilan
         return view('pengarang.index', $data);
@@ -47,31 +49,29 @@ class PengarangController extends Controller
      */
     public function store(Request $request)
     {
-        # validasi data
+        # validasi data input
         $request->validate([
-            'nama' => 'required'
+            'nama' => 'required|min:3|max:25'
         ]);
 
 
         # olah sebelum insert
         $insert = [
             'nama' => $request->input('nama'),
-            'dibuat_oleh'=>'Auth'::user()->name,
+            'dibuat_oleh'=> Auth::user()->name,
         ];
-        Pengarang::create($insert);
 
-        return redirect()->route('pengarang.index')->with('success', 'Berhasil tambah pengarang');
         # coba insert
         try {
             # proses insert
             Pengarang::create($insert);
 
             # kembalikan ke tampilan
-            return redirect()->route('pengarang.index')->with('success', 'Berhasil insert pengarang');
+            return redirect()->route('pengarang.index')->with('success', 'Hi '.Auth::user()->name.', Berhasil tambah pengarang');
         } catch (\Exception $e) { # jika gagal
             # kembalikan ke tampilan
-            return redirect()->route('pengarang.index')->with('failed', 'Gagal insert pengarang');
-        }
+            return redirect()->route('pengarang.index')->with('failed', 'Gagal insert [pengarang]');
+        } 
     }
 
     /**
@@ -80,11 +80,11 @@ class PengarangController extends Controller
      * @param  \App\Models\Pengarang  $pengarang
      * @return \Illuminate\Http\Response
      */
-    public function show(Pengarang $pengarang)
+    public function show(Pengarang $pengrang)
     {
         //
     }
-    /**
+     /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\Pengarang  $pengarang
@@ -92,7 +92,6 @@ class PengarangController extends Controller
      */
     public function edit(Pengarang $pengarang)
     {
-        //
         # variable tampilan
         $data = [
             'title' => 'Edit pengarang',
@@ -113,10 +112,9 @@ class PengarangController extends Controller
      */
     public function update(Request $request, Pengarang $pengarang)
     {
-        //
         # validasi data
         $request->validate([
-            'nama' => 'required'
+            'nama' => 'required|min:3|max:25'
         ]);
 
         # coba update
@@ -124,7 +122,7 @@ class PengarangController extends Controller
             # proses update
             $pengarang->update($request->all());
             # kembalikan ke tampilan
-            return redirect()->route('pengarang.index')->with('success', 'Berhasil update pengarang');
+            return redirect()->route('pengarang.index')->with('success', 'Hi '.Auth::user()->name.', Berhasil update pengarang');
         } catch (\Exception $e) { # jika gagal
             # kembalikan ke tampilan
             return redirect()->route('pengarang.index')->with('failed', 'Gagal update pengarang');
@@ -139,13 +137,12 @@ class PengarangController extends Controller
      */
     public function destroy(Pengarang $pengarang)
     {
-        //
         # coba update
         try {
             # proses delete
             $pengarang->delete();
             # kembalikan ke tampilan
-            return redirect()->route('pengarang.index')->with('success', 'Berhasil delete pengarang');
+            return redirect()->route('pengarang.index')->with('success', 'Hi '.Auth::user()->name.', Berhasil delete pengarang');
         } catch (\Exception $e) { # jika gagal
             # kembalikan ke tampilan
             return redirect()->route('pengarang.index')->with('failed', 'Gagal delete pengarang');

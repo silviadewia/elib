@@ -1,7 +1,11 @@
 <?php
+
 namespace App\Http\Controllers;
+
 use App\Models\Penerbit;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 class PenerbitController extends Controller
 {
     /**
@@ -11,15 +15,14 @@ class PenerbitController extends Controller
      */
     public function index()
     {
-        # variable tampilan
+        #variabel tampilan
         $data = [
-            'title' => 'Daftar penerbit',
+            'title' => 'Daftar Penerbit',
             'penerbit' => Penerbit::all(),
         ];
-        return view('Penerbit.index', $data)->with('i');
 
         # kembalikan ke tampilan
-        return view('penerbit.index', $data)->with('i');
+        return view('penerbit.index', $data)->with('i'); 
     }
 
     /*
@@ -33,7 +36,6 @@ class PenerbitController extends Controller
         $data = [
             'title' => 'Daftar penerbit'
         ];
-        return view('penerbit.index', $data); 
 
         # kembalikan ke tampilan
         return view('penerbit.index', $data);
@@ -47,31 +49,28 @@ class PenerbitController extends Controller
      */
     public function store(Request $request)
     {
-        # validasi data
+        # validasi data input
         $request->validate([
-            'nama' => 'required'
+            'nama' => 'required|min:3|max:25'
         ]);
-
 
         # olah sebelum insert
         $insert = [
             'nama' => $request->input('nama'),
-            'dibuat_oleh'=>'Auth'::user()->name,
+            'dibuat_oleh'=> Auth::user()->name,
         ];
-        Penerbit::create($insert);
 
-        return redirect()->route('penerbit.index')->with('success', 'Berhasil tambah penerbit');
         # coba insert
         try {
             # proses insert
             Penerbit::create($insert);
 
             # kembalikan ke tampilan
-            return redirect()->route('penerbit.index')->with('success', 'Berhasil insert penerbit');
+            return redirect()->route('penerbit.index')->with('success', 'Hi '.Auth::user()->name.', Berhasil tambah penerbit');
         } catch (\Exception $e) { # jika gagal
             # kembalikan ke tampilan
-            return redirect()->route('penerbit.index')->with('failed', 'Gagal insert penerbit');
-        }
+            return redirect()->route('penerbit.index')->with('failed', 'Gagal insert [penerbit]');
+        } 
     }
 
     /**
@@ -84,7 +83,7 @@ class PenerbitController extends Controller
     {
         //
     }
-    /**
+     /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\Penerbit  $penerbit
@@ -92,7 +91,6 @@ class PenerbitController extends Controller
      */
     public function edit(Penerbit $penerbit)
     {
-        //
         # variable tampilan
         $data = [
             'title' => 'Edit penerbit',
@@ -108,15 +106,14 @@ class PenerbitController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Penerbit $penerbit
+     * @param  \App\Models\Penerbit $penebit
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Penerbit $penerbit)
     {
-        //
         # validasi data
         $request->validate([
-            'nama' => 'required'
+            'nama' => 'required|min:3|max:25'
         ]);
 
         # coba update
@@ -124,7 +121,7 @@ class PenerbitController extends Controller
             # proses update
             $penerbit->update($request->all());
             # kembalikan ke tampilan
-            return redirect()->route('penerbit.index')->with('success', 'Berhasil update penerbit');
+            return redirect()->route('penerbit.index')->with('success', 'Hi '.Auth::user()->name.', Berhasil update penerbit');
         } catch (\Exception $e) { # jika gagal
             # kembalikan ke tampilan
             return redirect()->route('penerbit.index')->with('failed', 'Gagal update penerbit');
@@ -139,13 +136,12 @@ class PenerbitController extends Controller
      */
     public function destroy(Penerbit $penerbit)
     {
-        //
         # coba update
         try {
             # proses delete
             $penerbit->delete();
             # kembalikan ke tampilan
-            return redirect()->route('penerbit.index')->with('success', 'Berhasil delete penerbit');
+            return redirect()->route('penerbit.index')->with('success', 'Hi '.Auth::user()->name.', Berhasil delete penerbit');
         } catch (\Exception $e) { # jika gagal
             # kembalikan ke tampilan
             return redirect()->route('penerbit.index')->with('failed', 'Gagal delete penerbit');
