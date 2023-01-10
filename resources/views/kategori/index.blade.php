@@ -24,7 +24,8 @@
                         <div class="card-body">
                             <div class="form-group">
                                 <label for="nama">Nama kategori</label>
-                                <input type="text" class="form-control" id="nama" name="nama" placeholder="Nama kategori" autocomplete="off">
+                                <input type="text" class="form-control" id="nama" name="nama" 
+                                placeholder="Nama kategori" autocomplete="off">
                             </div>
                         </div>
 
@@ -47,7 +48,8 @@
                     </h3>
                 </div>
                 <div class="card-body">
-                    <table class="table table-bordered table-hover dataTable dtr-inline" name="table-Kategori" id="table-kategori">
+                    <table class="table table-bordered table-hover dataTable dtr-inline" name="table-Kategori" 
+                    id="table-kategori">
                         <thead>
                             <tr>
                                 <th>#</th>
@@ -63,10 +65,13 @@
                                 <td>{{ $value->nama }}</td>
                                 <td>
                                     <form action="{{ route('kategori.destroy', $value->id) }}" method="post">
-                                        <a href="{{ route('kategori.edit',$value->id) }}" class="btn btn-primary btn-sm"><i class="fas fa-pen"></i></a>
+                                        <a href="{{ route('kategori.edit',$value->id) }}" 
+                                        class="btn btn-primary btn-sm"><i class="fas fa-pen"></i></a>
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-danger btn-sm pas-delete-metu-alert-cantik"><i class="fas fa-trash"></i></button>
+                                        <button type="submit" 
+                                        class="btn btn-danger btn-sm pas-delete-metu-alert-cantik">
+                                        <i class="fas fa-trash"></i></button>
                                     </form>
                                 </td>
                             </tr>
