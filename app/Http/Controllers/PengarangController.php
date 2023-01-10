@@ -70,7 +70,7 @@ class PengarangController extends Controller
             return redirect()->route('pengarang.index')->with('success', 'Hi '.Auth::user()->name.', Berhasil tambah pengarang');
         } catch (\Exception $e) { # jika gagal
             # kembalikan ke tampilan
-            return redirect()->route('pengarang.index')->with('failed', 'Gagal insert [pengarang]');
+            return redirect()->route('pengarang.index')->with('failed', 'Gagal insert pengarang');
         } 
     }
 

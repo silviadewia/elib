@@ -6,7 +6,6 @@
 
 <h1>{{$title}}</h1>
 @stop
-
 @section('content')
 <div class="containe-fluid">
     <div class="row">
@@ -103,11 +102,12 @@
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
             confirmButtonText: 'Yakin!'
-        }).then((willDelete) => {
-            if (willDelete) {
+        }).then((diHapus) => {
+            if (diHapus.value) {
                 form.submit();
             }
         });
+        return false;
     });
 
     const Toast = Swal.mixin({

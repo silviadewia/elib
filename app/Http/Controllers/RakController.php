@@ -70,7 +70,7 @@ class RakController extends Controller
             return redirect()->route('rak.index')->with('success', 'Hi '.Auth::user()->name.', Berhasil tambah rak');
         } catch (\Exception $e) { # jika gagal
             # kembalikan ke tampilan
-            return redirect()->route('rak.index')->with('failed', 'Gagal insert [rak]');
+            return redirect()->route('rak.index')->with('failed', 'Gagal insert rak');
         } 
     }
 

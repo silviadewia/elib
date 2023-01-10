@@ -69,7 +69,7 @@ class PenerbitController extends Controller
             return redirect()->route('penerbit.index')->with('success', 'Hi '.Auth::user()->name.', Berhasil tambah penerbit');
         } catch (\Exception $e) { # jika gagal
             # kembalikan ke tampilan
-            return redirect()->route('penerbit.index')->with('failed', 'Gagal insert [penerbit]');
+            return redirect()->route('penerbit.index')->with('failed', 'Gagal insert penerbit');
         } 
     }
 
