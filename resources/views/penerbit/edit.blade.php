@@ -41,8 +41,8 @@
                         @method('PUT')
                         <div class="card-body">
                             <div class="form-group">
-                                <label for="nama">Nama kategori</label>
-                                <input type="text" class="form-control" value="{{ $edit_penerbit->nama }}" id="nama" name="nama" placeholder="Nama kategori" autocomplete="off">
+                                <label for="nama">Nama penerbit</label>
+                                <input type="text" class="form-control" value="{{ $edit_penerbit->nama }}" id="nama" name="nama" placeholder="Nama penerbit" autocomplete="off">
                             </div>
                         </div>
 
@@ -80,7 +80,7 @@
                                 <td>{{ ++$i }}</td>
                                 <td>{{ $value->nama }}</td>
                                 <td>
-                                    <form action="{{ route('kategori.destroy', $value->id) }}" method="post">
+                                    <form action="{{ route('penerbit.destroy', $value->id) }}" method="post">
                                         <button class="btn btn-primary btn-sm"><i class="fas fa-pen"></i></button>
                                         @csrf
                                         @method('DELETE')
