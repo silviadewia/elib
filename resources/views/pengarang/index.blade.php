@@ -24,7 +24,8 @@
                         <div class="card-body">
                             <div class="form-group">
                                 <label for="nama">Nama pengarang</label>
-                                <input type="text" class="form-control" id="nama" name="nama" placeholder="Nama pengarang" autocomplete="off">
+                                <input type="text" class="form-control" id="nama" name="nama"
+                                    placeholder="Nama pengarang" autocomplete="off">
                             </div>
                         </div>
 
@@ -47,7 +48,8 @@
                     </h3>
                 </div>
                 <div class="card-body">
-                    <table class="table table-bordered table-hover dataTable dtr-inline" name="table-Pengarang" id="table-pengarang">
+                    <table class="table table-bordered table-hover dataTable dtr-inline" name="table-Pengarang"
+                        id="table-pengarang">
                         <thead>
                             <tr>
                                 <th>#</th>
@@ -63,10 +65,13 @@
                                 <td>{{ $value->nama }}</td>
                                 <td>
                                     <form action="{{ route('pengarang.destroy', $value->id) }}" method="post">
-                                        <a href="{{ route('pengarang.edit',$value->id) }}" class="btn btn-primary btn-sm"><i class="fas fa-pen"></i></a>
+                                        <a href="{{ route('pengarang.edit',$value->id) }}"
+                                            class="btn btn-primary btn-sm"><i class="fas fa-pen"></i></a>
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-danger btn-sm pas-delete-metu-alert-cantik"><i class="fas fa-trash"></i></button>
+                                        <button type="submit"
+                                            class="btn btn-danger btn-sm pas-delete-metu-alert-cantik"><i
+                                                class="fas fa-trash"></i></button>
                                     </form>
                                 </td>
                             </tr>
@@ -82,7 +87,7 @@
 
 @section('js')
 <script>
-    $(document).ready(function() {
+    $(document).ready(function () {
         $('#table-pengarang').DataTable({
             dom: 'Bfrtip',
             buttons: [
@@ -91,8 +96,8 @@
         });
     });
 
-    $('.pas-delete-metu-alert-cantik').click(function(event){
-        var form =  $(this).closest("form");
+    $('.pas-delete-metu-alert-cantik').click(function (event) {
+        var form = $(this).closest("form");
         var name = $(this).data("name");
         event.preventDefault();
         Swal.fire({
@@ -103,31 +108,31 @@
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
             confirmButtonText: 'Yakin!'
-        }).then((willDelete) => {
-            if (willDelete) {
+        }).then((diHapus) => {
+            if (diHapus.value) {
                 form.submit();
             }
         });
     });
 
     const Toast = Swal.mixin({
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-                toast.addEventListener('mouseenter', Swal.stopTimer)
-                toast.addEventListener('mouseleave', Swal.resumeTimer)
-            }
-        })
-        
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+    })
+
     @if ($message = Session::get('success'))
         Toast.fire( 'Sukses !!!', '{{ $message }}', 'success')
     @endif
-
     @if ($errors->any())
         Toast.fire( 'Eror !!!', '{{ $errors->first() }}', 'error')
     @endif
+
 </script>
 @stop

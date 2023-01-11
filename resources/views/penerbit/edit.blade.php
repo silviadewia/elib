@@ -84,7 +84,7 @@
                                         <button class="btn btn-primary btn-sm"><i class="fas fa-pen"></i></button>
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>
+                                        <button type="submit" class="btn btn-danger btn-sm pas-delete-metu-alert-cantik"><i class="fas fa-trash"></i></button>
                                     </form>
                                 </td>
                             </tr>
@@ -108,5 +108,45 @@
             ]
         });
     });
+
+    $('.pas-delete-metu-alert-cantik').click(function(event){
+        var form =  $(this).closest("form");
+        var name = $(this).data("name");
+        event.preventDefault();
+        Swal.fire({
+            title: "PERHATIAN",
+            text: "Setelah di hapus, anda tidak akan dapat memulihkan data ini!",
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yakin!'
+        }).then((diHapus) => {
+            if (diHapus.value) {
+                form.submit();
+            }
+        });
+        return false;
+    });
+
+    const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+        })
+
+    @if ($message = Session::get('success'))
+        Toast.fire( 'Sukses !!!', '{{ $message }}', 'success')
+    @endif
+
+    @if ($errors->any())
+        Toast.fire( 'Eror !!!', '{{ $errors->first() }}', 'error')
+    @endif
 </script>
 @stop
