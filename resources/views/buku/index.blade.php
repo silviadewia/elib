@@ -14,7 +14,7 @@
                 <div class="card-header">
                     <h3 class="card-title">
                         <i class="fas fa-edit"></i>
-                        Buttons
+                        Table Buku
                     </h3>
                 </div>
                 <div class="card-body">

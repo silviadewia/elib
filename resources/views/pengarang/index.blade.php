@@ -15,7 +15,7 @@
                 <div class="card-header">
                     <h3 class="card-title">
                         <i class="fas fa-edit"></i>
-                        Buttons
+                        Table Pengarang
                     </h3>
                 </div>
                 <div class="card-body">
@@ -44,7 +44,7 @@
                 <div class="card-header">
                     <h3 class="card-title">
                         <i class="fas fa-edit"></i>
-                        Buttons
+                        Table Hasil 
                     </h3>
                 </div>
                 <div class="card-body">
