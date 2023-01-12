@@ -20,13 +20,13 @@
 
         <div class="small-box bg-red">
             <div class="inner">
-                <p>JENIS BUKU</p>
-                <h3>53</h3>
+                <p>DENDA</p>
+                <h3>{{ $count_denda }}</h3>
             </div>
             <div class="icon">
                 <i class="fa fa-book"></i>
             </div>
-            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="{{ route('denda.index'); }}" class="small-box-footer">Selengkapnya ... <i class="fa fa-arrow-circle-right"></i></a>
         </div>
     </div>
 
@@ -44,6 +44,40 @@
         </div>
     </div>
 </div>
+
+<div class="box">
+    <div class="box-header with-border">
+        <h3 class="box-title">Monthly Recap Report</h3>
+        <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+            </button>
+            <div class="btn-group">
+                <button type="button" class="btn btn-box-tool dropdown-toggle" data-toggle="dropdown">
+                    <i class="fa fa-wrench"></i></button>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a href="#">Action</a></li>
+                    <li><a href="#">Another action</a></li>
+                    <li><a href="#">Something else here</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#">Separated link</a></li>
+                </ul>
+            </div>
+            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+        </div>
+    </div>
+
+    <div class="box-body">
+        <div class="row">
+            <div class="col-md-8">
+                <p class="text-center">
+                    <strong>Sales: 1 Jan, 2014 - 30 Jul, 2014</strong>
+                </p>
+                <div class="chart">
+
+                    <canvas id="" style="height: 180px; width: 702px;" height="180" width="702" ></canvas>
+                </div>
+
+            </div>
 
             <div class="col-md-4">
                 <p class="text-center">

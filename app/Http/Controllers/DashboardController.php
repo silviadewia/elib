@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Kategori;
 use App\Models\User;
+use App\Models\Denda;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -27,6 +28,7 @@ class DashboardController extends Controller
     {
         $data = [
             'count_kategori' => Kategori::count(),
+            'count_denda' => Denda::count(),
             'count_user' => User::count()
         ];
 
