@@ -20,7 +20,7 @@
 
         <div class="small-box bg-red">
             <div class="inner">
-                <p>JENIS BUKU</p>
+                <p>DENDA</p>
                 <h3>53</h3>
             </div>
             <div class="icon">
@@ -41,49 +41,6 @@
                 <i class="fa fa-list"></i>
             </div>
             <a href="{{ route('kategori.index'); }}" class="small-box-footer">Selengkapnya ... <i class="fa fa-arrow-circle-right"></i></a>
-        </div>
-    </div>
-</div>
-
-<div class="row">
-    <div class="col-lg-4 col-xs-8">
-        <div class="small-box bg-orange">
-            <div class="inner">
-                <p>DIPINJAMKAN</p>
-                <h3>3</h3>
-
-            </div>
-            <div class="icon">
-                <i class="fa fa-arrow-up"></i>
-            </div>
-            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-        </div>
-    </div>
-    <div class="col-lg-4 col-xs-8">
-
-        <div class="small-box bg-gray">
-            <div class="inner">
-                <p>DIKEMBALIKAN</p>
-                <h3>2</h3>
-            </div>
-            <div class="icon">
-                <i class="fa fa-arrow-down"></i>
-            </div>
-            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-        </div>
-    </div>
-
-    <div class="col-lg-4 col-xs-8">
-
-        <div class="small-box bg-lightblue">
-            <div class="inner">
-                <p>DENDA</p>
-                <h3>1</h3>
-            </div>
-            <div class="icon">
-                <i class="fa fa-money-bill"></i>
-            </div>
-            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
         </div>
     </div>
 </div>
