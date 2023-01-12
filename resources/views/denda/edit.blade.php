@@ -15,23 +15,23 @@
                 <div class="card-header">
                     <h3 class="card-title">
                         <i class="fas fa-edit"></i>
-                        Tabel Denda
+                        Buttons
                     </h3>
                 </div>
                 <div class="card-body">
-                    <form method="post" action="{{ route('denda.store'); }}">
+                    <form method="post" action="{{ route('denda.update', $edit_denda->id); }}">
                         @csrf
+                        @method('PUT')
                         <div class="card-body">
                             <div class="form-group">
                                 <label for="harga">Harga</label>
-                                <input type="number" class="form-control" id="harga" name="harga" 
-                                placeholder="Harga" autocomplete="off">
+                                <input type="number" class="form-control" value="{{ $edit_denda->harga }}" id="harga" name="harga" placeholder="Harga" autocomplete="off">
                             </div>
                             <div class="form-group">
                                 <label for="status">Status</label>
                                 <select name="status" id="status">
-                                    <option value="aktif">Aktif</option>
-                                    <option value="tidak">Tidak</option>
+                                    <option value="active" {{ ($edit_denda->status == 'active') ? 'selected' : '' }}> Aktif</option>
+                                    <option value="tidak"  {{ ($edit_denda->status == 'tidak') ? 'selected' : '' }}> Tidak</option>
                                 </select>
                             </div>
                         </div>
@@ -51,12 +51,11 @@
                 <div class="card-header">
                     <h3 class="card-title">
                         <i class="fas fa-edit"></i>
-                        Tabel Hasil
+                        Buttons
                     </h3>
                 </div>
                 <div class="card-body">
-                    <table class="table table-bordered table-hover dataTable dtr-inline" name="table-denda" 
-                    id="table-denda">
+                    <table class="table table-bordered table-hover dataTable dtr-inline" name="table-Denda" id="table-denda">
                         <thead>
                             <tr>
                                 <th>#</th>
@@ -74,13 +73,10 @@
                                 <td>{{ $value->status}}</td>
                                 <td>
                                     <form action="{{ route('denda.destroy', $value->id) }}" method="post">
-                                        <a href="{{ route('denda.edit',$value->id) }}" 
-                                        class="btn btn-primary btn-sm"><i class="fas fa-pen"></i></a>
+                                        <button class="btn btn-primary btn-sm"><i class="fas fa-pen"></i></button>
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" 
-                                        class="btn btn-danger btn-sm pas-delete-metu-alert-cantik">
-                                        <i class="fas fa-trash"></i></button>
+                                        <button type="submit" class="btn btn-danger btn-sm pas-delete-metu-alert-cantik"><i class="fas fa-trash"></i></button>
                                     </form>
                                 </td>
                             </tr>
@@ -93,10 +89,19 @@
     </div>
 </div>
 @stop
+
 @section('js')
 <script>
     $(document).ready(function() {
         $('#table-denda').DataTable({
+            dom: 'Bfrtip',
+            buttons: [
+                'copy', 'csv', 'excel', 'pdf', 'print'
+            ]
+        });
+    });
+    $(document).ready(function() {
+        $('#table-penerbit').DataTable({
             dom: 'Bfrtip',
             buttons: [
                 'copy', 'csv', 'excel', 'pdf', 'print'

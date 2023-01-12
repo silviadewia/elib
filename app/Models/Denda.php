@@ -8,10 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Denda extends Model
 {
     use HasFactory;
-    protected $table = 'denda';
+    protected $table = 'table_denda';
 
     protected $fillable = [
-        'nama',
-        'dibuat_oleh',
+        'status',
+        'harga',
+        'dibuat_oleh'
     ];
 }

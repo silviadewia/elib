@@ -80,7 +80,7 @@
                                 <td>{{ ++$i }}</td>
                                 <td>{{ $value->nama }}</td>
                                 <td>
-                                    <form action="{{ route('kategori.destroy', $value->id) }}" method="post">
+                                    <form action="{{ route('penerbit.destroy', $value->id) }}" method="post">
                                         <button class="btn btn-primary btn-sm"><i class="fas fa-pen"></i></button>
                                         @csrf
                                         @method('DELETE')
