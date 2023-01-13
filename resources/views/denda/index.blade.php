@@ -71,7 +71,13 @@
                             <tr>
                                 <td>{{ ++$i }}</td>
                                 <td>{{ $value->harga }}</td>
-                                <td>{{ $value->status}}</td>
+                                <td>
+                                @if($value->status == 'aktif')
+                                <button class="btn btn-success btn-sm">AKTIF</button>
+                                @else
+                                <button class="btn btn-dengar btn-sm">TIDAK</button>
+                                @endif
+                                </td>
                                 <td>
                                     <form action="{{ route('denda.destroy', $value->id) }}" method="post">
                                         <a href="{{ route('denda.edit',$value->id) }}" 
