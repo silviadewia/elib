@@ -66,21 +66,30 @@
                         </thead>
                         <tbody>
                             @foreach($denda as $value)
-
+                            
                             <tr>
                                 <td>{{ ++$i }}</td>
                                 <td>{{ $value->harga }}</td>
-                                <td>{{ $value->status}}</td>
                                 <td>
+                                @if($value->status == 'aktif')
+                                <button class="btn btn-success btn-sm">AKTIF</button>
+                                @else
+                                <button class="btn btn-dengar btn-sm">TIDAK</button>
+                                @endif
+                                </td>
+                                <td>
+                                    
                                     <form action="{{ route('denda.destroy', $value->id) }}" method="post">
                                         <button class="btn btn-primary btn-sm"><i class="fas fa-pen"></i></button>
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-danger btn-sm pas-delete-metu-alert-cantik"><i class="fas fa-trash"></i></button>
                                     </form>
+                                
                                 </td>
                             </tr>
                             @endforeach
+
                         </tbody>
                     </table>
                 </div>
