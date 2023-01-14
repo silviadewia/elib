@@ -27,13 +27,11 @@
                                 <input type="number" class="form-control" id="harga" name="harga" 
                                 placeholder="Harga" autocomplete="off">
                             </div>
-                            <div class="form-group">
-                                <label for="status">Status</label>
-                                <select name="status" id="status">
-                                    <option value="aktif">Aktif</option>
-                                    <option value="tidak">Tidak</option>
-                                </select>
-                            </div>
+                            <select class="form-select form-select-sm" name="status">
+                                <option>Pilih Status</option>
+                                <option value="aktif">Aktif</option>
+                                <option value="tidak">Tidak</option>
+                        </select>
                         </div>
 
                         <div class="card-footer">
@@ -67,7 +65,6 @@
                         </thead>
                         <tbody>
                             @foreach($denda as $value)
-
                             <tr>
                                 <td>{{ ++$i }}</td>
                                 <td>{{ $value->harga }}</td>
@@ -75,7 +72,7 @@
                                 @if($value->status == 'aktif')
                                 <button class="btn btn-success btn-sm">AKTIF</button>
                                 @else
-                                <button class="btn btn-dengar btn-sm">TIDAK</button>
+                                <button class="btn btn-danger btn-sm">TIDAK</button>
                                 @endif
                                 </td>
                                 <td>

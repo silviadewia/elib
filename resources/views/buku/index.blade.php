@@ -56,7 +56,6 @@
                                 <td>{{ $value->dibuat_oleh }}</td>
                                 <td>1</td>
 
-                                # aksi
                                 <td>
                                     <button class="btn btn-primary btn-sm"><i class="fas fa-pen"></i> </button>
                                     <button class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> </button>

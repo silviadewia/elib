@@ -74,7 +74,7 @@
                                 @if($value->status == 'aktif')
                                 <button class="btn btn-success btn-sm">AKTIF</button>
                                 @else
-                                <button class="btn btn-dengar btn-sm">TIDAK</button>
+                                <button class="btn btn-danger btn-sm">TIDAK</button>
                                 @endif
                                 </td>
                                 <td>
