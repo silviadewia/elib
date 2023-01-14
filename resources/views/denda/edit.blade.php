@@ -28,11 +28,11 @@
                                 <input type="number" class="form-control" value="{{ $edit_denda->harga }}" id="harga" name="harga" placeholder="Harga" autocomplete="off">
                             </div>
                             <div class="form-group">
-                                <label for="status">Status</label>
-                                <select name="status" id="status">
-                                    <option value="active" {{ ($edit_denda->status == 'active') ? 'selected' : '' }}> Aktif</option>
-                                    <option value="tidak"  {{ ($edit_denda->status == 'tidak') ? 'selected' : '' }}> Tidak</option>
-                                </select>
+                            <select class="form-select form-select-sm" name="status">
+                                <option>Pilih Status</option>
+                                <option value="aktif">Aktif</option>
+                                <option value="tidak">Tidak</option>
+                        </select>
                             </div>
                         </div>
 
