@@ -18,6 +18,19 @@
                     </h3>
                 </div>
                 <div class="card-body">
+                <td>
+        <button type="submit" class="btn btn-info "> Tambah Buku <i class="fas fa-plus"></i></button>
+        <div class="btn-group open">
+            <button type="button" class="btn btn-success">Sortir Berdasarkan</button>
+            <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+                <span class="caret"></span>
+                <span class="sr-only">Toggle Dropdown</span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+                <li><a href="paket">Paket</a></li>
+                <li><a href="novel">Novel</a></li>
+            </ul>
+        </div>
                     <table class="table table-bordered table-hover dataTable dtr-inline" name="table-buku" id="table-buku">
                         <thead>
                             <tr>
@@ -71,16 +84,3 @@
 </div>
 @stop
 
-@section('js')
-<script>
-    $(document).ready(function () {
-        $('#table-buku').DataTable({
-            dom: 'Bfrtip',
-            buttons: [
-                'copy', 'csv', 'excel', 'pdf', 'print'
-            ]
-        });
-    });
-
-</script>
-@stop

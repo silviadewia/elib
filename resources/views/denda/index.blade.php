@@ -27,11 +27,15 @@
                                 <input type="number" class="form-control" id="harga" name="harga" 
                                 placeholder="Harga" autocomplete="off">
                             </div>
-                            <select class="form-select form-select-sm" name="status">
+                            <td>
+                            <div class="form-group">
+                            <label>Status</label>
+                            <select class="form-control select2bs4 select2-hidden-accessible" style="width: 100%;" name="status">
                                 <option>Pilih Status</option>
                                 <option value="aktif">Aktif</option>
                                 <option value="tidak">Tidak</option>
                         </select>
+                            </div>
                         </div>
 
                         <div class="card-footer">

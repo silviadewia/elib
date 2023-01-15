@@ -8,7 +8,6 @@
             <div class="inner">
                 <p>ANGGOTA</p>
                 <h3>15</h3>
-
             </div>
             <div class="icon">
                 <i class="fa fa-users"></i>

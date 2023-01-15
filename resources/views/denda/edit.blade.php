@@ -28,7 +28,8 @@
                                 <input type="number" class="form-control" value="{{ $edit_denda->harga }}" id="harga" name="harga" placeholder="Harga" autocomplete="off">
                             </div>
                             <div class="form-group">
-                            <select class="form-select form-select-sm" name="status">
+                            <label>Status</label>
+                            <select class="form-control select2bs4 select2-hidden-accessible" style="width: 100%;" name="status">
                                 <option>Pilih Status</option>
                                 <option value="aktif">Aktif</option>
                                 <option value="tidak">Tidak</option>
