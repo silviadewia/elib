@@ -31,6 +31,13 @@
                 <li><a href="novel">Novel</a></li>
             </ul>
         </div>
+
+        <div class="btn-group open hidden-xs" style="float:right;">
+<input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
+<div class="input-group-btn">
+<button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+</div>
+</div>
                     <table class="table table-bordered table-hover dataTable dtr-inline" name="table-buku" id="table-buku">
                         <thead>
                             <tr>

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Buku;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
 
 class BukuController extends Controller
 {
@@ -33,10 +33,12 @@ class BukuController extends Controller
         $data = [
             'title' => 'Daftar buku'
         ];
+
         return view('buku.index', $data);
     }
 
-    /**
+    
+     /*
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -45,18 +47,46 @@ class BukuController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nama' => 'required'
+            'sampul' => 'required',
+            'isbn' => 'required',
+            'judul' => 'required',
+            'kategori' => 'required',
+            'rak' => 'required',
+            'penerbit' => 'required',
+            'pengarang' => 'required',
+            'tahun' => 'required',
+            'jumlah_buku' => 'required',
+            'lampiran_buku' => 'required',
+            'keterangan_lain' => 'required',
+            'pinjam' => 'required'
         ]);
 
         # olah sebelum insert
         $insert = [
-            'nama' => $request->input('nama'),
-            'dibuat_oleh'=>'Auth'::user()->name,
+            'sampul' => $request->input('sampul'),
+            'isbn' => $request->input('isbn'),
+            'judul' => $request->input('judul'),
+            'kategoi' => $request->input('kategoi'),
+            'rak' => $request->input('rak'),
+            'penerbit' => $request->input('penerbit'),
+            'tahun' => $request->input('tahun'),
+            'jumlah_buku' => $request->input('jumlah_buku'),
+            'lampiran_buku' => $request->input('lampiran_buku'),
+            'keterangan_lain' => $request->input('keterangan_lain'),
+            'pinjam' => $request->input('pinjam'),
+            'dibuat_oleh'=>'Auth'::user()->name
         ];
-        Buku::create($insert);
 
-        return redirect()->route('buku.index')->with('success', 'Berhasil tambah kategori');
-        
+        try {
+            # proses insert
+            buku::create($insert);
+
+            # kembalikan ke tampilan
+            return redirect()->route('buku.index')->with('success', 'Hi '.Auth::user()->name.', Berhasil tambah buku');
+        } catch (\Exception $e) { # jika gagal
+            # kembalikan ke tampilan
+            return redirect()->route('buku.index')->with('failed', 'Gagal insert buku');
+        } 
     }
 
     /**
@@ -78,7 +108,17 @@ class BukuController extends Controller
      */
     public function edit(Buku $buku)
     {
-        //
+        {
+            # variable tampilan
+            $data = [
+                'title' => 'Edit buku',
+                'buku' => Buku::all(),
+                'edit_buku' => $buku
+            ];
+    
+            # kembalikan ke tampilan
+            return view('buku.edit', $data)->with('i');
+        }
     }
 
     /**
@@ -90,7 +130,35 @@ class BukuController extends Controller
      */
     public function update(Request $request, Buku $buku)
     {
-        //
+        {
+            # validasi data
+            $request->validate([
+            'sampul' => 'required',
+            'isbn' => 'required',
+            'judul' => 'required',
+            'kategori' => 'required',
+            'rak' => 'required',
+            'penerbit' => 'required',
+            'pengarang' => 'required',
+            'tahun' => 'required',
+            'jumlah_buku' => 'required',
+            'lampiran_buku' => 'required',
+            'keterangan_lain' => 'required',
+            'pinjam' => 'required'
+            ]);
+    
+            # coba update
+            try {
+                # proses update
+                $buku->update($request->all());
+                # kembalikan ke tampilan
+                return redirect()->route('buku.index')->with('success', 'Hi '.Auth::user()->name.', Berhasil update buku');
+            } catch (\Exception $e) { # jika gagal
+                # kembalikan ke tampilan
+                return redirect()->route('buku.index')->with('failed', 'Gagal update buku');
+            }
+        }
+    
     }
 
     /**
@@ -101,6 +169,17 @@ class BukuController extends Controller
      */
     public function destroy(Buku $buku)
     {
-        //
+        {
+            # coba update
+            try {
+                # proses delete
+                $buku->delete();
+                # kembalikan ke tampilan
+                return redirect()->route('buku.index')->with('success', 'Hi '.Auth::user()->name.', Berhasil delete buku');
+            } catch (\Exception $e) { # jika gagal
+                # kembalikan ke tampilan
+                return redirect()->route('buku.index')->with('failed', 'Gagal delete buku');
+            }
+        }
     }
 }
