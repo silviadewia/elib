@@ -122,7 +122,7 @@ class BukuController extends Controller
             ];
     
             # kembalikan ke tampilan
-            return view('buku.edit', $data)->with('i');
+            return view('daftar.edit', $data)->with('i');
         }
     }
 

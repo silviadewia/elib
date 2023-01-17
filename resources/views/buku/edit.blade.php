@@ -4,13 +4,13 @@
 
 @section('content_header')
 
-<h1>{{$title}}</h1>
+<h1>{{ $title }}</h1>
 @stop
 
 @section('content')
 <div class="containe-fluid">
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-12">
             <div class="card card-primary card-outline">
                 <div class="card-header">
                     <h3 class="card-title">
@@ -19,7 +19,7 @@
                     </h3>
                 </div>
                 <div class="card-body">
-                    <form method="post" action="{{ route('buku.update', $edit_buku->id); }}">
+                    <form method="post" action="{{ route('daftar.update', $edit-daftar->id); }}"> 
                         @csrf
                         @method('PUT')
                         <div class="card-body">
@@ -45,8 +45,8 @@
                             </div>
                             <div class="form-group">
                                 <label for="penerbit">Pengarang</label>
-                                <input type="radio" class="form-control" id="pengarang" name="pengarang" placeholder="Pengarang" autocomplete="off">
-                            </div>
+                            </div>                                <input type="radio" class="form-control" id="pengarang" name="pengarang" placeholder="Pengarang" autocomplete="off">
+
                             <div class="form-group">
                                 <label for="tahun">Tahun</label>
                                 <input type="number" class="form-control" id="tahun" name="tahun" placeholder="Tahun" autocomplete="off">
@@ -72,38 +72,20 @@
                                 <input type="number" class="form-control" id="pinjam" name="pinjam" placeholder="Pinjam" autocomplete="off">
                             </div>
                         </div>
-
-                        <div class="card-footer">
-                            <button type="reset" class="btn btn-default">Batal</button>
-                            <button type="submit" class="btn btn-info  float-right"><i class="fas fa-plus"></i>
-                                Simpan</button>
-                        </div>
-                </div>
-                </form>
-            </div>
+            </div>  
         </div>
-
-        @@section('content')
-        <div class="col-md-6">
-            <div class="card card-primary card-outline">
-                <div class="card-header">
-                    <h3 class="card-title">
-                        <i class="fas fa-edit"></i>
-                        Buttons
-                    </h3>
-                </div>
-                <div class="card-body">
-                    <table class="table table-bordered table-hover dataTable dtr-inline" name="table-Buku" id="table-buku">
+    </div>
+</div>
+<div class="card-body">
+                    <table class="table table-bordered table-hover dataTable dtr-inline" name="table-buku" id="table-buku">
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Sampul</th>
                                 <th>ISBN</th>
                                 <th>Judul</th>
                                 <th>Kategori</th>
                                 <th>Rak</th>
                                 <th>Penerbit</th>
-                                <th>Pengarang</th>
                                 <th>Tahun</th>
                                 <th>Jumlah Buku</th>
                                 <th>Lampiran Buku</th>
@@ -117,28 +99,25 @@
                             
                             <tr>
                                 <td>{{ ++$i }}</td>
-                                <td>{{ $value->sampul }}</td>
                                 <td>{{ $value->isbn }}</td>
                                 <td>{{ $value->judul }}</td>
                                 <td>{{ $value->kategori }}</td>
                                 <td>{{ $value->rak }}</td>
                                 <td>{{ $value->penerbit }}</td>
-                                <td>{{ $value->pengarang }}</td>
                                 <td>{{ $value->tahun }}</td>
                                 <td>{{ $value->jumlah_buku }}</td>
-                                <td>{{ $value->lampiran_buku }}</td>
                                 <td>{{ $value->keterangan_lain }}</td>
                                 <td>{{ $value->dibuat_oleh }}</td>
                                 <td>{{ $value->pinjam }}</td>
-                                
                                 <td>
                                     
-                                    <form action="{{ route('buku.destroy', $value->id) }}" method="post">
+                                    <form action="{{ route('daftar.destroy', $value->id) }}" method="post">
                                         <button class="btn btn-primary btn-sm"><i class="fas fa-pen"></i></button>
-                                        @method('DELETE')
                                         @csrf
+                                        @method('DELETE')
                                         <button type="submit" class="btn btn-danger btn-sm pas-delete-metu-alert-cantik"><i class="fas fa-trash"></i></button>
                                     </form>
+                                
                                 </td>
                             </tr>
                             @endforeach
@@ -146,24 +125,13 @@
                         </tbody>
                     </table>
                 </div>
-            </div>
-        </div>
-    </div>
-</div>
+
 @stop
 
 @section('js')
 <script>
     $(document).ready(function() {
-        $('#table-buku').DataTable({
-            dom: 'Bfrtip',
-            buttons: [
-                'copy', 'csv', 'excel', 'pdf', 'print'
-            ]
-        });
-    });
-    $(document).ready(function() {
-        $('#table-penerbit').DataTable({
+        $('#table-kategori').DataTable({
             dom: 'Bfrtip',
             buttons: [
                 'copy', 'csv', 'excel', 'pdf', 'print'
@@ -183,14 +151,13 @@
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
             confirmButtonText: 'Yakin!'
-        }).then((diHapus) => {
+               }).then((diHapus) => {
             if (diHapus.value) {
                 form.submit();
             }
         });
-        return false;
     });
-
+    
     const Toast = Swal.mixin({
             toast: true,
             position: 'top-end',
@@ -202,11 +169,10 @@
                 toast.addEventListener('mouseleave', Swal.resumeTimer)
             }
         })
-
+        
     @if ($message = Session::get('success'))
         Toast.fire( 'Sukses !!!', '{{ $message }}', 'success')
     @endif
-
     @if ($errors->any())
         Toast.fire( 'Eror !!!', '{{ $errors->first() }}', 'error')
     @endif
