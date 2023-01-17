@@ -111,19 +111,19 @@ class BukuController extends Controller
      * @param  \App\Models\Buku  $buku
      * @return \Illuminate\Http\Response
      */
-    public function edit(Buku $buku)
+    public function edit($id)
     {
-        {
-            # variable tampilan
-            $data = [
-                'title' => 'Edit buku',
-                'buku' => Buku::all(),
-                'edit_buku' => $buku
-            ];
-    
-            # kembalikan ke tampilan
-            return view('daftar.edit', $data)->with('i');
-        }
+
+        $data = [
+            'title' => 'Edit buku',
+            'edit_buku' => Buku::where('id', $id)->first(),
+            'buku' => Buku::all(),
+            // 'edit_buku' => $buku
+        ];
+        // return $data;
+
+        # kembalikan ke tampilan
+        return view('buku.edit', $data);
     }
 
     /**
