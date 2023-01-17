@@ -37,4 +37,3 @@ Route::resource('/denda',App\Http\Controllers\DendaController::class);
 Route::middleware('auth')->get('/laporan',[App\Http\Controllers\LaporanController::class, 'index']);
 Route::middleware('auth')->get('/pengaturan',[App\Http\Controllers\PengaturanController::class, 'index']);
 Route::middleware('auth')->get('/dikembalikan',[App\Http\Controllers\DikembalikanController::class, 'index']);
- 
