@@ -83,7 +83,6 @@
             </div>
         </div>
 
-        @@section('content')
         <div class="col-md-6">
             <div class="card card-primary card-outline">
                 <div class="card-header">
