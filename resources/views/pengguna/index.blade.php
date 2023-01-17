@@ -47,29 +47,29 @@
         aria-describedby="example1_info">
         <thead>
             <tr role="row">
-                <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                    aria-sort="ascending" aria-label="No: activate to sort column descending" style="width: 10.10px;">
+                <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="6" colspan="1"
+                    aria-sort="ascending" aria-label="No: activate to sort column descending" style="width: 6.6px;">
                     No</th>
-                <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                    aria-sort="ascending" aria-label="Id: activate to sort column descending" style="width: 297.469px;">
+                <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="6" colspan="1"
+                    aria-sort="ascending" aria-label="Id: activate to sort column descending" style="width: 58.2000px;">
                     Id</th>
-                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                    aria-label="Nis: activate to sort column ascending" style="width: 361.984px;">Nis</th>
-                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                    aria-label="Nama: activate to sort column ascending" style="width: 322.266px;">Nama
+                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="6" colspan="1"
+                    aria-label="Nis: activate to sort column ascending" style="width: 58.2000px;">Nis</th>
+                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="6" colspan="1"
+                    aria-label="Nama: activate to sort column ascending" style="width: 300.240px;">Nama
                 </th>
-                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                    aria-label="Jurusan: activate to sort column ascending" style="width: 257.094px;">Jurusan</th>
+                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="6" colspan="1"
+                    aria-label="Jurusan: activate to sort column ascending" style="width: 200.078px;">Jurusan</th>
                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                     aria-label="User: activate to sort column ascending" style="width: 188.188px;">User</th>
-                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                    aria-label="Telepon: activate to sort column ascending" style="width: 188.188px;">Telepon</th>
-                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
+                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="6" colspan="1"
+                    aria-label="Telepon: activate to sort column ascending" style="width: 160.170px;">Telepon</th>
+                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="6" colspan="1"
                     aria-label="Status: activate to sort column ascending" style="width: 188.188px;">Status</th>
-                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
+                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="6" colspan="1"
                     aria-label="Alamat: activate to sort column ascending" style="width: 188.188px;">Alamat</th>
-                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                    aria-label="Aksi: activate to sort column ascending" style="width: 21000.21000px;">Aksi</th>
+                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="6" colspan="6"
+                    aria-label="Aksi: activate to sort column ascending" style="width: 2100.2100px;">Aksi</th>
             </tr>
         </thead>
         <tbody>

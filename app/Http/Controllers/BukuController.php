@@ -15,30 +15,33 @@ class BukuController extends Controller
      */
     public function index()
     {
+        #variabel tampilan
         $data = [
             'title' => 'Daftar Buku',
             'buku' => Buku::all(),
         ];
-    
-        return view('buku.index', $data)->with('i');
-    }
 
-    /**
+        # kembalikan ke tampilan
+        return view('buku.index', $data)->with('i'); 
+    }
+ 
+   /*
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function create()
     {
+        # variable tampilan
         $data = [
             'title' => 'Daftar buku'
         ];
 
+        # kembalikan ke tampilan
         return view('buku.index', $data);
     }
-
     
-     /*
+    /*
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -58,6 +61,7 @@ class BukuController extends Controller
             'jumlah_buku' => 'required',
             'lampiran_buku' => 'required',
             'keterangan_lain' => 'required',
+            'dibuat_oleh' => 'required',
             'pinjam' => 'required'
         ]);
 
@@ -73,6 +77,7 @@ class BukuController extends Controller
             'jumlah_buku' => $request->input('jumlah_buku'),
             'lampiran_buku' => $request->input('lampiran_buku'),
             'keterangan_lain' => $request->input('keterangan_lain'),
+            'dibuat_oleh' => $request->input('dibuat_oleh'),
             'pinjam' => $request->input('pinjam'),
             'dibuat_oleh'=>'Auth'::user()->name
         ];

@@ -78,6 +78,7 @@
 
                                 <td>
                                     <button class="btn btn-primary btn-sm"><i class="fas fa-pen"></i> </button>
+                                    <button class="btn btn-info btn-sm"><i class="fa fa-eye"></i></button> 
                                     <button class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> </button>
                                 </td>
                             </tr>

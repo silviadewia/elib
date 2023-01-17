@@ -132,13 +132,12 @@
                                 
                                 <td>
                                     
-                                    <form action="{{ route('denda.destroy', $value->id) }}" method="post">
+                                    <form action="{{ route('buku.destroy', $value->id) }}" method="post">
                                         <button class="btn btn-primary btn-sm"><i class="fas fa-pen"></i></button>
-                                        @csrf
                                         @method('DELETE')
+                                        @csrf
                                         <button type="submit" class="btn btn-danger btn-sm pas-delete-metu-alert-cantik"><i class="fas fa-trash"></i></button>
                                     </form>
-                                
                                 </td>
                             </tr>
                             @endforeach
@@ -155,7 +154,7 @@
 @section('js')
 <script>
     $(document).ready(function() {
-        $('#table-denda').DataTable({
+        $('#table-buku').DataTable({
             dom: 'Bfrtip',
             buttons: [
                 'copy', 'csv', 'excel', 'pdf', 'print'
