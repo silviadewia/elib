@@ -19,63 +19,68 @@
                     </h3>
                 </div>
                 <div class="card-body">
-                    <form method="post" action="{{ route('daftar.update', $edit-daftar->id); }}"> 
+                    <form method="post" action="{{ route('daftar.update', $edit_buku->id); }}"> 
                         @csrf
                         @method('PUT')
                         <div class="card-body">
                             <div class="form-group">
                                 <label for="isbn">ISBN</label>
-                                <input type="number" class="form-control" id="isbn" name="isbn" placeholder="Isbn" autocomplete="off">
+                                <input type="number" class="form-control" value="{{ $edit_daftar->isbn }}" id="isbn" name="isbn" placeholder="Isbn" autocomplete="off">
                             </div>
                             <div class="form-group">
                                 <label for="judul">Judul</label>
-                                <input type="text" class="form-control" id="judul" name="judul" placeholder="Judul" autocomplete="off">
+                                <input type="text" class="form-control" value="{{ $edit_daftar->judul }}" id="judul" name="judul" placeholder="Judul" autocomplete="off">
                             </div>
                             <div class="form-group">
                                 <label for="kategori">Kategori</label>
-                                <input type="text" class="form-control" id="kategori" name="kategori" placeholder="Kategori" autocomplete="off">
+                                <input type="text" class="form-control" value="{{ $edit_daftar->kategori }}" id="kategori" name="kategori" placeholder="Kategori" autocomplete="off">
                             </div>
                             <div class="form-group">
                                 <label for="rak">Rak</label>
-                                <input type="number" class="form-control" id="rak" name="rak" placeholder="Rak" autocomplete="off">
+                                <input type="number" class="form-control" value="{{ $edit_daftar->rak }}" id="rak" name="rak" placeholder="Rak" autocomplete="off">
                             </div>
                             <div class="form-group">
                                 <label for="penerbit">Penerbit</label>
-                                <input type="radio" class="form-control" id="penerbit" name="penerbit" placeholder="Penerbit" autocomplete="off">
+                                <input type="radio" class="form-control" value="{{ $edit_daftar->penerbit }}" id="penerbit" name="penerbit" placeholder="Penerbit" autocomplete="off">
                             </div>
                             <div class="form-group">
                                 <label for="penerbit">Pengarang</label>
-                            </div>                                <input type="radio" class="form-control" id="pengarang" name="pengarang" placeholder="Pengarang" autocomplete="off">
-
+                                <input type="radio" class="form-control" value="{{ $edit_daftar->pengarang }}" id="pengarang" name="pengarang" placeholder="Pengarang" autocomplete="off">
+                            </div>
                             <div class="form-group">
                                 <label for="tahun">Tahun</label>
-                                <input type="number" class="form-control" id="tahun" name="tahun" placeholder="Tahun" autocomplete="off">
+                                <input type="number" class="form-control" value="{{ $edit_daftar->tahun }}" id="tahun" name="tahun" placeholder="Tahun" autocomplete="off">
                             </div>
                             <div class="form-group">
                                 <label for="jumlah_buku">Jumlah Buku</label>
-                                <input type="number" class="form-control" id="jumah_buku" name="jumlah_buku" placeholder="Jumlah_buku" autocomplete="off">
+                                <input type="number" class="form-control" value="{{ $edit_daftar->jumlah_buku }}" id="jumah_buku" name="jumlah_buku" placeholder="Jumlah_buku" autocomplete="off">
                             </div>
                             <div class="form-group">
                                 <label for="lampiran_buku">Lampiran Buku</label>
-                                <input type="text" class="form-control" id="lampiran_buku" name="lampiran_buku" placeholder="Lampiran_buku" autocomplete="off">
+                                <input type="text" class="form-control" value="{{ $edit_daftar->lampiran_buku }}" id="lampiran_buku" name="lampiran_buku" placeholder="Lampiran_buku" autocomplete="off">
                             </div>
                             <div class="form-group">
                                 <label for="keterangan_lain">Keterangan Lain</label>
-                                <input type="text" class="form-control" id="keterangan_lain" name="keterangan_lain" placeholder="Keterangan_lain" autocomplete="off">
+                                <input type="text" class="form-control" value="{{ $edit_daftar->keterangan_lain }}" id="keterangan_lain" name="keterangan_lain" placeholder="Keterangan_lain" autocomplete="off">
                             </div>
                             <div class="form-group">
                                 <label for="dibuat_oleh">Dibuat Oleh</label>
-                                <input type="text" class="form-control" id="dibuat_oleh" name="dibuat_oleh" placeholder="Dibuat_oleh" autocomplete="off">
+                                <input type="text" class="form-control" value="{{ $edit_daftar->dibuat_oleh }}" id="dibuat_oleh" name="dibuat_oleh" placeholder="Dibuat_oleh" autocomplete="off">
                             </div>
                             <div class="form-group">
                                 <label for="pinjam">Pinjam</label>
-                                <input type="number" class="form-control" id="pinjam" name="pinjam" placeholder="Pinjam" autocomplete="off">
+                                <input type="number" class="form-control" value="{{ $edit_daftar->pinjam }}" id="pinjam" name="pinjam" placeholder="Pinjam" autocomplete="off">
                             </div>
                         </div>
             </div>  
         </div>
     </div>
 </div>
+<div class="card-footer">
+                            <button type="reset" class="btn btn-default">Batal</button>
+                            <button type="submit" class="btn btn-info  float-right"><i class="fas fa-plus"></i>
+                                Simpan</button>
+                        </div>
 <div class="card-body">
                     <table class="table table-bordered table-hover dataTable dtr-inline" name="table-buku" id="table-buku">
                         <thead>
@@ -131,7 +136,7 @@
 @section('js')
 <script>
     $(document).ready(function() {
-        $('#table-kategori').DataTable({
+        $('#table-buku').DataTable({
             dom: 'Bfrtip',
             buttons: [
                 'copy', 'csv', 'excel', 'pdf', 'print'
