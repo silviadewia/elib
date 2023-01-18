@@ -102,7 +102,7 @@ class BukuController extends Controller
      */
     public function show(Buku $buku)
     {
-        //
+        return view('show', compact('buku'));
     }
 
     /**
@@ -123,7 +123,7 @@ class BukuController extends Controller
         // return $data;
 
         # kembalikan ke tampilan
-        return view('buku.edit', $data);
+        return view('buku.edit');
     }
 
     /**
@@ -172,7 +172,7 @@ class BukuController extends Controller
      * @param  \App\Models\Buku  $buku
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Buku $buku)
+    public function destroy($buku)
     {
         {
             # coba update

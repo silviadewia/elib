@@ -23,9 +23,9 @@
                         @csrf
                         @method('PUT')
                         <div class="card-body">
-                             <div class="form-group">
+                        <div class="form-group">
                                 <label for="sampul">Sampul</label>
-                                <input type="img" class="form-control" value="{{ $edit_buku['isbn'] }}" id="isbn" name="isbn" placeholder="Isbn" autocomplete="off">
+                                <input type="file" value="{{ $edit_buku['sampul'] }}" id="sampul">
                             </div>
                             <div class="form-group">
                                 <label for="isbn">ISBN</label>
@@ -40,16 +40,28 @@
                                 <input type="text" class="form-control" value="{{ $edit_buku['kategori'] }}" id="kategori" name="kategori" placeholder="Kategori" autocomplete="off">
                             </div>
                             <div class="form-group">
-                                <label for="rak">Rak</label>
-                                <input type="number" class="form-control" value="{{ $edit_buku['rak'] }}" id="rak" name="rak" placeholder="Rak" autocomplete="off">
+                            <label>Rak</label>
+                            <select class="form-control select2bs4 select2-hidden-accessible" style="width: 100%;" name="rak">
+                                <option>Pilih Rak</option>
+                                <option value="001">001</option>
+                                <option value="009">009</option>
+                        </select>
                             </div>
                             <div class="form-group">
-                                <label for="penerbit">Penerbit</label>
-                                <input type="radio" class="form-control" value="{{ $edit_buku['penerbit'] }}" id="penerbit" name="penerbit" placeholder="Penerbit" autocomplete="off">
+                            <label>Penerbit</label>
+                            <select class="form-control select2bs4 select2-hidden-accessible" style="width: 100%;" name="penerbit">
+                                <option>Pilih Penerbit</option>
+                                <option value="ria_ricis">Ria Ricis</option>
+                                <option value="boy_candra">boy Candra</option>
+                        </select>
                             </div>
                             <div class="form-group">
-                                <label for="penerbit">Pengarang</label>
-                                <input type="radio" class="form-control" value="{{ $edit_buku['pengarang'] }}" id="pengarang" name="pengarang" placeholder="Pengarang" autocomplete="off">
+                            <label>Pengarang</label>
+                            <select class="form-control select2bs4 select2-hidden-accessible" style="width: 100%;" name="pengarang">
+                                <option>Pilih Pengarang</option>
+                                <option value="ria_ricis">Ria Ricis</option>
+                                <option value="boy_candra">boy Candra</option>
+                        </select>
                             </div>
                             <div class="form-group">
                                 <label for="tahun">Tahun</label>
@@ -57,15 +69,15 @@
                             </div>
                             <div class="form-group">
                                 <label for="jumlah_buku">Jumlah Buku</label>
-                                <input type="number" class="form-control" value="{{ $edit_buku['jumlah_buku'] }}" id="jumah_buku" name="jumlah_buku" placeholder="Jumlah_buku" autocomplete="off">
+                                <input type="number" class="form-control" value="{{ $edit_buku['jumlah_buku'] }}" id="jumah_buku" name="jumlah_buku" placeholder="Jumlah buku" autocomplete="off">
                             </div>
                             <div class="form-group">
                                 <label for="lampiran_buku">Lampiran Buku</label>
-                                <input type="text" class="form-control" value="{{ $edit_buku['lampiran_buku'] }}" id="lampiran_buku" name="lampiran_buku" placeholder="Lampiran_buku" autocomplete="off">
+                                <input type="file" value="{{ $edit_buku['lampiran_buku'] }}" id="lampiran_buku">
                             </div>
                             <div class="form-group">
-                                <label for="keterangan_lain">Keterangan Lain</label>
-                                <input type="text" class="form-control" value="{{ $edit_buku['keterangan_lain'] }}" id="keterangan_lain" name="keterangan_lain" placeholder="Keterangan_lain" autocomplete="off">
+                                <label for="keterangan_lain">keterangan Lain</label>
+                                <input type="text" class="form-control" value="{{ $edit_buku['jketerangan_lain'] }}" id="jumah_buku" name="keterangan_lain" placeholder="keterangan lain" autocomplete="off">
                             </div>
                             <div class="form-group">
                                 <label for="dibuat_oleh">Dibuat Oleh</label>
