@@ -41,13 +41,8 @@
                     <table class="table table-bordered table-hover dataTable dtr-inline" name="table-buku" id="table-buku">
                         <thead>
                             <tr>
-                                <th>No</th>
-                                <th>Sampul</th>
-                                <th>ISBN</th>
-                                <th>Judul</th>
                                 <th>Kategori</th>
                                 <th>Rak</th>
-                                <th>Penerbit</th>
                                 <th>Pengarang</th>
                                 <th>Tahun</th>
                                 <th>Jumlah Buku</th>

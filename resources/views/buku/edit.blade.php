@@ -28,10 +28,6 @@
                                 <input type="img" class="form-control" value="{{ $edit_buku['isbn'] }}" id="isbn" name="isbn" placeholder="Isbn" autocomplete="off">
                             </div>
                             <div class="form-group">
-                                <label for="isbn">ISBN</label>
-                                <input type="number" class="form-control" value="{{ $edit_buku['isbn'] }}" id="isbn" name="isbn" placeholder="Isbn" autocomplete="off">
-                            </div>
-                            <div class="form-group">
                                 <label for="judul">Judul</label>
                                 <input type="text" class="form-control" value="{{ $edit_buku['judul'] }}" id="judul" name="judul" placeholder="Judul" autocomplete="off">
                             </div>
@@ -90,7 +86,6 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Sampul</th>
                                 <th>ISBN</th>
                                 <th>Judul</th>
                                 <th>Kategori</th>
@@ -132,13 +127,10 @@
                                 </td>
                             </tr>
                             @endforeach
-
                         </tbody>
                     </table>
                 </div>
-
 @stop
-
 @section('js')
 <script>
     $(document).ready(function() {
@@ -149,7 +141,6 @@
             ]
         });
     });
-
     $('.pas-delete-metu-alert-cantik').click(function(event){
         var form =  $(this).closest("form");
         var name = $(this).data("name");
