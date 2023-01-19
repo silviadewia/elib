@@ -43,7 +43,7 @@ class BukuController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    { return $request->all();
         $request->validate([
             'sampul' => 'required',
             'isbn' => 'required',
@@ -103,7 +103,6 @@ class BukuController extends Controller
      */
     public function edit($id)
     {
-
         # kembalikan ke tampilan
         return view('buku.edit', [
             'title' => 'Edit buku',
@@ -121,7 +120,7 @@ class BukuController extends Controller
      */
     public function update(Request $request, Buku $buku)
     {
-        {
+        { 
             # validasi data
             $request->validate([
             'sampul' => 'required',

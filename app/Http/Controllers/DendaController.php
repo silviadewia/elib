@@ -51,15 +51,15 @@ class DendaController extends Controller
     {
         # validasi data input
         $request->validate([
-            'biaya_denda' => 'required|min:4|max:25',
+            'harga' => 'required|min:4|max:25',
             'status' => 'required'
         ]);
 
         # olah sebelum insert
         $insert = [
-            'biaya_denda' => $request->input('biaya_denda'),
+            'harga' => $request->input('harga'),
             'status' => $request->input('status'),
-            'dibuat_oleh'=> Auth::user()->name
+            'dibuat_oleh'=> Auth::user()->name,
         ];
 
         # coba insert
@@ -68,10 +68,10 @@ class DendaController extends Controller
             Denda::create($insert);
 
             # kembalikan ke tampilan
-            return redirect()->route('denda.index')->with('success', 'Hi '.Auth::user()->name.', Berhasil tambah denda');
+            return redirect()->route('denda.index')->with('success', 'Hi '.Auth::user()->name.', Berhasil tambah Denda');
         } catch (\Exception $e) { # jika gagal
             # kembalikan ke tampilan
-            return redirect()->route('denda.index')->with('failed', 'Gagal insert denda');
+            return redirect()->route('denda.index')->with('failed', 'Gagal insert Denda');
         } 
     }
 
@@ -115,7 +115,7 @@ class DendaController extends Controller
     {
         # validasi data
         $request->validate([
-            'biaya_denda' => 'required|min:3|max:25',
+            'harga' => 'required|min:3|max:25',
             'status' => 'required'
         ]);
 

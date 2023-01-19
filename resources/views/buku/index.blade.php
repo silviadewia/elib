@@ -18,76 +18,82 @@
                     </h3>
                 </div>
                 <div class="card-body">
-                <td>
-        <button type="submit" class="btn btn-info "> Tambah Buku <i class="fas fa-plus"></i></button>
-        <div class="btn-group open">
-            <button type="button" class="btn btn-success">Sortir Berdasarkan</button>
-            <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
-                <span class="caret"></span>
-                <span class="sr-only">Toggle Dropdown</span>
-            </button>
-            <ul class="dropdown-menu" role="menu">
-                <li><a href="paket">Paket</a></li>
-                <li><a href="novel">Novel</a></li>
-            </ul>
-        </div>
+                    <td>
+                        <button type="submit" class="btn btn-info "> Tambah Buku <i class="fas fa-plus"></i></button>
+                        <div class="btn-group open">
+                            <button type="button" class="btn btn-success">Sortir Berdasarkan</button>
+                            <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown"
+                                aria-expanded="true">
+                                <span class="caret"></span>
+                                <span class="sr-only">Toggle Dropdown</span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="paket">Paket</a></li>
+                                <li><a href="novel">Novel</a></li>
+                            </ul>
+                        </div>
 
-        <div class="btn-group open hidden-xs" style="float:right;">
-<input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
-<div class="input-group-btn">
-<button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
-</div>
-</div>
-                    <table class="table table-bordered table-hover dataTable dtr-inline" name="table-buku" id="table-buku">
-                        <thead>
-                            <tr>
-                                <th>No</th>
-                                <th>Sampul</th>
-                                <th>ISBN</th>
-                                <th>Judul</th>
-                                <th>Kategori</th>
-                                <th>Rak</th>
-                                <th>Penerbit</th>
-                                <th>Pengarang</th>
-                                <th>Tahun</th>
-                                <th>Jumlah Buku</th>
-                                <th>Lampiran Buku</th>
-                                <th>keterangan Lain</th>
-                                <th>Dibuat Oleh</th>
-                                <th>Pinjam</th>
-                                <th>Aksi</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach($buku as $value)
-                            <tr>
-                                <td>{{ ++$i }}</td>
-                                <td>{{ $value->sampul }}</td>
-                                <td>{{ $value->isbn }}</td>
-                                <td>{{ $value->judul_buku }}</td>
-                                <td>{{ $value->kategori }}</td>
-                                <td>{{ $value->rak }}</td>
-                                <td>{{ $value->penerbit }}</td>
-                                <td>{{ $value->pengarang }}</td>
-                                <td>{{ $value->tahun_buku }}</td>
-                                <td>{{ $value->jumlah_buku }}</td>
-                                <td>{{ $value->lampiran_buku }}</td>
-                                <td>{{ $value->keterangan_lain }}</td>
-                                <td>{{ $value->dibuat_oleh }}</td>
-                                <td>1</td>
+                        <div class="btn-group open hidden-xs" style="float:right;">
+                            <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
+                            <div class="input-group-btn">
+                                <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                            </div>
+                        </div>
+                        <table class="table table-bordered table-hover dataTable dtr-inline" name="table-buku"
+                            id="table-buku">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Sampul</th>
+                                    <th>ISBN</th>
+                                    <th>Judul</th>
+                                    <th>Kategori</th>
+                                    <th>Rak</th>
+                                    <th>Penerbit</th>
+                                    <th>Pengarang</th>
+                                    <th>Tahun</th>
+                                    <th>Jumlah Buku</th>
+                                    <th>Lampiran Buku</th>
+                                    <th>keterangan Lain</th>
+                                    <th>Dibuat Oleh</th>
+                                    <th>Pinjam</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($buku as $value)
+                                <tr>
+                                    <td>{{ ++$i }}</td>
+                                    <td>{{ $value->sampul }}</td>
+                                    <td>{{ $value->isbn }}</td>
+                                    <td>{{ $value->judul_buku }}</td>
+                                    <td>{{ $value->kategori }}</td>
+                                    <td>{{ $value->rak }}</td>
+                                    <td>{{ $value->penerbit }}</td>
+                                    <td>{{ $value->pengarang }}</td>
+                                    <td>{{ $value->tahun_buku }}</td>
+                                    <td>{{ $value->jumlah_buku }}</td>
+                                    <td>{{ $value->lampiran_buku }}</td>
+                                    <td>{{ $value->keterangan_lain }}</td>
+                                    <td>{{ $value->dibuat_oleh }}</td>
+                                    <td>1</td>
 
-                                <td>
-                                    <a href="{{ route('daftar.edit',$value->id) }}" class="btn btn-primary btn-sm"><i class="fas fa-pen"></i> </a>
-                                    <a href="{{ route('daftar.show',$value->id) }}" class="btn btn-info btn-sm"><i class="fa fa-eye"></i> </a> 
-                                    @csrf
+                                    <td>
+                                        <a href="{{ route('daftar.edit',$value->id) }}"
+                                            class="btn btn-primary btn-sm"><i class="fas fa-pen"></i> </a>
+                                        <a href="{{ route('daftar.show',$value->id) }}" class="btn btn-info btn-sm"><i
+                                                class="fa fa-eye"></i> </a>
+                                        @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-danger btn-sm pas-delete-metu-alert-cantik"><i class="fas fa-trash"></i></button>
-                                    </form>
-                                </td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                                        <button type="submit"
+                                            class="btn btn-danger btn-sm pas-delete-metu-alert-cantik"><i
+                                                class="fas fa-trash"></i></button>
+                                        </form>
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
                 </div>
             </div>
         </div>
@@ -97,8 +103,8 @@
 
 @section('js')
 <script>
-    $('.pas-delete-metu-alert-cantik').click(function(event){
-        var form =  $(this).closest("form");
+    $('.pas-delete-metu-alert-cantik').click(function (event) {
+        var form = $(this).closest("form");
         var name = $(this).data("name");
         event.preventDefault();
         Swal.fire({
@@ -117,21 +123,22 @@
         return false;
     });
     const Toast = Swal.mixin({
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-                toast.addEventListener('mouseenter', Swal.stopTimer)
-                toast.addEventListener('mouseleave', Swal.resumeTimer)
-            }
-        })
-    @if ($message = Session::get('success'))
-        Toast.fire( 'Sukses !!!', '{{ $message }}', 'success')
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+    })
+    @if($message = Session::get('success'))
+    Toast.fire('Sukses !!!', '{{ $message }}', 'success')
     @endif
-    @if ($errors->any())
-        Toast.fire( 'Eror !!!', '{{ $errors->first() }}', 'error')
+    @if($errors -> any())
+    Toast.fire('Eror !!!', '{{ $errors->first() }}', 'error')
     @endif
+
 </script>
 @stop

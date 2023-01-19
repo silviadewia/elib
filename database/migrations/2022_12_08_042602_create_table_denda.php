@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('table_denda', function (Blueprint $table) {
             $table->id();
-            $table->decimal('biaya_denda',$precision = 10, $scale = 3 );
-            $table->enum('status', ['aktif','non_aktif']);
+            $table->decimal('harga',$precision = 10, $scale = 3 );
+            $table->enum('status', ['aktif','tidak']);
             $table->string('dibuat_oleh', 25);
             $table->timestamps();
         });

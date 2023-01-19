@@ -23,7 +23,7 @@
                         @csrf
                         <div class="card-body">
                             <div class="form-group">
-                                <label for="biaya_denda">Biaya Denda</label>
+                                <label for="harga">harga</label>
                                 <input type="number" class="form-control" id="harga" name="harga" 
                                 placeholder="Harga" autocomplete="off">
                             </div>
@@ -33,7 +33,7 @@
                             <select class="form-control select2bs4 select2-hidden-accessible" style="width: 100%;" name="status">
                                 <option>Pilih Status</option>
                                 <option value="aktif">AKTIF</option>
-                                <option value="non_aktif">NON AKTIF</option>
+                                <option value="tidak">TIDAK</option>
                         </select>
                             </div>
                         </div>
@@ -62,7 +62,7 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Biaya Denda</th>
+                                <th>Harga</th>
                                 <th>Status</th>
                                 <th>Aksi</th>
                             </tr>
@@ -71,12 +71,12 @@
                             @foreach($denda as $value)
                             <tr>
                                 <td>{{ ++$i }}</td>
-                                <td>{{ $value->biaya_denda }}</td>
+                                <td>{{ $value->harga }}</td>
                                 <td>
                                 @if($value->status == 'aktif')
                                 <button class="btn btn-success btn-sm">AKTIF</button>
                                 @else
-                                <button class="btn btn-danger btn-sm">NON AKTIF</button>
+                                <button class="btn btn-danger btn-sm">TIDAK</button>
                                 @endif
                                 </td>
                                 <td>
