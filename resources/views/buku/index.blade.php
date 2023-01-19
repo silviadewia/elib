@@ -41,8 +41,13 @@
                     <table class="table table-bordered table-hover dataTable dtr-inline" name="table-buku" id="table-buku">
                         <thead>
                             <tr>
+                                <th>No</th>
+                                <th>Sampul</th>
+                                <th>ISBN</th>
+                                <th>Judul</th>
                                 <th>Kategori</th>
                                 <th>Rak</th>
+                                <th>Penerbit</th>
                                 <th>Pengarang</th>
                                 <th>Tahun</th>
                                 <th>Jumlah Buku</th>
@@ -73,8 +78,11 @@
 
                                 <td>
                                     <a href="{{ route('daftar.edit',$value->id) }}" class="btn btn-primary btn-sm"><i class="fas fa-pen"></i> </a>
-                                    <button class="btn btn-info btn-sm"><i class="fa fa-eye"></i></button> 
-                                    <button class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> </button>
+                                    <a href="{{ route('daftar.show',$value->id) }}" class="btn btn-info btn-sm"><i class="fa fa-eye"></i> </a> 
+                                    @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger btn-sm pas-delete-metu-alert-cantik"><i class="fas fa-trash"></i></button>
+                                    </form>
                                 </td>
                             </tr>
                             @endforeach
@@ -89,7 +97,6 @@
 
 @section('js')
 <script>
-
     $('.pas-delete-metu-alert-cantik').click(function(event){
         var form =  $(this).closest("form");
         var name = $(this).data("name");
@@ -109,7 +116,6 @@
         });
         return false;
     });
-
     const Toast = Swal.mixin({
             toast: true,
             position: 'top-end',
@@ -121,11 +127,9 @@
                 toast.addEventListener('mouseleave', Swal.resumeTimer)
             }
         })
-
     @if ($message = Session::get('success'))
         Toast.fire( 'Sukses !!!', '{{ $message }}', 'success')
     @endif
-
     @if ($errors->any())
         Toast.fire( 'Eror !!!', '{{ $errors->first() }}', 'error')
     @endif
