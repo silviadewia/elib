@@ -24,15 +24,15 @@
                         @method('PUT')
                         <div class="card-body">
                             <div class="form-group">
-                                <label for="harga">Harga</label>
-                                <input type="number" class="form-control" value="{{ $edit_denda->harga }}" id="harga" name="harga" placeholder="Harga" autocomplete="off">
+                                <label for="biaya-denda">Biaya Denda</label>
+                                <input type="number" class="form-control" value="{{ $edit_denda->biaya_denda }}" id="biaya_denda" name="biaya_denda" placeholder="Biaya denda" autocomplete="off">
                             </div>
                             <div class="form-group">
                             <label>Status</label>
                             <select class="form-control select2bs4 select2-hidden-accessible" style="width: 100%;" name="status">
                                 <option>Pilih Status</option>
-                                <option value="aktif">Aktif</option>
-                                <option value="tidak">Tidak</option>
+                                <option value="aktif">AKTIF</option>
+                                <option value="non_aktif">NON AKTIF</option>
                         </select>
                             </div>
                         </div>
@@ -60,7 +60,7 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Harga</th>
+                                <th>Biaya Denda</th>
                                 <th>Status</th>
                                 <th>Aksi</th>
                             </tr>
@@ -70,12 +70,12 @@
                             
                             <tr>
                                 <td>{{ ++$i }}</td>
-                                <td>{{ $value->harga }}</td>
+                                <td>{{ $value->biaya_denda }}</td>
                                 <td>
                                 @if($value->status == 'aktif')
                                 <button class="btn btn-success btn-sm">AKTIF</button>
                                 @else
-                                <button class="btn btn-danger btn-sm">TIDAK</button>
+                                <button class="btn btn-danger btn-sm">NON AKTIF</button>
                                 @endif
                                 </td>
                                 <td>

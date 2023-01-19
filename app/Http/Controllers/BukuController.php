@@ -104,16 +104,12 @@ class BukuController extends Controller
     public function edit($id)
     {
 
-        $data = [
+        # kembalikan ke tampilan
+        return view('buku.edit', [
             'title' => 'Edit buku',
             'edit_buku' => Buku::where('id', $id)->first(),
             'buku' => Buku::all(),
-            // 'edit_buku' => $buku
-        ];
-        // return $data;
-
-        # kembalikan ke tampilan
-        return view('buku.edit');
+        ]);
     }
 
     /**

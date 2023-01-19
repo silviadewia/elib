@@ -51,13 +51,13 @@ class DendaController extends Controller
     {
         # validasi data input
         $request->validate([
-            'harga' => 'required|min:4|max:25',
+            'biaya_denda' => 'required|min:4|max:25',
             'status' => 'required'
         ]);
 
         # olah sebelum insert
         $insert = [
-            'harga' => $request->input('harga'),
+            'biaya_denda' => $request->input('biaya_denda'),
             'status' => $request->input('status'),
             'dibuat_oleh'=> Auth::user()->name
         ];
@@ -115,7 +115,7 @@ class DendaController extends Controller
     {
         # validasi data
         $request->validate([
-            'harga' => 'required|min:3|max:25',
+            'biaya_denda' => 'required|min:3|max:25',
             'status' => 'required'
         ]);
 
