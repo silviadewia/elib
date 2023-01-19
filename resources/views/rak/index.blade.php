@@ -51,7 +51,7 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Nomor Rak</th>
+                                <th>Nomor</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>

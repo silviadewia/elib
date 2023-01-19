@@ -41,7 +41,7 @@
                         @method('PUT')
                         <div class="card-body">
                             <div class="form-group">
-                                <label for="nama">Nama rak</label>
+                                <label for="nama">Nomor rak</label>
                                 <input type="text" class="form-control" value="{{ $edit_rak->nama }}" id="nama" name="nama" placeholder="Nama rak" autocomplete="off">
                             </div>
                         </div>
@@ -69,7 +69,7 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Kategori</th>
+                                <th>Nomor Rak</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>

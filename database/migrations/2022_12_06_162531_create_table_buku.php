@@ -23,8 +23,8 @@ return new class extends Migration
             $table->integer('tahun_buku')->unsigned();
             $table->integer('jumlah_buku')->unsigned();
             $table->integer('isbn')->unsigned();
-            $table->text('sampul');
-            $table->text('lampiran_buku');
+            $table->varchar('sampul');
+            $table->varchar('lampiran_buku');
             $table->text('keterangan_lain');
             $table->string('dibuat_oleh', 25);
             $table->timestamps();
