@@ -1,11 +1,8 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use App\Models\Buku;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
 class BukuController extends Controller
 {
     /**
@@ -20,7 +17,6 @@ class BukuController extends Controller
             'title' => 'Daftar Buku',
             'buku' => Buku::all(),
         ];
-
         # kembalikan ke tampilan
         return view('buku.index', $data)->with('i'); 
     }
@@ -36,7 +32,6 @@ class BukuController extends Controller
         $data = [
             'title' => 'Daftar buku'
         ];
-
         # kembalikan ke tampilan
         return view('buku.index', $data);
     }
@@ -64,7 +59,6 @@ class BukuController extends Controller
             'dibuat_oleh' => 'required',
             'pinjam' => 'required'
         ]);
-
         # olah sebelum insert
         $insert = [
             'sampul' => $request->input('sampul'),
@@ -81,11 +75,9 @@ class BukuController extends Controller
             'pinjam' => $request->input('pinjam'),
             'dibuat_oleh'=>'Auth'::user()->name
         ];
-
         try {
             # proses insert
             buku::create($insert);
-
             # kembalikan ke tampilan
             return redirect()->route('buku.index')->with('success', 'Hi '.Auth::user()->name.', Berhasil tambah buku');
         } catch (\Exception $e) { # jika gagal
@@ -93,7 +85,6 @@ class BukuController extends Controller
             return redirect()->route('buku.index')->with('failed', 'Gagal insert buku');
         } 
     }
-
     /**
      * Display the specified resource.
      *
@@ -104,7 +95,6 @@ class BukuController extends Controller
     {
         return view('show', compact('buku'));
     }
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -114,16 +104,12 @@ class BukuController extends Controller
     public function edit($id)
     {
 
-        $data = [
+        # kembalikan ke tampilan
+        return view('buku.edit', [
             'title' => 'Edit buku',
             'edit_buku' => Buku::where('id', $id)->first(),
             'buku' => Buku::all(),
-            // 'edit_buku' => $buku
-        ];
-        // return $data;
-
-        # kembalikan ke tampilan
-        return view('buku.edit');
+        ]);
     }
 
     /**
@@ -165,7 +151,6 @@ class BukuController extends Controller
         }
     
     }
-
     /**
      * Remove the specified resource from storage.
      *

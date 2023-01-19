@@ -12,7 +12,7 @@ class Denda extends Model
 
     protected $fillable = [
         'status',
-        'harga',
+        'biaya_denda',
         'dibuat_oleh'
     ];
 }

@@ -97,7 +97,6 @@
 
 @section('js')
 <script>
-
     $('.pas-delete-metu-alert-cantik').click(function(event){
         var form =  $(this).closest("form");
         var name = $(this).data("name");
@@ -117,7 +116,6 @@
         });
         return false;
     });
-
     const Toast = Swal.mixin({
             toast: true,
             position: 'top-end',
@@ -129,11 +127,9 @@
                 toast.addEventListener('mouseleave', Swal.resumeTimer)
             }
         })
-
     @if ($message = Session::get('success'))
         Toast.fire( 'Sukses !!!', '{{ $message }}', 'success')
     @endif
-
     @if ($errors->any())
         Toast.fire( 'Eror !!!', '{{ $errors->first() }}', 'error')
     @endif

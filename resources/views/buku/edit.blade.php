@@ -25,6 +25,7 @@
                         <div class="card-body">
                         <div class="form-group">
                                 <label for="sampul">Sampul</label>
+                                <br>
                                 <input type="file" value="{{ $edit_buku['sampul'] }}" id="sampul">
                             </div>
                             <div class="form-group">
@@ -73,11 +74,12 @@
                             </div>
                             <div class="form-group">
                                 <label for="lampiran_buku">Lampiran Buku</label>
+                                <br>
                                 <input type="file" value="{{ $edit_buku['lampiran_buku'] }}" id="lampiran_buku">
                             </div>
                             <div class="form-group">
                                 <label for="keterangan_lain">keterangan Lain</label>
-                                <input type="text" class="form-control" value="{{ $edit_buku['jketerangan_lain'] }}" id="jumah_buku" name="keterangan_lain" placeholder="keterangan lain" autocomplete="off">
+                                <textarea input type="textarea" class="form-control" value="{{ $edit_buku['keterangan_lain'] }}" id="jumah_buku" name="keterangan_lain" placeholder="keterangan lain" autocomplete="off"></textarea>
                             </div>
                             <div class="form-group">
                                 <label for="dibuat_oleh">Dibuat Oleh</label>
@@ -97,107 +99,5 @@
                             <button type="submit" class="btn btn-info  float-right"><i class="fas fa-plus"></i>
                                 Simpan</button>
                         </div>
-<div class="card-body">
-                    <table class="table table-bordered table-hover dataTable dtr-inline" name="table-buku" id="table-buku">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Sampul</th>
-                                <th>ISBN</th>
-                                <th>Judul</th>
-                                <th>Kategori</th>
-                                <th>Rak</th>
-                                <th>Penerbit</th>
-                                <th>Tahun</th>
-                                <th>Jumlah Buku</th>
-                                <th>Lampiran Buku</th>
-                                <th>Keterangan Lain</th>
-                                <th>Dibuat Oleh</th>
-                                <th>Pinjam</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        @foreach($buku as $key => $value)
-                            
-                            <tr>
-                                <td>{{ $key + 1 }}</td>
-                                <td>{{ $value->sampul }}</td>
-                                <td>{{ $value->isbn }}</td>
-                                <td>{{ $value->judul }}</td>
-                                <td>{{ $value->kategori }}</td>
-                                <td>{{ $value->rak }}</td>
-                                <td>{{ $value->penerbit }}</td>
-                                <td>{{ $value->tahun }}</td>
-                                <td>{{ $value->jumlah_buku }}</td>
-                                <td>{{ $value->keterangan_lain }}</td>
-                                <td>{{ $value->dibuat_oleh }}</td>
-                                <td>{{ $value->pinjam }}</td>
-                                <td>
-                                    
-                                    <form action="{{ route('daftar.destroy', $value->id) }}" method="post">
-                                        <button class="btn btn-primary btn-sm"><i class="fas fa-pen"></i></button>
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-danger btn-sm pas-delete-metu-alert-cantik"><i class="fas fa-trash"></i></button>
-                                    </form>
-                                
-                                </td>
-                            </tr>
-                            @endforeach
-
-                        </tbody>
-                    </table>
-                </div>
-
 @stop
 
-@section('js')
-<script>
-    $(document).ready(function() {
-        $('#table-buku').DataTable({
-            dom: 'Bfrtip',
-            buttons: [
-                'copy', 'csv', 'excel', 'pdf', 'print'
-            ]
-        });
-    });
-
-    $('.pas-delete-metu-alert-cantik').click(function(event){
-        var form =  $(this).closest("form");
-        var name = $(this).data("name");
-        event.preventDefault();
-        Swal.fire({
-            title: "PERHATIAN",
-            text: "Setelah di hapus, anda tidak akan dapat memulihkan data ini!",
-            icon: 'question',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yakin!'
-               }).then((diHapus) => {
-            if (diHapus.value) {
-                form.submit();
-            }
-        });
-    });
-    
-    const Toast = Swal.mixin({
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-                toast.addEventListener('mouseenter', Swal.stopTimer)
-                toast.addEventListener('mouseleave', Swal.resumeTimer)
-            }
-        })
-        
-    @if ($message = Session::get('success'))
-        Toast.fire( 'Sukses !!!', '{{ $message }}', 'success')
-    @endif
-    @if ($errors->any())
-        Toast.fire( 'Eror !!!', '{{ $errors->first() }}', 'error')
-    @endif
-</script>
-@stop
