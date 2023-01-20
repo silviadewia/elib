@@ -19,7 +19,8 @@
                 </div>
                 <div class="card-body">
                     <td>
-                        <button type="submit" class="btn btn-info "> Tambah Buku <i class="fas fa-plus"></i></button>
+                    
+                    <button type="submit" class="btn btn-info "> Tambah Buku <i class="fas fa-plus"></i></button>
                         <div class="btn-group open">
                             <button type="button" class="btn btn-success">Sortir Berdasarkan</button>
                             <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown"
@@ -39,7 +40,8 @@
                                 <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
                             </div>
                         </div>
-                        <table class="table table-bordered table-hover dataTable dtr-inline" name="table-buku"
+
+                  <table class="table table-bordered table-hover dataTable dtr-inline" name="table-buku"
                             id="table-buku">
                             <thead>
                                 <tr>
