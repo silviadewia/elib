@@ -30,9 +30,10 @@
                             <div class="form-group">
                             <label>Status</label>
                             <select class="form-control select2bs4 select2-hidden-accessible" style="width: 100%;" name="status">
-                                <option>Pilih Status</option>
+                            <optgroup label="Pilih Status">
                                 <option value="aktif">AKTIF</option>
                                 <option value="tidak">TIDAK</option>
+                            </optgroup>
                         </select>
                             </div>
                         </div>
@@ -60,7 +61,7 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Harga</th>
+                                <th>Biaya Denda</th>
                                 <th>Status</th>
                                 <th>Aksi</th>
                             </tr>
@@ -75,7 +76,7 @@
                                 @if($value->status == 'aktif')
                                 <button class="btn btn-success btn-sm">AKTIF</button>
                                 @else
-                                <button class="btn btn-danger btn-sm">TIDAK</button>
+                                <button class="btn btn-danger btn-sm">NON AKTIF</button>
                                 @endif
                                 </td>
                                 <td>

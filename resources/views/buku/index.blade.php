@@ -20,11 +20,10 @@
                 <div class="card-body">
                     <td>
                     
-                    <button type="submit" class="btn btn-info "> Tambah Buku <i class="fas fa-plus"></i></button>
+                    <a href="{{ route('daftar.create'); }}" class="btn btn-info "> Tambah Buku <i class="fas fa-plus"></i></a>
                         <div class="btn-group open">
-                            <button type="button" class="btn btn-success">Sortir Berdasarkan</button>
                             <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown"
-                                aria-expanded="true">
+                                aria-expanded="true">Sortir Berdasarkan
                                 <span class="caret"></span>
                                 <span class="sr-only">Toggle Dropdown</span>
                             </button>
