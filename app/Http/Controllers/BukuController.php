@@ -30,10 +30,12 @@ class BukuController extends Controller
     {
         # variable tampilan
         $data = [
-            'title' => 'Daftar buku'
+            'title' => 'Daftar buku',
+            'buku' => Buku::all(),
         ];
+
         # kembalikan ke tampilan
-        return view('buku.index', $data);
+        return view('buku.create', $data)->with('i');
     }
     
     /*
@@ -43,7 +45,7 @@ class BukuController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    { return $request->all();
+    {   dd($request);
         $request->validate([
             'sampul' => 'required',
             'isbn' => 'required',
@@ -59,6 +61,7 @@ class BukuController extends Controller
             'dibuat_oleh' => 'required',
             'pinjam' => 'required'
         ]);
+
         # olah sebelum insert
         $insert = [
             'sampul' => $request->input('sampul'),
