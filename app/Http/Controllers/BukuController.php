@@ -45,9 +45,9 @@ class BukuController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {   dd($request);
         $request->validate([
-            'sampul' => 'required |image| mimes:jpg,png,jpeg,gif,smg|max:2048|dimensions:min_witdh=100,min_height=100,max_witdh=1000,max_height=1000',
+            'sampul' => 'required',
             'isbn' => 'required',
             'judul' => 'required',
             'kategori' => 'required',
@@ -56,7 +56,7 @@ class BukuController extends Controller
             'pengarang' => 'required',
             'tahun' => 'required',
             'jumlah_buku' => 'required',
-            'lampiran_buku' => 'required |file| mimes:jpg,png,jpeg,gif,smg|max:2048|dimensions:min_witdh=100,min_height=100,max_witdh=1000,max_height=1000',
+            'lampiran_buku' => 'required',
             'keterangan_lain' => 'required',
             'dibuat_oleh' => 'required',
             'pinjam' => 'required'

@@ -17,7 +17,7 @@
                         Table Pinjam
                     </h3>
                 </div>
-                <div class=" Left mt-3"> 
+                <div class="card-body">
                 <button type="button" class="btn btn-primary">Tambah Pengguna<i class="fas fa-plus"></i></a></button>
                 <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown"
                                 aria-expanded="true">Sortir Berdasarkan ID
@@ -29,7 +29,6 @@
                                 <li><a href="novel">Novel</a></li>
                             </ul>
                         </div>
-                <div class="row">
                     <div class="card-body">
                         <div class="box-body">
                             <div class="row">
@@ -427,7 +426,7 @@
 @section('js')
 <script>
     $(document).ready(function () {
-        $('#table-pinjam').DataTable({
+        $('#table-pengguna').DataTable({
             dom: 'Bfrtip',
             buttons: [
                 'copy', 'csv', 'excel', 'pdf', 'print'

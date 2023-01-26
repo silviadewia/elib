@@ -143,17 +143,3 @@
                         </table>
                     </div>
                     @stop
-
-                    @section('js')
-                    <script>
-                        $(document).ready(function () {
-                            $('#table-pinjam').DataTable({
-                                dom: 'Bfrtip',
-                                buttons: [
-                                    'copy', 'csv', 'excel', 'pdf', 'print'
-                                ]
-                            });
-                        });
-
-                    </script>
-                    @stop

@@ -18,10 +18,63 @@
                     </h3>
                 </div>
                 <div class="card-body">
+                <div class="box-body">
+                <div class="btn-group">
+                <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown"
+                                aria-expanded="true">Sortir Berdasarkan
+                                <span class="caret"></span>
+                                <span class="sr-only">Toggle Dropdown</span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="paket">Paket</a></li>
+                                <li><a href="novel">Novel</a></li>
+                            </ul>
+                        
+                            <div class="btn-group">
+                            <button type="button" class="btn btn-default">Bulan</button>
+                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                                    aria-expanded="false">
+                                    <span class="caret"></span>
+                                    <span class="sr-only">Toggle Dropdown</span>
+                                </button>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="#">Januari</a></li>
+                                    <li><a href="#">Februari</a></li>
+                                    <li><a href="#">Maret</a></li>
+                                    <li><a href="#">April</a></li>
+                                    <li><a href="#">Mei</a></li>
+                                    <li><a href="#">Juni</a></li>
+                                    <li><a href="#">Juli</a></li>
+                                    <li><a href="#">Agustus</a></li>
+                                    <li><a href="#">Septmber</a></li>
+                                    <li><a href="#">Oktober</a></li>
+                                    <li><a href="#">November</a></li>
+                                    <li><a href="#">Desember</a></li>
+                                </ul>
+
+                            </div>
+                                <div class="btn-group">
+                                <button type="button" class="btn btn-default">Tahun</button>
+                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                                    aria-expanded="false">
+                                    <span class="caret"></span>
+                                    <span class="sr-only">Toggle Dropdown</span>
+                                </button>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="#">2021</a></li>
+                                    <li><a href="#">2022</a></li>
+                                    <li><a href="#">2023</a></li>
+                                </ul>
+                            </div>
+
+                </div>
+                </div>
+                </div>
+                <div class="card-body">
                     <div class="box-body">
                         <div class="row">
                             <div class="col-sm-12">
-                                <table id="table-pinjam" class="table table-bordered table-striped dataTable">
+                                <table id="table-dikembalikan" class="table table-bordered table-striped dataTable">
                                     <thead>
                                         <tr role="row">
                                             <th rowspan="1" colspan="1">Rendering engine</th>
@@ -883,7 +936,7 @@
 @section('js')
 <script>
     $(document).ready(function () {
-        $('#table-pinjam').DataTable({
+        $('#table-dikembalikan').DataTable({
             dom: 'Bfrtip',
         buttons: [
             'copy', 'csv', 'excel', 'pdf', 'print'

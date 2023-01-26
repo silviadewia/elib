@@ -17,12 +17,10 @@
                         Table Pinjam
                     </h3>
                 </div>
-                
-                </div>
                 <div class="card-body">
-                    <td>
-                    
-                            <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown"
+                <div class="box-body">
+                <div class="btn-group">
+                <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown"
                                 aria-expanded="true">Sortir Berdasarkan
                                 <span class="caret"></span>
                                 <span class="sr-only">Toggle Dropdown</span>
@@ -31,9 +29,9 @@
                                 <li><a href="paket">Paket</a></li>
                                 <li><a href="novel">Novel</a></li>
                             </ul>
-
+                        
                             <div class="btn-group">
-                                <button type="button" class="btn btn-default">Bulan</button>
+                            <button type="button" class="btn btn-default">Bulan</button>
                                 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
                                     aria-expanded="false">
                                     <span class="caret"></span>
@@ -54,6 +52,7 @@
                                     <li><a href="#">Desember</a></li>
                                 </ul>
 
+                            </div>
                                 <div class="btn-group">
                                 <button type="button" class="btn btn-default">Tahun</button>
                                 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
@@ -67,9 +66,10 @@
                                     <li><a href="#">2023</a></li>
                                 </ul>
                             </div>
-                        
+
                 </div>
-                <div class="row">
+                </div>
+                </div>
                 <div class="card-body">
                     <div class="box-body">
                         <div class="row">
