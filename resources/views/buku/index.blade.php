@@ -18,8 +18,7 @@
                     </h3>
                 </div>
                 <div class="card-body">
-                    <td>
-                    
+                  
                     <button type="submit" class="btn btn-info "> Tambah Buku <i class="fas fa-plus"></i></button>
                         <div class="btn-group open">
                             <button type="button" class="btn btn-success">Sortir Berdasarkan</button>
