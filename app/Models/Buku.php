@@ -21,8 +21,6 @@ class Buku extends Model
         'tahun',
         'jumlah_buku',
         'lampiran_buku',
-        'keterangan_lain',
-        'pinjam',
-        'dibuat_oleh'
+        'keterangan_lain'
     ];
 }

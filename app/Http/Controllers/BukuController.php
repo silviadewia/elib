@@ -45,9 +45,9 @@ class BukuController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {   dd($request);
+    {   return $request->all();
         $request->validate([
-            'sampul' => 'required',
+            'sampul' => 'required|mimes:jpeg,jpg,png',
             'isbn' => 'required',
             'judul' => 'required',
             'kategori' => 'required',
@@ -57,12 +57,11 @@ class BukuController extends Controller
             'tahun' => 'required',
             'jumlah_buku' => 'required',
             'lampiran_buku' => 'required',
-            'keterangan_lain' => 'required',
-            'dibuat_oleh' => 'required',
-            'pinjam' => 'required'
+            'keterangan_lain' => 'required|min:4|max:250',
         ]);
 
         # olah sebelum insert
+
         $insert = [
             'sampul' => $request->input('sampul'),
             'isbn' => $request->input('isbn'),
@@ -74,10 +73,9 @@ class BukuController extends Controller
             'jumlah_buku' => $request->input('jumlah_buku'),
             'lampiran_buku' => $request->input('lampiran_buku'),
             'keterangan_lain' => $request->input('keterangan_lain'),
-            'dibuat_oleh' => $request->input('dibuat_oleh'),
-            'pinjam' => $request->input('pinjam'),
             'dibuat_oleh'=>'Auth'::user()->name
         ];
+        $insert['sampul']=$request->file('test')->store('sampul');
         try {
             # proses insert
             buku::create($insert);
@@ -96,7 +94,6 @@ class BukuController extends Controller
      */
     public function show(Buku $buku)
     {
-        return view('show', compact('buku'));
     }
     /**
      * Show the form for editing the specified resource.
