@@ -10,17 +10,5 @@ class Buku extends Model
     use HasFactory;
     protected $table = 'table_buku';
 
-    protected $fillable = [
-        'sampul',
-        'isbn',
-        'judul',
-        'kategori',
-        'rak',
-        'penerbit',
-        'pengarang',
-        'tahun',
-        'jumlah_buku',
-        'lampiran_buku',
-        'keterangan_lain'
-    ];
+    protected $guarded = ['id'];
 }
