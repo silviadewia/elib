@@ -47,7 +47,7 @@ class BukuController extends Controller
     public function store(Request $request)
     {   return $request->all();
         $request->validate([
-            'sampul' => 'required',
+            'sampul' => 'required|mimes:jpeg,jpg,png',
             'isbn' => 'required',
             'judul' => 'required',
             'kategori' => 'required',
@@ -61,6 +61,7 @@ class BukuController extends Controller
         ]);
 
         # olah sebelum insert
+
         $insert = [
             'sampul' => $request->input('sampul'),
             'isbn' => $request->input('isbn'),
@@ -74,6 +75,7 @@ class BukuController extends Controller
             'keterangan_lain' => $request->input('keterangan_lain'),
             'dibuat_oleh'=>'Auth'::user()->name
         ];
+        $insert['sampul']=$request->file('test')->store('sampul');
         try {
             # proses insert
             buku::create($insert);
@@ -92,7 +94,6 @@ class BukuController extends Controller
      */
     public function show(Buku $buku)
     {
-        return view('show', compact('buku'));
     }
     /**
      * Show the form for editing the specified resource.

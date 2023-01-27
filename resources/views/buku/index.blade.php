@@ -76,7 +76,11 @@
                                     <td>{{ $value->pengarang }}</td>
                                     <td>{{ $value->tahun_buku }}</td>
                                     <td>{{ $value->jumlah_buku }}</td>
-                                    <td>{{ $value->lampiran_buku }}</td>
+                                    <td>
+                                        @if ($value->lampiran_buku)
+                                            <img style="max-width:50px;max-height:50px" scr="{{ url('lampiran_buku').'/'. $value->lampiran_buku }}"/>
+                                        @endif
+                                    </td>
                                     <td>{{ $value->keterangan_lain }}</td>
                                     <td>
                                         <a href="{{ route('daftar.edit',$value->id) }}"

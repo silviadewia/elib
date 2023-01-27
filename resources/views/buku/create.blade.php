@@ -19,9 +19,9 @@
                     </h3>
                 </div>
                 <div class="card-body">
-                    <form method="{{ route('daftar.store') }} enctype="multpart/form-data" method="POST">
+                    <form action="{{ route('daftar.store') }}" enctype="multpart/form-data" method="POST">
                         @csrf
-                        @method('PUT')
+                        @method('POST')
                         <div class="card-body">
                             <div class="form-group">
                                 <label for="sampul">Sampul</label>
@@ -38,7 +38,7 @@
                                 <input type="text" class="form-control" value="" id="judul"
                                     name="judul" placeholder="Judul" autocomplete="off">
                             </div>
-                            <div class="form-group">
+                          <div class="form-group">
                                 <label>Kategori</label>
                                 <select class="form-control select2bs4 select2-hidden-accessible" style="width: 100%;"
                                     name="kategori">
