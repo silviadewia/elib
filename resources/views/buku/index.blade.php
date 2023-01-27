@@ -56,8 +56,6 @@
                                     <th>Jumlah Buku</th>
                                     <th>Lampiran Buku</th>
                                     <th>keterangan Lain</th>
-                                    <th>Dibuat Oleh</th>
-                                    <th>Pinjam</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
@@ -65,7 +63,11 @@
                                 @foreach($buku as $value)
                                 <tr>
                                     <td>{{ ++$i }}</td>
-                                    <td>{{ $value->sampul }}</td>
+                                    <td>
+                                        @if ($value->sampul)
+                                            <img style="max-width:50px;max-height:50px" scr="{{ url('sampul').'/'. $value->sampul }}"/>
+                                        @endif
+                                    </td>
                                     <td>{{ $value->isbn }}</td>
                                     <td>{{ $value->judul_buku }}</td>
                                     <td>{{ $value->kategori }}</td>
@@ -76,9 +78,6 @@
                                     <td>{{ $value->jumlah_buku }}</td>
                                     <td>{{ $value->lampiran_buku }}</td>
                                     <td>{{ $value->keterangan_lain }}</td>
-                                    <td>{{ $value->dibuat_oleh }}</td>
-                                    <td>1</td>
-
                                     <td>
                                         <a href="{{ route('daftar.edit',$value->id) }}"
                                             class="btn btn-primary btn-sm"><i class="fas fa-pen"></i> </a>
