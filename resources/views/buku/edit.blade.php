@@ -1,5 +1,4 @@
 @extends('adminlte::page')
-
 @section('title', $title)
 
 @section('content_header')
@@ -136,7 +135,6 @@
                             ]
                         });
                     });
-
                     $('.pas-delete-metu-alert-cantik').click(function(event) {
                         var form = $(this).closest("form");
                         var name = $(this).data("name");
@@ -155,7 +153,6 @@
                             }
                         });
                     });
-
                     const Toast = Swal.mixin({
                         toast: true,
                         position: 'top-end',
@@ -167,7 +164,6 @@
                             toast.addEventListener('mouseleave', Swal.resumeTimer)
                         }
                     })
-
                     @if ($message = Session::get('success'))
                         Toast.fire('Sukses !!!', '{{ $message }}', 'success')
                     @endif
