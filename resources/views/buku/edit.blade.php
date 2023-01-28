@@ -23,84 +23,98 @@
                         @csrf
                         @method('PUT')
                         <div class="card-body">
-                            <div class="form-group">
-                                <label for="sampul">Sampul</label>
-                                <br>
-                                <input type="file" value="{{ $edit_buku['sampul'] }}" id="sampul">
-                            </div>
-                            <div class="box-body">
-                                <label for="isbn">ISBN</label>
-                                <input type="number" class="form-control" value="{{ $edit_buku['isbn'] }}" id="isbn"
-                                    name="isbn" placeholder="Isbn" autocomplete="off">
-                            </div>
-                            <div class="form-group">
-                                <label for="judul">Judul</label>
-                                <input type="text" class="form-control" value="{{ $edit_buku['judul'] }}" id="judul"
-                                    name="judul" placeholder="Judul" autocomplete="off">
-                            </div>
-                            <div class="form-group">
-                                <label>Kategori</label>
-                                <select class="form-control select2bs4 select2-hidden-accessible" style="width: 100%;"
-                                    name="kategori">
-                                    <optgroup label="Pilih Kategori">
-                                    <option value="Buku Paket">Buku Paket</option>
-                                    <option value="Ensiklopedia">Ensiklopedia</option>
-                                    </optgroup>
-                                </select>
                                 <div class="form-group">
-                                    <label>Rak</label>
-                                    <select class="form-control select2bs4 select2-hidden-accessible"
-                                        style="width: 100%;" name="rak">
-                                        <optgroup label="Pilih Rak">
-                                        <option value="001">001</option>
-                                        <option value="009">009</option>
-                                        </optgroup>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label>Penerbit</label>
-                                    <select class="form-control select2bs4 select2-hidden-accessible"
-                                        style="width: 100%;" name="penerbit">
-                                        <optgroup label="Pilih Penerbit">
-                                        <option value="ria_ricis">Ria Ricis</option>
-                                        <option value="boy_candra">boy Candra</option>
-                                        </optgroup>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label>Pengarang</label>
-                                    <select class="form-control select2bs4 select2-hidden-accessible"
-                                        style="width: 100%;" name="pengarang">
-                                        <optgroup label="Pilih Pengarang">
-                                        <option value="ria_ricis">Ria Ricis</option>
-                                        <option value="boy_candra">boy Candra</option>
-                                        </optgroup>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="tahun">Tahun</label>
-                                    <input type="number" class="form-control" value="{{ $edit_buku['tahun'] }}"
-                                        id="tahun" name="tahun" placeholder="Tahun" autocomplete="off">
-                                </div>
-                                <div class="form-group">
-                                    <label for="jumlah_buku">Jumlah Buku</label>
-                                    <input type="number" class="form-control" value="{{ $edit_buku['jumlah_buku'] }}"
-                                        id="jumah_buku" name="jumlah_buku" placeholder="Jumlah buku" autocomplete="off">
-                                </div>
-                                <div class="form-group">
-                                    <label for="lampiran_buku">Lampiran Buku</label>
+                                    <label for="sampul">Sampul</label>
                                     <br>
-                                    <input type="file" value="{{ $edit_buku['lampiran_buku'] }}" id="lampiran_buku">
+                                    <input type="file" value="{{ $edit_buku->sampul }}" id="sampul" name="sampul">
                                 </div>
                                 <div class="form-group">
-                                    <label for="keterangan_lain">keterangan Lain</label>
-                                    <textarea input type="textarea" class="form-control"
-                                        value="{{ $edit_buku['keterangan_lain'] }}" id="jumah_buku"
-                                        name="keterangan_lain" placeholder="keterangan lain"
-                                        autocomplete="off"></textarea>
+                                    <label for="isbn">ISBN</label>
+                                    <input type="number" class="form-control" value="{{ $edit_buku->isbn }}" id="isbn" name="isbn"
+                                        placeholder="Isbn" autocomplete="off">
+                                </div>
+                                <div class="form-group">
+                                    <label for="judul">Judul</label>
+                                    <input type="text" class="form-control" value="{{ $edit_buku->judul }}" id="judul" name="judul"
+                                        placeholder="Judul" autocomplete="off">
+                                </div>
+                                <div class="form-group">
+                                    <label>Kategori</label>
+                                    <select class="form-control select2bs4 select2-hidden-accessible" style="width: 100%;"
+                                        name="kategori">
+                                        <optgroup label="Pilih Kategori">
+                                            <option value="Buku Paket"
+                                            @if($edit_buku->kategori == "Buku Paket")
+                                        selected @endif>Buku Paket</option>
+                                        <option value="Buku Paket"
+                                            @if($edit_buku->Ensiklopedia == "Ensiklopedia")
+                                        selected @endif>Ensiklopedia</option>
+                                        </optgroup>
+                                    </select>
+                                    <div class="form-group">
+                                        <label>Rak</label>
+                                        <select class="form-control select2bs4 select2-hidden-accessible"
+                                            style="width: 100%;" name="rak">
+                                            <optgroup label="Pilih Rak">
+                                            <option value="rak"
+                                            @if($edit_buku->rak == "001")
+                                        selected @endif>001</option>
+                                        <option value="rak"
+                                            @if($edit_buku->rak == "009")
+                                        selected @endif>001</option>
+                                        </optgroup>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Penerbit</label>
+                                        <select class="form-control select2bs4 select2-hidden-accessible"
+                                            style="width: 100%;" name="penerbit">
+                                            <optgroup label="Pilih Penerbit">
+                                            <option value="penerbit"
+                                            @if($edit_buku->penerbit == "Ria Ricis")
+                                        selected @endif>Ria Ricis</option>
+                                        <option value="penerbit"
+                                            @if($edit_buku->penerbit == "Boy Candra")
+                                        selected @endif>Boy Candra</option>
+                                            </optgroup>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Pengarang</label>
+                                        <select class="form-control select2bs4 select2-hidden-accessible"
+                                            style="width: 100%;" name="pengarang">
+                                            <optgroup label="Pilih Pengarang">
+                                            <option value="pengarang"
+                                            @if($edit_buku->pengarang == "Ria Ricis")
+                                        selected @endif>Ria Ricis</option>
+                                        <option value="pengarang"
+                                            @if($edit_buku->pengarang == "Boy Candra")
+                                        selected @endif>Boy Candra</option>
+                                            </optgroup>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="tahun">Tahun</label>
+                                        <input type="number" class="form-control" value="{{ $edit_buku->tahun }}" id="tahun"
+                                            name="tahun" placeholder="Tahun" autocomplete="off">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="jumlah_buku">Jumlah Buku</label>
+                                        <input type="number" class="form-control" value="{{ $edit_buku->jumlah_buku }}" id="jumah_buku"
+                                            name="jumlah_buku" placeholder="Jumlah buku" autocomplete="off">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="lampiran_buku">Lampiran Buku</label>
+                                        <br>
+                                        <input type="file" value="{{ $edit_buku->lampiran_buku }}" id="lampiran_buku" name="lampiran_buku">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="keterangan_lain">keterangan Lain</label>
+                                        <textarea input type="textarea" class="form-control" value="{{ $edit_buku->keterangan_lain }}" id="jumah_buku" name="keterangan_lain"
+                                            placeholder="keterangan lain" autocomplete="off"></textarea>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
                 </div>
             </div>
         </div>

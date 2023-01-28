@@ -133,22 +133,20 @@ class BukuController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Buku $buku)
-    { {
-            # validasi data
-            $request->validate([
-                'sampul' => 'required',
-                'isbn' => 'required',
-                'judul' => 'required',
-                'kategori' => 'required',
-                'rak' => 'required',
-                'penerbit' => 'required',
-                'pengarang' => 'required',
-                'tahun' => 'required',
-                'jumlah_buku' => 'required',
-                'lampiran_buku' => 'required',
-                'keterangan_lain' => 'required',
-                'pinjam' => 'required'
-            ]);
+    { { return $request->all();
+        $request->validate([
+            'sampul' => 'required|image',
+            'isbn' => 'required',
+            'judul' => 'required',
+            'kategori' => 'required',
+            'rak' => 'required',
+            'penerbit' => 'required',
+            'pengarang' => 'required',
+            'tahun' => 'required',
+            'jumlah_buku' => 'required',
+            'lampiran_buku' => 'required',
+            'keterangan_lain' => 'required|min:4|max:225'
+        ]);
 
             # coba update
             try {
