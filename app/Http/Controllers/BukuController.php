@@ -133,7 +133,7 @@ class BukuController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Buku $buku)
-    { { return $request->all();
+    { {
         $request->validate([
             'sampul' => 'required|image',
             'isbn' => 'required',
@@ -160,24 +160,24 @@ class BukuController extends Controller
             }
         }
     }
+   
     /**
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\Buku  $buku
      * @return \Illuminate\Http\Response
      */
-    public function destroy($buku)
-    { {
-            # coba update
-            try {
-                # proses delete
-                $buku->delete();
-                # kembalikan ke tampilan
-                return redirect()->route('buku.index')->with('success', 'Hi ' . Auth::user()->name . ', Berhasil delete buku');
-            } catch (\Exception $e) { # jika gagal
-                # kembalikan ke tampilan
-                return redirect()->route('buku.index')->with('failed', 'Gagal delete buku');
-            }
+    public function destroy(Buku $buku)
+    {
+        # coba update
+        try {
+            # proses delete
+            $buku->delete();
+            # kembalikan ke tampilan
+            return redirect()->route('daftar.index')->with('success', 'Hi '.Auth::user()->name.', Berhasil delete buku');
+        } catch (\Exception $e) { # jika gagal
+            # kembalikan ke tampilan
+            return redirect()->route('daftar.index')->with('failed', 'Gagal delete buku');
         }
     }
 }
