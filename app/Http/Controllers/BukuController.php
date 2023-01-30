@@ -5,8 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Buku;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Log;
+use Ramsey\Uuid\Uuid;
 
 class BukuController extends Controller
 {
@@ -59,7 +60,7 @@ class BukuController extends Controller
             'rak' => 'required',
             'penerbit' => 'required',
             'pengarang' => 'required',
-            'tahun_buku' => 'required',
+            'tahun' => 'required',
             'jumlah_buku' => 'required',
             'lampiran_buku' => 'required|max:2048',
             'keterangan_lain' => 'required',
@@ -72,31 +73,38 @@ class BukuController extends Controller
         #pindahkan gambar
         $pindahSampul =  $request->file('sampul')->move(public_path('sampul'), $namaSampul);
 
-        if (!pindahkanSampul) {
+        if (!$pindahSampul) {
             return redirect()->route('daftar.index')->with('failed', 'Gagal unggah gambar');
+        }
+
+        // pindahkan lampiran
+        $pindahLampiran =  $request->file('lampiran_buku')->move(public_path('lampiran-buku'), $namaLampiran);
+
+        if (!$pindahLampiran) {
+            return redirect()->route('daftar.index')->with('failed', 'Gagal unggah lampiran');
         }
 
         # olah sebelum insert
         $insert = [
             'sampul' => $namaSampul,
             'isbn' => $request->input('isbn'),
-            'judul_buku' => $request->input('judul_buku'),
+            'judul_buku' => $request->input('judul'),
             'kategori' => $request->input('kategori'),
-            'rak' => $request->input('kategori'),
-            'penerbit' => $request->input('judul_buku'),
-            'pngarang' => $request->input('pengarang'),
-            'tahun_buku' => $request->input('tahun_buku'),
+            'rak' => $request->input('rak'),
+            'penerbit' => $request->input('penerbit'),
+            'pengarang' => $request->input('pengarang'),
+            'tahun_buku' => $request->input('tahun'),
             'jumlah_buku' => $request->input('jumlah_buku'),
             'lampiran_buku' => $namaLampiran,
             'keterangan_lain' => $request->input('keterangan_lain'),
-            'dibuat_oleh' => 'Auth'::user()->name
+            'dibuat_oleh' => Auth::user()->name
         ];
 
         try {
             # proses insert
             Buku::create($insert);
             # kembalikan ke tampilan
-            return redirect()->route('daftar.index')->with('succes', 'Hi'. Auth::user()->name. ',Berhasil tambah buku');
+            return redirect()->route('daftar.index')->with('success', 'Hi' . Auth::user()->name . ', Berhasil tambah buku');
         } catch (\Exception $e) { # jika gagal
             # kembalikan ke tampilan
             Log::critical("Gagal insert", [$e->getMessage()]);
@@ -114,7 +122,7 @@ class BukuController extends Controller
     {
         return view('show', compact('buku'));
     }
-    
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -139,9 +147,8 @@ class BukuController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Buku $buku)
-    { {
+    {
         $request->validate([
-            'sampul' => 'required|image',
             'isbn' => 'required',
             'judul' => 'required',
             'kategori' => 'required',
@@ -150,23 +157,69 @@ class BukuController extends Controller
             'pengarang' => 'required',
             'tahun' => 'required',
             'jumlah_buku' => 'required',
-            'lampiran_buku' => 'required',
             'keterangan_lain' => 'required|min:4|max:225'
         ]);
 
-            # coba update
-            try {
-                # proses update
-                $buku->update($request->all());
-                # kembalikan ke tampilan
-                return redirect()->route('daftar.index')->with('success', 'Hi ' . Auth::user()->name . ', Berhasil update buku');
-            } catch (\Exception $e) { # jika gagal
-                # kembalikan ke tampilan
-                return redirect()->route('daftar.index')->with('failed', 'Gagal update buku');
+        $update = [
+            'isbn' => $request->input('isbn'),
+            'judul_buku' => $request->input('judul'),
+            'kategori' => $request->input('kategori'),
+            'rak' => $request->input('rak'),
+            'penerbit' => $request->input('penerbit'),
+            'pengarang' => $request->input('pengarang'),
+            'tahun_buku' => $request->input('tahun'),
+            'jumlah_buku' => $request->input('jumlah_buku'),
+            'keterangan_lain' => $request->input('keterangan_lain'),
+        ];
+
+        if ($request->hasFile('sampul')) {
+
+            $request->validate([
+                'sampul' => 'required|image'
+            ]);
+
+            $namaSampulBaru = Uuid::uuid4();
+            $pindahSampul =  $request->file('sampul')->move(public_path('sampul'), $namaSampulBaru);
+
+            if ($pindahSampul) {
+                File::delete(public_path('sampul/' . $request->input('sampulLama')));
+
+                $update['sampul'] = $namaSampulBaru;
+            } else {
+                return redirect()->route('daftar.index')->with('failed', 'Gagal unggah sampul');
             }
         }
+
+        if ($request->hasFile('lampiran_buku')) {
+
+            $request->validate([
+                'lampiran_buku' => 'required'
+            ]);
+
+            $namaLampiranBaru = Uuid::uuid4();
+            $pindahLampiran =  $request->file('lampiran_buku')->move(public_path('lampiran-buku'), $namaLampiranBaru);
+
+            if ($pindahLampiran) {
+                File::delete(public_path('lampiran-buku/' . $request->input('lampiranLama')));
+
+                $update['lampiran_buku'] = $namaLampiranBaru;
+            } else {
+                return redirect()->route('daftar.index')->with('failed', 'Gagal unggah lampiran');
+            }
+        }
+
+        # coba update
+        try {
+            # proses update
+            $buku->where('id', $request->input('id'))->update($update);
+            # kembalikan ke tampilan
+            return redirect()->route('daftar.index')->with('success', 'Hi ' . Auth::user()->name . ', Berhasil update buku');
+        } catch (\Exception $e) { # jika gagal
+            # kembalikan ke tampilan
+            return redirect()->route('daftar.index')->with('failed', 'Gagal update buku');
+        }
     }
-   
+
     /**
      * Remove the specified resource from storage.
      *
@@ -176,17 +229,17 @@ class BukuController extends Controller
     public function destroy(Buku $buku)
     {
         $buku = Buku::findOrFail($id);
-$buku->delete();
- return redirect()->route('daftar.index')->with('success', 'Hi '.Auth::user()->name.', Berhasil delete buku');
+        $buku->delete();
+        return redirect()->route('daftar.index')->with('success', 'Hi ' . Auth::user()->name . ', Berhasil delete buku');
         # coba update
         // try {
         //     $buku = Buku::findOrFail($id);
-            # proses delete
-            // $buku->delete();
-            # kembalikan ke tampilan
+        # proses delete
+        // $buku->delete();
+        # kembalikan ke tampilan
         //     return redirect()->route('daftar.index')->with('success', 'Hi '.Auth::user()->name.', Berhasil delete buku');
         // } catch (\Exception $e) { # jika gagal
-            # kembalikan ke tampilan
+        # kembalikan ke tampilan
         //     return redirect()->route('daftar.index')->with('failed', 'Gagal delete buku');
         // }
     }

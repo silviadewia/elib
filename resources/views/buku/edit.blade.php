@@ -18,17 +18,20 @@
                         </h3>
                     </div>
                     <div class="card-body">
-                        <form method="post" action="{{ route('daftar.update', $edit_buku->id) }}">
+                        <form method="POST" enctype="multipart/form-data"
+                            action="{{ route('daftar.update', $edit_buku->id) }}">
                             @csrf
                             @method('PUT')
+                            <input type="hidden" name="id" value="{{ $edit_buku->id }}">
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="sampul">Sampul</label>
                                     <br>
-                                    <img src="{{ asset('storage') }}/{{ $edit_buku->sampul }}" alt="" width= "300">
+                                    <img src="/sampul/{{ $edit_buku->sampul }}" alt="" width="300">
                                     <br>
                                     <br>
                                     <input type="file" value="" id="sampul" name="sampul">
+                                    <input type="hidden" name="sampulLama" value="{{ $edit_buku->sampul }}">
                                 </div>
                                 <div class="form-group">
                                     <label for="isbn">ISBN</label>
@@ -102,11 +105,13 @@
                                     <div class="form-group">
                                         <label for="lampiran_buku">Lampiran Buku</label>
                                         <br>
-                                        <a href="{{ asset('storage') }}/{{ $edit_buku->lampiran_buku }}" target="_blank"
+                                        <a href="/lampiran-buku/{{ $edit_buku->lampiran_buku }}" target="_blank"
                                             rel="noopener noreferrer">Lihat Lampiran Saat Ini</a>
                                         <br>
                                         <br>
                                         <input type="file" value="" id="lampiran_buku" name="lampiran_buku">
+                                        <input type="hidden" name="lampiranLama"
+                                            value="{{ $edit_buku->lampiran_buku }}">
                                     </div>
                                     <div class="form-group">
                                         <label for="keterangan_lain">keterangan Lain</label>
