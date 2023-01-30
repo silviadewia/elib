@@ -68,7 +68,7 @@
                                             <td>
                                                 @if ($value->sampul)
                                                     <img style="max-width:50px;max-height:50px"
-                                                        src="{{ asset('storage') }}/{{ $value->sampul }}" />
+                                                        src="/sampul/{{ $value->sampul }}" />
                                                 @endif
                                             </td>
                                             <td>{{ $value->isbn }}</td>
@@ -81,23 +81,23 @@
                                             <td>{{ $value->jumlah_buku }}</td>
                                             <td>
                                                 @if ($value->lampiran_buku)
-                                                    <a href="{{ asset('storage') }}/{{ $value->lampiran_buku }}"
-                                                        target="_blank" rel="noopener noreferrer">Lihat Lampiran</a>
+                                                    <a href="/lampiran-buku/{{ $value->lampiran_buku }}" target="_blank"
+                                                        rel="noopener noreferrer">Lihat Lampiran</a>
                                                 @endif
                                             </td>
                                             <td>{{ $value->keterangan_lain }}</td>
                                             <td>
                                                 <a href="{{ route('daftar.edit', $value->id) }}"
                                                     class="btn btn-primary btn-sm"><i class="fas fa-pen"></i> </a>
-                                                    
+
                                                 <a href="{{ route('daftar.show', $value->id) }}"
                                                     class="btn btn-info btn-sm"><i class="fa fa-eye"></i> </a>
-                                            <form action="{{ route('daftar.destroy', $value->id) }}" method="post">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" 
-                                                class="btn btn-danger btn-sm pas-delete-metu-alert-cantik">
-                                                <i class="fas fa-trash"></i></button>
+                                                <form action="{{ route('daftar.destroy', $value->id) }}" method="post">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit"
+                                                        class="btn btn-danger btn-sm pas-delete-metu-alert-cantik">
+                                                        <i class="fas fa-trash"></i></button>
                                                 </form>
                                             </td>
                                         </tr>
