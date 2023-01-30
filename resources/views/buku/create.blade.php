@@ -61,8 +61,8 @@
                                         <select class="form-control select2bs4 select2-hidden-accessible"
                                             style="width: 100%;" name="penerbit">
                                             <optgroup label="Pilih Penerbit">
-                                                <option value="ria_ricis">Ria Ricis</option>
-                                                <option value="boy_candra">boy Candra</option>
+                                                <option value="ria ricis">Ria Ricis</option>
+                                                <option value="boy candra">boy Candra</option>
                                             </optgroup>
                                         </select>
                                     </div>
@@ -71,8 +71,8 @@
                                         <select class="form-control select2bs4 select2-hidden-accessible"
                                             style="width: 100%;" name="pengarang">
                                             <optgroup label="Pilih Pengarang">
-                                                <option value="ria_ricis">Ria Ricis</option>
-                                                <option value="boy_candra">boy Candra</option>
+                                                <option value="ria ricis">Ria Ricis</option>
+                                                <option value="boy candra">boy Candra</option>
                                             </optgroup>
                                         </select>
                                     </div>

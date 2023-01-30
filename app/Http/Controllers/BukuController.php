@@ -227,12 +227,13 @@ class BukuController extends Controller
      * @param  \App\Models\Buku  $buku
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Buku $buku)
+    public function destroy(Buku $buku, $id)
     {
          # coba update
          try {
             # proses delete
-            $buku->delete();
+           $buku = Buku::findOrFail($id);
+           $buku->delete();
             # kembalikan ke tampilan
             return redirect()->route('daftar.index')->with('success', 'Hi '.Auth::user()->name.', Berhasil delete Buku');
         } catch (\Exception $e) { # jika gagal
