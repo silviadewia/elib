@@ -89,13 +89,15 @@
                                             <td>
                                                 <a href="{{ route('daftar.edit', $value->id) }}"
                                                     class="btn btn-primary btn-sm"><i class="fas fa-pen"></i> </a>
+                                                    
                                                 <a href="{{ route('daftar.show', $value->id) }}"
                                                     class="btn btn-info btn-sm"><i class="fa fa-eye"></i> </a>
+                                            <form action="{{ route('daftar.destroy', $value->id) }}" method="post">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit"
-                                                    class="btn btn-danger btn-sm pas-delete-metu-alert-cantik"><i
-                                                        class="fas fa-trash"></i></button>
+                                                <button type="submit" 
+                                                class="btn btn-danger btn-sm pas-delete-metu-alert-cantik">
+                                                <i class="fas fa-trash"></i></button>
                                                 </form>
                                             </td>
                                         </tr>
