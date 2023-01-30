@@ -120,7 +120,8 @@ class BukuController extends Controller
      */
     public function show(Buku $buku)
     {
-        return view('show', compact('buku'));
+        $buku= buku::find($id);
+        return view('daftar.show')->with('buku', $buku);
     }
 
     /**
@@ -228,19 +229,15 @@ class BukuController extends Controller
      */
     public function destroy(Buku $buku)
     {
-        $buku = Buku::findOrFail($id);
-        $buku->delete();
-        return redirect()->route('daftar.index')->with('success', 'Hi ' . Auth::user()->name . ', Berhasil delete buku');
-        # coba update
-        // try {
-        //     $buku = Buku::findOrFail($id);
-        # proses delete
-        // $buku->delete();
-        # kembalikan ke tampilan
-        //     return redirect()->route('daftar.index')->with('success', 'Hi '.Auth::user()->name.', Berhasil delete buku');
-        // } catch (\Exception $e) { # jika gagal
-        # kembalikan ke tampilan
-        //     return redirect()->route('daftar.index')->with('failed', 'Gagal delete buku');
-        // }
+         # coba update
+         try {
+            # proses delete
+            $buku->delete();
+            # kembalikan ke tampilan
+            return redirect()->route('daftar.index')->with('success', 'Hi '.Auth::user()->name.', Berhasil delete Buku');
+        } catch (\Exception $e) { # jika gagal
+            # kembalikan ke tampilan
+            return redirect()->route('daftar.index')->with('failed', 'Gagal delete Buku');
+        }
     }
 }
