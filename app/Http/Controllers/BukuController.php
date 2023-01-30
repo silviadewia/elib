@@ -52,63 +52,69 @@ class BukuController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'sampul' => 'required|image',
+            'sampul' => 'required|image|max:2048',
             'isbn' => 'required',
             'judul' => 'required',
             'kategori' => 'required',
             'rak' => 'required',
             'penerbit' => 'required',
             'pengarang' => 'required',
-            'tahun' => 'required',
+            'tahun_buku' => 'required',
             'jumlah_buku' => 'required',
-            'lampiran_buku' => 'required',
-            'keterangan_lain' => 'required|min:4|max:250',
+            'lampiran_buku' => 'required|max:2048',
+            'keterangan_lain' => 'required',
         ]);
 
+        # nama gambar uuid versi 4
+        $namaSampul = Uuid::uuid4();
+        $namaLampiran = Uuid::uuid4();
+
+        #pindahkan gambar
+        $pindahSampul =  $request->file('sampul')->move(public_path('sampul'), $namaSampul);
+
+        if (!pindahkanSampul) {
+            return redirect()->route('daftar.index')->with('failed', 'Gagal unggah gambar');
+        }
+
         # olah sebelum insert
-
         $insert = [
-            'isbn' => $request->isbn,
-            'judul_buku' => $request->judul,
-            'kategori' => $request->kategori,
-            'rak' => $request->rak,
-            'penerbit' => $request->penerbit,
-            'pengarang' => $request->pengarang,
-            'tahun_buku' => $request->tahun,
-            'jumlah_buku' => $request->jumlah_buku,
-            'keterangan_lain' => $request->keterangan_lain,
-            'dibuat_oleh' => Auth::user()->name
+            'sampul' => $namaSampul,
+            'isbn' => $request->input('isbn'),
+            'judul_buku' => $request->input('judul_buku'),
+            'kategori' => $request->input('kategori'),
+            'rak' => $request->input('kategori'),
+            'penerbit' => $request->input('judul_buku'),
+            'pngarang' => $request->input('pengarang'),
+            'tahun_buku' => $request->input('tahun_buku'),
+            'jumlah_buku' => $request->input('jumlah_buku'),
+            'lampiran_buku' => $namaLampiran,
+            'keterangan_lain' => $request->input('keterangan_lain'),
+            'dibuat_oleh' => 'Auth'::user()->name
         ];
-
-        $insert['sampul'] = $request->file('sampul')->storeAs('sampul', Str::slug($request->judul) . '.' . $request->file('sampul')->getClientOriginalExtension());
-        $insert['lampiran_buku'] = $request->file('lampiran_buku')->storeAs('lampiran-buku', Str::slug($request->lampiran_buku) . '.' . $request->file('lampiran_buku')->getClientOriginalExtension());
 
         try {
             # proses insert
             Buku::create($insert);
             # kembalikan ke tampilan
-            return redirect()->back()->with('success', 'Hi ' . Auth::user()->name . ', Berhasil tambah buku');
+            return redirect()->route('daftar.index')->with('succes', 'Hi'. Auth::user()->name. ',Berhasil tambah buku');
         } catch (\Exception $e) { # jika gagal
-            // Cek apakah gambar terupload, hapus jika iya
-            if (Storage::exists($insert['sampul'])) {
-                Storage::delete($insert['sampul']);
-            }
-            if (Storage::exists($insert['lampiran_buku'])) {
-                Storage::delete($insert['lampiran_buku']);
-            }
             # kembalikan ke tampilan
-            return redirect()->back()->with('error', 'Gagal insert buku');
+            Log::critical("Gagal insert", [$e->getMessage()]);
+            return redirect()->route('daftar.index')->with('failed', 'Gagal insert buku');
         }
     }
+
     /**
      * Display the specified resource.
-     *
-     * @param  \App\Models\Buku  $buku
+     * 
+     * @param \App\Models\Buku $buku
      * @return \Illuminate\Http\Response
      */
     public function show(Buku $buku)
     {
+        return view('show', compact('buku'));
     }
+    
     /**
      * Show the form for editing the specified resource.
      *
@@ -153,10 +159,10 @@ class BukuController extends Controller
                 # proses update
                 $buku->update($request->all());
                 # kembalikan ke tampilan
-                return redirect()->route('buku.index')->with('success', 'Hi ' . Auth::user()->name . ', Berhasil update buku');
+                return redirect()->route('daftar.index')->with('success', 'Hi ' . Auth::user()->name . ', Berhasil update buku');
             } catch (\Exception $e) { # jika gagal
                 # kembalikan ke tampilan
-                return redirect()->route('buku.index')->with('failed', 'Gagal update buku');
+                return redirect()->route('daftar.index')->with('failed', 'Gagal update buku');
             }
         }
     }
@@ -169,15 +175,19 @@ class BukuController extends Controller
      */
     public function destroy(Buku $buku)
     {
+        $buku = Buku::findOrFail($id);
+$buku->delete();
+ return redirect()->route('daftar.index')->with('success', 'Hi '.Auth::user()->name.', Berhasil delete buku');
         # coba update
-        try {
+        // try {
+        //     $buku = Buku::findOrFail($id);
             # proses delete
-            $buku->delete();
+            // $buku->delete();
             # kembalikan ke tampilan
-            return redirect()->route('daftar.index')->with('success', 'Hi '.Auth::user()->name.', Berhasil delete buku');
-        } catch (\Exception $e) { # jika gagal
+        //     return redirect()->route('daftar.index')->with('success', 'Hi '.Auth::user()->name.', Berhasil delete buku');
+        // } catch (\Exception $e) { # jika gagal
             # kembalikan ke tampilan
-            return redirect()->route('daftar.index')->with('failed', 'Gagal delete buku');
-        }
+        //     return redirect()->route('daftar.index')->with('failed', 'Gagal delete buku');
+        // }
     }
 }

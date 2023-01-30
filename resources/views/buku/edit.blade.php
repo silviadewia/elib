@@ -25,7 +25,7 @@
                                 <div class="form-group">
                                     <label for="sampul">Sampul</label>
                                     <br>
-                                    <img src="{{ asset('storage') }}/{{ $edit_buku->sampul }}" alt="">
+                                    <img src="{{ asset('storage') }}/{{ $edit_buku->sampul }}" alt="" width= "300">
                                     <br>
                                     <br>
                                     <input type="file" value="" id="sampul" name="sampul">
