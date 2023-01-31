@@ -111,14 +111,6 @@
             ]
         });
     });
-    $(document).ready(function() {
-        $('#table-penerbit').DataTable({
-            dom: 'Bfrtip',
-            buttons: [
-                'copy', 'csv', 'excel', 'pdf', 'print'
-            ]
-        });
-    });
 
     $('.pas-delete-metu-alert-cantik').click(function(event){
         var form =  $(this).closest("form");
@@ -131,7 +123,8 @@
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Yakin!'
+            confirmButtonText: 'Yakin!',
+            cancelButtonText: 'Tidak!'
         }).then((diHapus) => {
             if (diHapus.value) {
                 form.submit();
