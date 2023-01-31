@@ -87,12 +87,11 @@
                                             </td>
                                             <td>{{ $value->keterangan_lain }}</td>
                                             <td>
+                                            <form action="{{ route('daftar.destroy', $value->id) }}" method="post">
                                                 <a href="{{ route('daftar.edit', $value->id) }}"
                                                     class="btn btn-primary btn-sm"><i class="fas fa-pen"></i> </a>
-
                                                 <a href="{{ route('daftar.show', $value->id) }}"
                                                     class="btn btn-info btn-sm"><i class="fa fa-eye"></i> </a>
-                                                <form action="{{ route('daftar.destroy', $value->id) }}" method="post">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit"
