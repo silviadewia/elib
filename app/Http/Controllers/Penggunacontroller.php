@@ -2,7 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Pengguna;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Log;
+use Ramsey\Uuid\Uuid;
 
 class Penggunacontroller extends Controller
 {
@@ -14,7 +19,8 @@ class Penggunacontroller extends Controller
     public function index()
     {
         $data = [
-            'title' => 'Daftar Pengguna'
+            'title' => 'Daftar Pengguna',
+            'pengguna' => Pengguna::all()
         ];
         return view('Pengguna.index', $data);
     }
@@ -26,7 +32,14 @@ class Penggunacontroller extends Controller
      */
     public function create()
     {
-        //
+        # variable tampilan
+        $data = [
+            'title' => 'Daftar pengguna',
+            'pengguna' => Pengguna::all()
+        ];
+
+        # kembalikan ke tampilan
+        return view('pengguna.create', $data)->with('i');
     }
 
     /**
@@ -37,7 +50,32 @@ class Penggunacontroller extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nis' => 'required',
+            'nama_lengkap' => 'required',
+            'jurusan' => 'required',
+            'tempat_Lahir' => 'required',
+            'tanggal_Lahir' => 'required',
+            'username' => 'required',
+            'password' => 'required',
+            'level' => 'required',
+            'jenis_Kelamin' => 'required',
+            'keterangan_lain' => 'required',
+            'telepon' => 'required',
+            'email' => 'required',
+            'foto' => 'required|image|max:2048',
+            'alamat' => 'required',
+        ]);
+
+        # nama gambar uuid versi 4
+        $namafoto = Uuid::uuid4();
+
+        #pindahkan gambar
+        $pindahfoto =  $request->file('foto')->move(public_path('foto'), $namaFoto);
+
+        if (!$pindahFoto) {
+            return redirect()->route('pengguna.index')->with('failed', 'Gagal unggah gambar');
+        }
     }
 
     /**

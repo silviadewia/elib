@@ -18,8 +18,13 @@
                     </h3>
                 </div>
                 <div class="card-body">
-                <button type="button" class="btn btn-primary">Tambah Pengguna<i class="fas fa-plus"></i></a></button>
-                <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown"
+                <div class="card-header">
+                    <h5 class="card-title">
+                    <a href="" class="text-right btn btn-info "> Tambah Pengguna <i
+                                class="fas fa-plus"></i></a>
+                    </h5>
+                </div>
+                <!-- <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown"
                                 aria-expanded="true">Sortir Berdasarkan ID
                                 <span class="caret"></span>
                                 <span class="sr-only">Toggle Dropdown</span>
@@ -28,393 +33,70 @@
                                 <li><a href="paket">Paket</a></li>
                                 <li><a href="novel">Novel</a></li>
                             </ul>
-                        </div>
+                        </div>-->
                     <div class="card-body">
                         <div class="box-body">
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <table id="table-pinjam" class="table table-bordered table-striped dataTable">
-                                        <thead>
-                                            <tr role="row">
-                                                <th rowspan="1" colspan="1">No</th>
-                                                <th rowspan="1" colspan="1">Id</th>
-                                                <th rowspan="1" colspan="1">Nis</th>
-                                                <th rowspan="1" colspan="1">Nama</th>
-                                                <th rowspan="1" colspan="1">Jurusan</th>
-                                                <th rowspan="1" colspan="1">User</th>
-                                                <th rowspan="1" colspan="1">Telepon</th>
-                                                <th rowspan="1" colspan="1">Status</th>
-                                                <th rowspan="1" colspan="1">Alamat</th>
-                                                <th rowspan="1" colspan="1">Aksi</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr role="row" class="odd">
-                                                <td class="sorting_1">1</td>
-                                                <td>Ardan</td>
-                                                <td>123</td>
-                                                <td>3111</td>
-                                                <td>Ardan</td>
-                                                <td>Rpl</td>
-                                                <td>ardan123</td>
-                                                <td>0867965432</td>
-                                                <td>petugas</td>
-                                                <td>bondo</td>
-                                            </tr>
-                                            <tr role="row" class="even">
-                                                <td class="sorting_1">2</td>
-                                                <td>Ardan</td>
-                                                <td>123</td>
-                                                <td>3111</td>
-                                                <td>Ardan</td>
-                                                <td>Rpl</td>
-                                                <td>ardan123</td>
-                                                <td>0867965432</td>
-                                                <td>petugas</td>
-                                                <td>bondo</td>
-                                            </tr>
-                                            <tr role="row" class="odd">
-                                                <td class="sorting_1">1</td>
-                                                <td>Ardan</td>
-                                                <td>123</td>
-                                                <td>3111</td>
-                                                <td>Ardan</td>
-                                                <td>Rpl</td>
-                                                <td>ardan123</td>
-                                                <td>0867965432</td>
-                                                <td>petugas</td>
-                                                <td>bondo</td>
-                                            </tr>
-                                            <tr role="row" class="even">
-                                                <td class="sorting_1">2</td>
-                                                <td>Ardan</td>
-                                                <td>123</td>
-                                                <td>3111</td>
-                                                <td>Ardan</td>
-                                                <td>Rpl</td>
-                                                <td>ardan123</td>
-                                                <td>0867965432</td>
-                                                <td>petugas</td>
-                                                <td>bondo</td>
-                                            </tr>
-                                            <tr role="row" class="odd">
-                                                <td class="sorting_1">1</td>
-                                                <td>Ardan</td>
-                                                <td>123</td>
-                                                <td>3111</td>
-                                                <td>Ardan</td>
-                                                <td>Rpl</td>
-                                                <td>ardan123</td>
-                                                <td>0867965432</td>
-                                                <td>petugas</td>
-                                                <td>bondo</td>
-                                            </tr>
-                                            <tr role="row" class="even">
-                                                <td class="sorting_1">2</td>
-                                                <td>Ardan</td>
-                                                <td>123</td>
-                                                <td>3111</td>
-                                                <td>Ardan</td>
-                                                <td>Rpl</td>
-                                                <td>ardan123</td>
-                                                <td>0867965432</td>
-                                                <td>petugas</td>
-                                                <td>bondo</td>
-                                            </tr>
-                                            <tr role="row" class="odd">
-                                                <td class="sorting_1">1</td>
-                                                <td>Ardan</td>
-                                                <td>123</td>
-                                                <td>3111</td>
-                                                <td>Ardan</td>
-                                                <td>Rpl</td>
-                                                <td>ardan123</td>
-                                                <td>0867965432</td>
-                                                <td>petugas</td>
-                                                <td>bondo</td>
-                                            </tr>
-                                            <tr role="row" class="even">
-                                                <td class="sorting_1">2</td>
-                                                <td>Ardan</td>
-                                                <td>123</td>
-                                                <td>3111</td>
-                                                <td>Ardan</td>
-                                                <td>Rpl</td>
-                                                <td>ardan123</td>
-                                                <td>0867965432</td>
-                                                <td>petugas</td>
-                                                <td>bondo</td>
-                                            </tr>
-                                            <tr role="row" class="odd">
-                                                <td class="sorting_1">1</td>
-                                                <td>Ardan</td>
-                                                <td>123</td>
-                                                <td>3111</td>
-                                                <td>Ardan</td>
-                                                <td>Rpl</td>
-                                                <td>ardan123</td>
-                                                <td>0867965432</td>
-                                                <td>petugas</td>
-                                                <td>bondo</td>
-                                            </tr>
-                                            <tr role="row" class="even">
-                                                <td class="sorting_1">2</td>
-                                                <td>Ardan</td>
-                                                <td>123</td>
-                                                <td>3111</td>
-                                                <td>Ardan</td>
-                                                <td>Rpl</td>
-                                                <td>ardan123</td>
-                                                <td>0867965432</td>
-                                                <td>petugas</td>
-                                                <td>bondo</td>
-                                            </tr>
-                                            <tr role="row" class="odd">
-                                                <td class="sorting_1">1</td>
-                                                <td>Ardan</td>
-                                                <td>123</td>
-                                                <td>3111</td>
-                                                <td>Ardan</td>
-                                                <td>Rpl</td>
-                                                <td>ardan123</td>
-                                                <td>0867965432</td>
-                                                <td>petugas</td>
-                                                <td>bondo</td>
-                                            </tr>
-                                            <tr role="row" class="even">
-                                                <td class="sorting_1">2</td>
-                                                <td>Ardan</td>
-                                                <td>123</td>
-                                                <td>3111</td>
-                                                <td>Ardan</td>
-                                                <td>Rpl</td>
-                                                <td>ardan123</td>
-                                                <td>0867965432</td>
-                                                <td>petugas</td>
-                                                <td>bondo</td>
-                                            </tr>
-                                            <tr role="row" class="odd">
-                                                <td class="sorting_1">1</td>
-                                                <td>Ardan</td>
-                                                <td>123</td>
-                                                <td>3111</td>
-                                                <td>Ardan</td>
-                                                <td>Rpl</td>
-                                                <td>ardan123</td>
-                                                <td>0867965432</td>
-                                                <td>petugas</td>
-                                                <td>bondo</td>
-                                            </tr>
-                                            <tr role="row" class="even">
-                                                <td class="sorting_1">2</td>
-                                                <td>Ardan</td>
-                                                <td>123</td>
-                                                <td>3111</td>
-                                                <td>Ardan</td>
-                                                <td>Rpl</td>
-                                                <td>ardan123</td>
-                                                <td>0867965432</td>
-                                                <td>petugas</td>
-                                                <td>bondo</td>
-                                            </tr>
-                                            <tr role="row" class="odd">
-                                                <td class="sorting_1">1</td>
-                                                <td>Ardan</td>
-                                                <td>123</td>
-                                                <td>3111</td>
-                                                <td>Ardan</td>
-                                                <td>Rpl</td>
-                                                <td>ardan123</td>
-                                                <td>0867965432</td>
-                                                <td>petugas</td>
-                                                <td>bondo</td>
-                                            </tr>
-                                            <tr role="row" class="even">
-                                                <td class="sorting_1">2</td>
-                                                <td>Ardan</td>
-                                                <td>123</td>
-                                                <td>3111</td>
-                                                <td>Ardan</td>
-                                                <td>Rpl</td>
-                                                <td>ardan123</td>
-                                                <td>0867965432</td>
-                                                <td>petugas</td>
-                                                <td>bondo</td>
-                                            </tr>
-                                            <tr role="row" class="odd">
-                                                <td class="sorting_1">1</td>
-                                                <td>Ardan</td>
-                                                <td>123</td>
-                                                <td>3111</td>
-                                                <td>Ardan</td>
-                                                <td>Rpl</td>
-                                                <td>ardan123</td>
-                                                <td>0867965432</td>
-                                                <td>petugas</td>
-                                                <td>bondo</td>
-                                            </tr>
-                                            <tr role="row" class="even">
-                                                <td class="sorting_1">2</td>
-                                                <td>Ardan</td>
-                                                <td>123</td>
-                                                <td>3111</td>
-                                                <td>Ardan</td>
-                                                <td>Rpl</td>
-                                                <td>ardan123</td>
-                                                <td>0867965432</td>
-                                                <td>petugas</td>
-                                                <td>bondo</td>
-                                            </tr>
-                                            <tr role="row" class="odd">
-                                                <td class="sorting_1">1</td>
-                                                <td>Ardan</td>
-                                                <td>123</td>
-                                                <td>3111</td>
-                                                <td>Ardan</td>
-                                                <td>Rpl</td>
-                                                <td>ardan123</td>
-                                                <td>0867965432</td>
-                                                <td>petugas</td>
-                                                <td>bondo</td>
-                                            </tr>
-                                            <tr role="row" class="even">
-                                                <td class="sorting_1">2</td>
-                                                <td>Ardan</td>
-                                                <td>123</td>
-                                                <td>3111</td>
-                                                <td>Ardan</td>
-                                                <td>Rpl</td>
-                                                <td>ardan123</td>
-                                                <td>0867965432</td>
-                                                <td>petugas</td>
-                                                <td>bondo</td>
-                                            </tr>
-                                            <tr role="row" class="odd">
-                                                <td class="sorting_1">1</td>
-                                                <td>Ardan</td>
-                                                <td>123</td>
-                                                <td>3111</td>
-                                                <td>Ardan</td>
-                                                <td>Rpl</td>
-                                                <td>ardan123</td>
-                                                <td>0867965432</td>
-                                                <td>petugas</td>
-                                                <td>bondo</td>
-                                            </tr>
-                                            <tr role="row" class="even">
-                                                <td class="sorting_1">2</td>
-                                                <td>Ardan</td>
-                                                <td>123</td>
-                                                <td>3111</td>
-                                                <td>Ardan</td>
-                                                <td>Rpl</td>
-                                                <td>ardan123</td>
-                                                <td>0867965432</td>
-                                                <td>petugas</td>
-                                                <td>bondo</td>
-                                            </tr>
-                                            <tr role="row" class="odd">
-                                                <td class="sorting_1">1</td>
-                                                <td>Ardan</td>
-                                                <td>123</td>
-                                                <td>3111</td>
-                                                <td>Ardan</td>
-                                                <td>Rpl</td>
-                                                <td>ardan123</td>
-                                                <td>0867965432</td>
-                                                <td>petugas</td>
-                                                <td>bondo</td>
-                                            </tr>
-                                            <tr role="row" class="even">
-                                                <td class="sorting_1">2</td>
-                                                <td>Ardan</td>
-                                                <td>123</td>
-                                                <td>3111</td>
-                                                <td>Ardan</td>
-                                                <td>Rpl</td>
-                                                <td>ardan123</td>
-                                                <td>0867965432</td>
-                                                <td>petugas</td>
-                                                <td>bondo</td>
-                                            </tr>
-                                            <tr role="row" class="odd">
-                                                <td class="sorting_1">1</td>
-                                                <td>Ardan</td>
-                                                <td>123</td>
-                                                <td>3111</td>
-                                                <td>Ardan</td>
-                                                <td>Rpl</td>
-                                                <td>ardan123</td>
-                                                <td>0867965432</td>
-                                                <td>petugas</td>
-                                                <td>bondo</td>
-                                            </tr>
-                                            <tr role="row" class="even">
-                                                <td class="sorting_1">2</td>
-                                                <td>Ardan</td>
-                                                <td>123</td>
-                                                <td>3111</td>
-                                                <td>Ardan</td>
-                                                <td>Rpl</td>
-                                                <td>ardan123</td>
-                                                <td>0867965432</td>
-                                                <td>petugas</td>
-                                                <td>bondo</td>
-                                            </tr>
-                                            <tr role="row" class="odd">
-                                                <td class="sorting_1">1</td>
-                                                <td>Ardan</td>
-                                                <td>123</td>
-                                                <td>3111</td>
-                                                <td>Ardan</td>
-                                                <td>Rpl</td>
-                                                <td>ardan123</td>
-                                                <td>0867965432</td>
-                                                <td>petugas</td>
-                                                <td>bondo</td>
-                                            </tr>
-                                            <tr role="row" class="even">
-                                                <td class="sorting_1">2</td>
-                                                <td>Ardan</td>
-                                                <td>123</td>
-                                                <td>3111</td>
-                                                <td>Ardan</td>
-                                                <td>Rpl</td>
-                                                <td>ardan123</td>
-                                                <td>0867965432</td>
-                                                <td>petugas</td>
-                                                <td>bondo</td>
-                                            </tr>
-                                            <tr role="row" class="odd">
-                                                <td class="sorting_1">1</td>
-                                                <td>Ardan</td>
-                                                <td>123</td>
-                                                <td>3111</td>
-                                                <td>Ardan</td>
-                                                <td>Rpl</td>
-                                                <td>ardan123</td>
-                                                <td>0867965432</td>
-                                                <td>petugas</td>
-                                                <td>bondo</td>
-                                            </tr>
-                                            <tr role="row" class="even">
-                                                <td class="sorting_1">2</td>
-                                                <td>Ardan</td>
-                                                <td>123</td>
-                                                <td>3111</td>
-                                                <td>Ardan</td>
-                                                <td>Rpl</td>
-                                                <td>ardan123</td>
-                                                <td>0867965432</td>
-                                                <td>petugas</td>
-                                                <td>bondo</td>
-                                            </tr>
-
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
+                                <table class="table table-bordered table-hover dataTable dtr-inline" name="table-pengguna"
+                            id="table-pengguna">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>NIS</th>
+                                    <th>Nama Lengkap</th>
+                                    <th>Jurusan</th>
+                                    <th>Tempat Lahir</th>
+                                    <th>Tanggal Lahir</th>
+                                    <th>Username</th>
+                                    <th>Password</th>
+                                    <th>Level</th>
+                                    <th>Jenis Kelamin</th>
+                                    <th>Telepon</th>
+                                    <th>Email</th>
+                                    <th>Foto</th>
+                                    <th>Alamat</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($pengguna as $value)
+                                <tr>
+                                    <td>{{ ++$i }}</td>
+                                    <td>{{ $value->nis }}</td>
+                                    <td>{{ $value->nama_lengkap }}</td>
+                                    <td>{{ $value->jurusan }}</td>
+                                    <td>{{ $value->tempat_lahir }}</td>
+                                    <td>{{ $value->tanggal_lahir }}</td>
+                                    <td>{{ $value->username }}</td>
+                                    <td>{{ $value->password }}</td>
+                                    <td>{{ $value->level }}</td>
+                                    <td>{{ $value->telepon }}</td>
+                                    <td>{{ $value->email }}</td>
+                                    <td>
+                                        @if ($value->foto)
+                                        <img style="max-width:50px;max-height:50px"
+                                            src="/foto/{{ $value->foto }}" />
+                                        @endif
+                                    </td>
+                                    <td>{{ $value->alamat }}</td>
+                                    <td>
+                                        <form action="{{ route('daftar.destroy', $value->id) }}" method="post">
+                                            <a href="{{ route('daftar.edit', $value->id) }}"
+                                                class="btn btn-primary btn-sm"><i class="fas fa-pen"></i> </a>
+                                            <a href="{{ route('daftar.show', $value->id) }}"
+                                                class="btn btn-info btn-sm"><i class="fa fa-eye"></i> </a>
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit"
+                                                class="btn btn-danger btn-sm pas-delete-metu-alert-cantik">
+                                                <i class="fas fa-trash"></i></button>
+                                        </form>
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
