@@ -118,10 +118,12 @@ class BukuController extends Controller
      * @param \App\Models\Buku $buku
      * @return \Illuminate\Http\Response
      */
-    public function show(Buku $buku)
+    public function show($buku)
     { 
+        $buku = Buku::findOrFail($buku); 
+        // Buku adalah model FindorFail tujuannya, CariatauGagal dari ID buku sample http://127.0.0.1:8000/buku/daftar/8
+        // 8 adalah ID buku
         return view('buku.show',compact('buku'));
-
     }
 
     /**

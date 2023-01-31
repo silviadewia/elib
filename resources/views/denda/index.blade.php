@@ -123,7 +123,8 @@
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Yakin!'
+            confirmButtonText: 'Yakin!',
+            cancelButtonText: 'Tidak!'
         }).then((diHapus) => {
             if (diHapus.value) {
                 form.submit();
