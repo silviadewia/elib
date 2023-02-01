@@ -21,7 +21,7 @@ class Penggunacontroller extends Controller
             'title' => 'Daftar Pengguna',
             'pengguna' => Pengguna::all(),
         ];
-        return view('pengguna.index', $data)->with('i'); 
+        return view('pengguna.index', $data)->with('i');
     }
 
     /**
@@ -46,22 +46,22 @@ class Penggunacontroller extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    { dd($request->file('foto'));
-            $request->validate([
-                'nis' => 'required',
-                'nama_lengkap' => 'required',
-                'jurusan' => 'required',
-                'tempat_lahir' => 'required',
-                'tanggal_lahir' => 'required',
-                'username' => 'required',
-                'password' => 'required',
-                'level' => 'required',
-                'jenis_kelamin' => 'required',
-                'telepon' => 'required',
-                'email' => 'required',
-                'foto' => 'required|image|max:2048',
-                'alamat' => 'required'
-            ]);
+    {
+        $request->validate([
+            'nis' => 'required',
+            'nama_lengkap' => 'required',
+            'jurusan' => 'required',
+            'tempat_lahir' => 'required',
+            'tanggal_lahir' => 'required',
+            'username' => 'required',
+            'password' => 'required',
+            'level' => 'required',
+            'jenis_kelamin' => 'required',
+            'telepon' => 'required',
+            'email' => 'required',
+            'foto' => 'required|image|max:2048',
+            'alamat' => 'required'
+        ]);
 
         # nama gambar uuid versi 4
         $foto = Uuid::uuid4();
@@ -71,12 +71,14 @@ class Penggunacontroller extends Controller
         if (!$pindahFoto) {
             return redirect()->route('pengguna.index')->with('failed', 'Gagal unggah gambar');
         }
-          # olah sebelum insert
-          $insert = [
+
+        # olah sebelum insert
+        $insert = [
             'nis' => $request->input('nis'),
             'nama_lengkap' => $request->input('nama_lengkap'),
             'jurusan' => $request->input('jurusan'),
             'tempat_lahir' => $request->input('tempat_lahir'),
+            'tanggal_lahir' => $request->input('tanggal_lahir'),
             'username' => $request->input('username'),
             'password' => $request->input('password'),
             'level' => $request->input('level'),
@@ -87,9 +89,11 @@ class Penggunacontroller extends Controller
             'alamat' => $request->input('alamat'),
             'dibuat_oleh' => Auth::user()->name
         ];
+
+        dd(Pengguna::create($insert));
+
         try {
             # proses insert
-            Pengguna::create($insert);
             # kembalikan ke tampilan
             return redirect()->route('pengguna.index')->with('success', 'Hi' . Auth::user()->name . ', Berhasil tambah pengguna');
         } catch (\Exception $e) { # jika gagal
@@ -98,7 +102,7 @@ class Penggunacontroller extends Controller
             return redirect()->route('pengguna.index')->with('failed', 'Gagal insert pengguna');
         }
     }
-    
+
     /**
      * Display the specified resource.
      *
