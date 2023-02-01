@@ -9,22 +9,22 @@ class Pengguna extends Model
 {
     use HasFactory;
     protected $table = 'table_pengguna';
+    protected $guarded = ['id'];
 
-    protected $fillable = [
-    'nis',
-    'nama_lengkap',
-    'jurusan',
-    'tempat_lahir',
-    'tanggal_lahir',
-    'username',
-    'password',
-    'level',
-    'jenis_kelamin',
-    'telepon',
-    'email',
-    'foto',
-    'alamat',
-    'dibuat_oleh'
-];
+    //     protected $fillable = [
+    //     'nis',
+    //     'nama_lengkap',
+    //     'jurusan',
+    //     'tempat_lahir',
+    //     'tanggal_lahir',
+    //     'username',
+    //     'password',
+    //     'level',
+    //     'jenis_kelamin',
+    //     'telepon',
+    //     'email',
+    //     'foto',
+    //     'alamat',
+    //     'dibuat_oleh'
+    // ];
 }
-

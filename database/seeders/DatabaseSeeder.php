@@ -26,13 +26,13 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
-        User::factory()->create([
-            'name' => 'silvia',
-            'email' => 'callmesil@gmail.com',
-            'password' => Hash::make('kacangbawang'),
-            'created_at' => Carbon::now()->toDateTimeLocalString(),
-            'updated_at' => Carbon::now()->toDateTimeLocalString()
-        ]);
+        // User::factory()->create([
+        //     'name' => 'silvia',
+        //     'email' => 'callmesil@gmail.com',
+        //     'password' => Hash::make('kacangbawang'),
+        //     'created_at' => Carbon::now()->toDateTimeLocalString(),
+        //     'updated_at' => Carbon::now()->toDateTimeLocalString()
+        // ]);
 
         DB::table('users')->insert(
             [
