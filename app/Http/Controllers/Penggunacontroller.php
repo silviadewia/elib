@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Pengguna;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
+use Ramsey\Uuid\Uuid;
 
 class Penggunacontroller extends Controller
 {
@@ -14,9 +18,10 @@ class Penggunacontroller extends Controller
     public function index()
     {
         $data = [
-            'title' => 'Daftar Pengguna'
+            'title' => 'Daftar Pengguna',
+            'pengguna' => Pengguna::all(),
         ];
-        return view('Pengguna.index', $data);
+        return view('pengguna.index', $data)->with('i'); 
     }
 
     /**
@@ -26,7 +31,12 @@ class Penggunacontroller extends Controller
      */
     public function create()
     {
-        //
+        $data = [
+            'title' => 'Daftar pengguna',
+            'pengguna' => Pengguna::all(),
+        ];
+
+        return view('pengguna.create', $data)->with('i');
     }
 
     /**
@@ -36,10 +46,59 @@ class Penggunacontroller extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        //
-    }
+    { dd($request->file('foto'));
+            $request->validate([
+                'nis' => 'required',
+                'nama_lengkap' => 'required',
+                'jurusan' => 'required',
+                'tempat_lahir' => 'required',
+                'tanggal_lahir' => 'required',
+                'username' => 'required',
+                'password' => 'required',
+                'level' => 'required',
+                'jenis_kelamin' => 'required',
+                'telepon' => 'required',
+                'email' => 'required',
+                'foto' => 'required|image|max:2048',
+                'alamat' => 'required'
+            ]);
 
+        # nama gambar uuid versi 4
+        $foto = Uuid::uuid4();
+        #pindahkan gambar
+        $pindahFoto =  $request->file('foto')->move(public_path('foto'), $foto);
+
+        if (!$pindahFoto) {
+            return redirect()->route('pengguna.index')->with('failed', 'Gagal unggah gambar');
+        }
+          # olah sebelum insert
+          $insert = [
+            'nis' => $request->input('nis'),
+            'nama_lengkap' => $request->input('nama_lengkap'),
+            'jurusan' => $request->input('jurusan'),
+            'tempat_lahir' => $request->input('tempat_lahir'),
+            'username' => $request->input('username'),
+            'password' => $request->input('password'),
+            'level' => $request->input('level'),
+            'jenis_kelamin' => $request->input('jenis_kelamin'),
+            'telepon' => $request->input('telepon'),
+            'email' => $request->input('email'),
+            'foto' => $foto,
+            'alamat' => $request->input('alamat'),
+            'dibuat_oleh' => Auth::user()->name
+        ];
+        try {
+            # proses insert
+            Pengguna::create($insert);
+            # kembalikan ke tampilan
+            return redirect()->route('pengguna.index')->with('success', 'Hi' . Auth::user()->name . ', Berhasil tambah pengguna');
+        } catch (\Exception $e) { # jika gagal
+            # kembalikan ke tampilan
+            Log::critical("Gagal insert", [$e->getMessage()]);
+            return redirect()->route('pengguna.index')->with('failed', 'Gagal insert pengguna');
+        }
+    }
+    
     /**
      * Display the specified resource.
      *

@@ -26,7 +26,7 @@ return new class extends Migration
             $table->enum('jenis_Kelamin', ['laki-laki','perempuan']);
             $table->integer('telepon')->unsigned();
             $table->string('email', 25);
-            $table->text('foto');
+            $table->string('foto');
             $table->string('alamat');
             $table->string('dibuat_oleh', 25);
             $table->timestamps();
