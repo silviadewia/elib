@@ -46,7 +46,7 @@ class Penggunacontroller extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    { 
         $request->validate([
             'nis' => 'required',
             'nama_lengkap' => 'required',
@@ -90,10 +90,10 @@ class Penggunacontroller extends Controller
             'dibuat_oleh' => Auth::user()->name
         ];
 
-        dd(Pengguna::create($insert));
 
         try {
             # proses insert
+            Pengguna::create($insert);
             # kembalikan ke tampilan
             return redirect()->route('pengguna.index')->with('success', 'Hi' . Auth::user()->name . ', Berhasil tambah pengguna');
         } catch (\Exception $e) { # jika gagal
@@ -120,9 +120,14 @@ class Penggunacontroller extends Controller
      * @param  \App\Models\Pengguna  $pengguna
      * @return \Illuminate\Http\Response
      */
-    public function edit(Pengguna $pengguna)
+    public function edit($id)
     {
-        //
+         # kembalikan ke tampilan
+         return view('pengguna.edit', [
+            'title' => 'Edit pengguna',
+            'edit_pengguna' => Pengguna::where('id', $id)->first(),
+            'pengguna' => Pengguna::all(),
+        ]);
     }
 
     /**
@@ -134,7 +139,66 @@ class Penggunacontroller extends Controller
      */
     public function update(Request $request, Pengguna $pengguna)
     {
-        //
+        $request->validate([
+            'nis' => 'required',
+            'nama_lengkap' => 'required',
+            'jurusan' => 'required',
+            'tempat_lahir' => 'required',
+            'tanggal_lahir' => 'required',
+            'username' => 'required',
+            'password' => 'required',
+            'level' => 'required',
+            'jenis_kelamin' => 'required',
+            'telepon' => 'required',
+            'email' => 'required',
+            'foto' => 'required|image|max:2048',
+            'alamat' => 'required'
+        ]);
+
+        $update = [
+            'nis' => $request->input('nis'),
+            'nama_lengkap' => $request->input('nama_lengkap'),
+            'jurusan' => $request->input('jurusan'),
+            'tempat_lahir' => $request->input('tempat_lahir'),
+            'tanggal_lahir' => $request->input('tanggal_lahir'),
+            'username' => $request->input('username'),
+            'password' => $request->input('password'),
+            'level' => $request->input('level'),
+            'jenis_kelamin' => $request->input('jenis_kelamin'),
+            'telepon' => $request->input('telepon'),
+            'email' => $request->input('email'),
+            'foto' => $foto,
+            'alamat' => $request->input('alamat'),
+        ];
+
+        if ($request->hasFile('foto')) {
+
+            $request->validate([
+                'foto' => 'required|image'
+            ]);
+
+            $FotoBaru = Uuid::uuid4();
+            $pindahFoto =  $request->file('foto')->move(public_path('foto'), $FotoBaru);
+
+            if ($pindahSampul) {
+                File::delete(public_path('foto/' . $request->input('fotoLama')));
+
+                $update['foto'] = $FotoBaru;
+            } else {
+                return redirect()->route('pengguna.index')->with('failed', 'Gagal unggah foto');
+            }
+        }
+
+         # coba update
+         try {
+            # proses update
+            $pengguna->where('id', $request->input('id'))->update($update);
+            # kembalikan ke tampilan
+            return redirect()->route('pengguna.index')->with('success', 'Hi ' . Auth::user()->name . ', Berhasil update pengguna');
+        } catch (\Exception $e) { # jika gagal
+            # kembalikan ke tampilan
+            return redirect()->route('pengguna.index')->with('failed', 'Gagal update pengguna');
+        }
     }
 
     /**
@@ -145,6 +209,16 @@ class Penggunacontroller extends Controller
      */
     public function destroy(Pengguna $pengguna)
     {
-        //
+        # coba update
+        try {
+            # proses delete
+           $pengguna = Pengguna::findOrFail($id);
+           $pengguna->delete();
+            # kembalikan ke tampilan
+            return redirect()->route('pengguna.index')->with('success', 'Hi '.Auth::user()->name.', Berhasil delete Pengguna');
+        } catch (\Exception $e) { # jika gagal
+            # kembalikan ke tampilan
+            return redirect()->route('pengguna.index')->with('failed', 'Gagal delete Pengguna');
+        }
     }
 }

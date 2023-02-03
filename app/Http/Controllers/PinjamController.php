@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\transaksi_peminjaman;
 use Illuminate\Http\Request;
 
 class PinjamController extends Controller
@@ -14,9 +15,10 @@ class PinjamController extends Controller
     public function index()
     {
         $data = [
-            'title' => 'Daftar Pinjam'
+            'title' => 'Daftar Pinjam',
+            'pinjam' => Pinjam::all(),
         ];
-        return view('Pinjam.index', $data);
+        return view('pinjam.index', $data)->with('i');
     }
 
     /**
