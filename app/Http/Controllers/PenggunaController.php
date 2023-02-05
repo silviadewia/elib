@@ -111,7 +111,8 @@ class Penggunacontroller extends Controller
      */
     public function show(Pengguna $pengguna)
     {
-        //
+        
+        return view('pengguna.show',compact('pengguna'));
     }
 
     /**
@@ -212,13 +213,12 @@ class Penggunacontroller extends Controller
         # coba update
         try {
             # proses delete
-           $pengguna = Pengguna::findOrFail($id);
-           $pengguna->delete();
+            $pengguna->delete();
             # kembalikan ke tampilan
-            return redirect()->route('pengguna.index')->with('success', 'Hi '.Auth::user()->name.', Berhasil delete Pengguna');
+            return redirect()->route('pengguna.index')->with('success', 'Hi '.Auth::user()->name.', Berhasil delete pengguna');
         } catch (\Exception $e) { # jika gagal
             # kembalikan ke tampilan
-            return redirect()->route('pengguna.index')->with('failed', 'Gagal delete Pengguna');
+            return redirect()->route('pengguna.index')->with('failed', 'Gagal delete pengguna');
         }
     }
 }

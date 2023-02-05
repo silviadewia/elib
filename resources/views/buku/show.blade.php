@@ -15,7 +15,7 @@
                     <td>
                         <div class="mb-3">
                             <label class="form-label">Sampul</label>
-                            <input type="text" class="form-control " name="sampul" value="{{ $buku->sampul }}" readonly>
+                            <input type="img" class="form-control " name="sampul" value="{{ $buku->sampul }}" readonly>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">ISBN</label>
@@ -46,7 +46,7 @@
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Tahun</label>
-                            <input type="text" class="form-control" name="tahun" value="{{ $buku->tahun_buku }}" readonly>
+                            <input type="text" class="form-control" name="tahun_buku" value="{{ $buku->tahun_buku }}" readonly>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Jumlah Buku</label>
@@ -63,6 +63,10 @@
                             <input type="text" class="form-control" name="keterangan_lain"
                                 value="{{ $buku->keterangan_lain }}" readonly>
                         </div>
+                        <div class="modal-footer">
+                                                                    <button type="button"
+                                                                        class="btn btn-outline pull-left"
+                                                                        data-dismiss="modal">Close</button>
                 </div>
                 <div class="card-body">
                 <div class="card-footer">
