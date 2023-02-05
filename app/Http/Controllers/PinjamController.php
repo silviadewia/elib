@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\transaksi_peminjaman;
+use App\Models\pinjam;
 use Illuminate\Http\Request;
 
 class PinjamController extends Controller
@@ -13,7 +13,7 @@ class PinjamController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
+    { 
         $data = [
             'title' => 'Daftar Pinjam',
             'pinjam' => Pinjam::all(),
@@ -28,7 +28,12 @@ class PinjamController extends Controller
      */
     public function create()
     {
-        //
+        $data = [
+            'title' => 'Daftar pinjam',
+            'pinjam' => Pinjam::all(),
+        ];
+
+        return view('pinjam.create', $data)->with('i');
     }
 
     /**
@@ -39,7 +44,36 @@ class PinjamController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'no_pinjaman' => 'required',
+            'tgl_pinjaman' => 'required',
+            'id_anggota' => 'required',
+            'lama' => 'required',
+            'id_buku' => 'required',
+            'tanggal_kembali' => 'required',
+            'denda' => 'required',
+        ]);
+
+         # olah sebelum insert
+         $insert = [
+            'no_pinjaman' => $request->input('no_pinjaman'),
+            'tgl_pinjaman' => $request->input('tgl_pinjaman'),
+            'id_anggota' => $request->input('id_anggota'),
+            'lama' => $request->input('lama'),
+            'id_buku' => $request->input('id_buku'),
+            'tanggal_kembali' => $request->input('tanggal_kembali'),
+            'denda' => $request->input('denda'),
+        ];
+        try {
+            # proses insert
+            Pinjam::create($insert);
+            # kembalikan ke tampilan
+            return redirect()->route('pinjam.index')->with('success', 'Hi' . Auth::user()->name . ', Berhasil tambah Pinjam');
+        } catch (\Exception $e) { # jika gagal
+            # kembalikan ke tampilan
+            Log::critical("Gagal insert", [$e->getMessage()]);
+            return redirect()->route('pinjam.index')->with('failed', 'Gagal insert pinjam');
+        }
     }
 
     /**
@@ -50,7 +84,7 @@ class PinjamController extends Controller
      */
     public function show(Pinjam $pinjam)
     {
-        //
+        return view('pinjam.show',compact('pinjam'));
     }
 
     /**

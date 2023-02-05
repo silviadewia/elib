@@ -93,12 +93,12 @@
                                                             </select>
                                                         </div>
                                                         <div class="form-group">
-                                                            <label>Jenis Kelamin</label>
-                                                            <br>
-                                                            <td>
-                                                            <input type="radio" name="jenis_kelamin" value="laki-laki">Laki-Laki
-                                                            <input type="radio" name="jenis_kelamin" value="perempuan">Perempuan
-                                                            </td>
+                                                        <label>Jenis_Kelamin</label>
+                                                            <select name="jenis_kelamin" class="form-control"
+                                                                required="required">
+                                                                <option>Laki-Laki</option>
+                                                                <option>Perempuan</option>
+                                                            </select>
                                                         </div>
                                                         <div class="form-group">
                                                             <label>Telepon</label>
