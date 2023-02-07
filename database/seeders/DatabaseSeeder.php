@@ -19,21 +19,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
-
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
-
-        // User::factory()->create([
-        //     'name' => 'silvia',
-        //     'email' => 'callmesil@gmail.com',
-        //     'password' => Hash::make('kacangbawang'),
-        //     'created_at' => Carbon::now()->toDateTimeLocalString(),
-        //     'updated_at' => Carbon::now()->toDateTimeLocalString()
-        // ]);
-
         DB::table('users')->insert(
             [
                 'name' => 'silvia',

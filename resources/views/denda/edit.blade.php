@@ -39,7 +39,7 @@
                         </div>
 
                         <div class="card-footer">
-                            <button type="reset" class="btn btn-default">Batal</button>
+                             <a href="{{ url()->previous() }}" class="btn btn-default">Batal</a>
                             <button type="submit" class="btn btn-info  float-right"><i class="fas fa-plus"></i>
                                 Simpan</button>
                         </div>
