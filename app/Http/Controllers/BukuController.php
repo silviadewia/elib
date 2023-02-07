@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Buku;
+use App\Models\Kategori;
+use App\Models\Penerbit;
+use App\Models\Pengarang;
+use App\Models\Rak;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
@@ -38,6 +42,10 @@ class BukuController extends Controller
         $data = [
             'title' => 'Daftar buku',
             'buku' => Buku::all(),
+            'penerbit' => Penerbit::all(),
+            'kategori' => Kategori::all(),
+            'rak' => Rak::all(),
+            'pengarang' => Pengarang::all(),
         ];
 
         # kembalikan ke tampilan

@@ -46,7 +46,7 @@ class Penggunacontroller extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    { 
+    {
         $request->validate([
             'nis' => 'required',
             'nama_lengkap' => 'required',
@@ -111,8 +111,8 @@ class Penggunacontroller extends Controller
      */
     public function show(Pengguna $pengguna)
     {
-        
-        return view('pengguna.show',compact('pengguna'));
+
+        return view('pengguna.show', compact('pengguna'));
     }
 
     /**
@@ -123,8 +123,8 @@ class Penggunacontroller extends Controller
      */
     public function edit($id)
     {
-         # kembalikan ke tampilan
-         return view('pengguna.edit', [
+        # kembalikan ke tampilan
+        return view('pengguna.edit', [
             'title' => 'Edit pengguna',
             'edit_pengguna' => Pengguna::where('id', $id)->first(),
             'pengguna' => Pengguna::all(),
@@ -190,8 +190,8 @@ class Penggunacontroller extends Controller
             }
         }
 
-         # coba update
-         try {
+        # coba update
+        try {
             # proses update
             $pengguna->where('id', $request->input('id'))->update($update);
             # kembalikan ke tampilan
@@ -215,7 +215,7 @@ class Penggunacontroller extends Controller
             # proses delete
             $pengguna->delete();
             # kembalikan ke tampilan
-            return redirect()->route('pengguna.index')->with('success', 'Hi '.Auth::user()->name.', Berhasil delete pengguna');
+            return redirect()->route('pengguna.index')->with('success', 'Hi ' . Auth::user()->name . ', Berhasil delete pengguna');
         } catch (\Exception $e) { # jika gagal
             # kembalikan ke tampilan
             return redirect()->route('pengguna.index')->with('failed', 'Gagal delete pengguna');
