@@ -147,7 +147,6 @@
 </div>
 </div>
 @stop
-</div>
 
 
 @section('js')
