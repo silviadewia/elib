@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\pinjam;
+use App\Models\Pinjam;
 use Illuminate\Http\Request;
 
 class PinjamController extends Controller
