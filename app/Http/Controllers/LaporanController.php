@@ -17,7 +17,7 @@ class LaporanController extends Controller
         $data = [
             'title' => 'Daftar Laporan'
         ];
-        return view('Laporan.index', $data);
+        return view('caribuku.index', $data);
         //
     }
 
