@@ -13,20 +13,20 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('table_transaksi_peminjaman', function (Blueprint $table) {
+        Schema::create('table_pinjam', function (Blueprint $table) {
             $table->id();
-            $table->integer('no_pinjaman')->unsigned();
-            $table->dateTime('tgl_pinjaman');
-            $table->integer('id_anggota')->unsigned();
-            $table->integer('lama')->unsigned();
-            $table->integer('id_buku')->unsigned();
+            $table->dateTime('tanggal');
+            $table->unsignedBigInteger('id_anggota');
+            $table->unsignedInteger('lama');
+            $table->json('id_buku')->comment('json data, untuk simpan banyak buku');
             $table->dateTime('tanggal_kembali');
-            $table->decimal('denda',$precision = 10, $scale = 3);
+            $table->decimal('denda');
             $table->string('dibuat_oleh', 25);
             $table->timestamps();
 
+            $table->foreign('id_anggota')->references('id')->on('users');
         });
-    }
+}
 
     /**
      * Reverse the migrations.
@@ -35,6 +35,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('table_transaksi_peminjaman');
+        Schema::dropIfExists('table_pinjam');
     }
 };

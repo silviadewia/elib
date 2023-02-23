@@ -20,29 +20,18 @@ class UserSeeder extends Seeder
     {
         DB::table('users')->insert(
             [
+                'nis' => '1234567890',
                 'name' => 'silvia',
+                'nama_lengkap' => 'silvia',
+                'jurusan' => "RPL",
+                'tempat_lahir' => 'bandung',
+                'tanggal_lahir' => '2000-01-01',
+                'level' => 0,
+                'jenis_kelamin' => 'p',
+                'telepon' => '081234567890',
+                'foto' => 'default.png',
+                'alamat' => 'bandung',
                 'email' => 'callmesil@gmail.com',
-                'password' => Hash::make('kacangbawang'),
-                'created_at' => Carbon::now()->toDateTimeLocalString(),
-                'updated_at' => Carbon::now()->toDateTimeLocalString()
-            ],
-            [
-                'name' => 'nawang',
-                'email' => 'callmenaw@gmail.com',
-                'password' => Hash::make('kacangbawang'),
-                'created_at' => Carbon::now()->toDateTimeLocalString(),
-                'updated_at' => Carbon::now()->toDateTimeLocalString()
-            ],
-            [
-                'name' => 'ardan',
-                'email' => 'callmedan@gmail.com',
-                'password' => Hash::make('kacangbawang'),
-                'created_at' => Carbon::now()->toDateTimeLocalString(),
-                'updated_at' => Carbon::now()->toDateTimeLocalString()
-            ],
-            [
-                'name' => 'herman',
-                'email' => 'callmeman@gmail.com',
                 'password' => Hash::make('kacangbawang'),
                 'created_at' => Carbon::now()->toDateTimeLocalString(),
                 'updated_at' => Carbon::now()->toDateTimeLocalString()

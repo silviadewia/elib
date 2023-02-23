@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Pinjam extends Model
 {
     use HasFactory;
-    protected $table = 'table_transaksi_peminjaman';
+    protected $table = 'table_pinjam';
 
     protected $fillable = [
         'no_pinjaman',
@@ -20,6 +20,4 @@ class Pinjam extends Model
         'denda',
         'dibuat_oleh'
     ];
-
-    
 }

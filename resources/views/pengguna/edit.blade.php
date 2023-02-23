@@ -40,12 +40,12 @@
                                     <label>Jurusan</label>
                                     <select class="form-control" name="jurusan">
                                         <optgroup label="Pilih Jurusan">
-                                            <option value="TEKNIK DAN BISNIS SEPEDA MOTOR" @if ($edit_pengguna->jurusan== 'TEKNIK DAN BISNIS SEPEDA MOTOR') selected @endif> TEKNIK DAN BISNIS SEPEDA MOTOR</option>
-                                            <option value="REKAYASA PERANGKAT LUNAK" @if ($edit_pengguna->jurusan == 'REKAYASA PERANGKAT LUNAK') selected @endif>REKAYASA PERANGKAT LUNAK</option>
-                                            <option value="OTOMATISASI DAN TATA KELOLA PERKANTORAN" @if ($edit_pengguna->jurusan == 'OTOMATISASI DAN TATA KELOLA PERKANTORAN') selected @endif> OTOMATISASI DAN TATA KELOLA PERKANTORAN</option>
-                                            <option value="AKUNTANSI DAN KEUANGAN LEMBAGA" @if ($edit_pengguna->jurusan == 'AKUNTANSI DAN KEUANGAN LEMBAGA') selected @endif>
+                                            <option value="tbsm" @if ($edit_pengguna->jurusan== 'tbsm') selected @endif> TEKNIK DAN BISNIS SEPEDA MOTOR</option>
+                                            <option value="rpl" @if ($edit_pengguna->jurusan == 'rpl') selected @endif>REKAYASA PERANGKAT LUNAK</option>
+                                            <option value="otkp" @if ($edit_pengguna->jurusan == 'otkp') selected @endif> OTOMATISASI DAN TATA KELOLA PERKANTORAN</option>
+                                            <option value="akl" @if ($edit_pengguna->jurusan == 'akl') selected @endif>
                                                 AKUNTANSI DAN KEUANGAN LEMBAGA</option>
-                                            <option value="BISNIS DARING DAN PEMASARAN" @if ($edit_pengguna->jurusan == 'BISNIS DARING DAN PEMASARAN') selected @endif> BISNIS DARING DAN PEMASARAN</option>
+                                            <option value="bdp" @if ($edit_pengguna->jurusan == 'bdp') selected @endif> BISNIS DARING DAN PEMASARAN</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
@@ -62,7 +62,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Username</label>
-                                    <input type="text" class="form-control" value="{{ $edit_pengguna->username }}"
+                                    <input type="text" class="form-control" value="{{ $edit_pengguna->name }}"
                                         id="username" name="username" placeholder="Username" autocomplete="off">
                                 </div>
                                 <div class="form-group">
@@ -71,25 +71,24 @@
                                         id="password" name="password" placeholder="Password" autocomplete="off">
                                 </div>
                             </div>
-                            <div class="col-sm-12">
                                 <div class="form-group">
                                     <label>Level</label>
                                     <select name="level" class="form-control" required="required">
-                                        <option value="PETUGAS" @if ($edit_pengguna->level == 'PETUGAS') selected @endif>PETUGAS</option>
-                                        <option value="ANGGOTA" @if ($edit_pengguna->level == 'ANGGOTA') selected @endif>ANGGOTA</option>
+                                        <option value="0" @if ($edit_pengguna->level == 0) selected @endif>ADMIN</option>
+                                        <option value="1" @if ($edit_pengguna->level == 1) selected @endif>ANGGOTA</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
                                     <label>Jenis Kelamin</label>
                                     <select name="jenis_kelamin" class="form-control" required="required">
-                                        <option value="jenis_kelamin" @if ($edit_pengguna->jenis_kelamin =='LAKI-LAKI') selected @endif>LAKI-LAKI</option>
-                                        <option value="jenis_kelamin" @if ($edit_pengguna->jenis_kelamin =='PEREMPUAN') selected @endif>PEREMPUAN</option>
+                                        <option value="l" @if ($edit_pengguna->jenis_kelamin =='l') selected @endif>LAKI-LAKI</option>
+                                        <option value="p" @if ($edit_pengguna->jenis_kelamin =='p') selected @endif>PEREMPUAN</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
                                     <label>Telepon</label>
-                                    <input class="form-control" value="{{ $edit_pengguna->telepon }}" id="telepon"
-                                        name="telepon" placeholder="Contoh : 089618173609" autocomplete="off">
+                                    <input class="form-control" value="{{ $edit_pengguna->telepon }}" id="telepon" 
+                                    name="telepon" placeholder="Contoh : 089618173609" autocomplete="off">
                                 </div>
                                 <div class="form-group">
                                     <label>E-mail</label>
@@ -114,11 +113,7 @@
                                         autocomplete="off">{{ $edit_pengguna->alamat }}</textarea>
                                 </div>
                             </div>
-                        </div>
-                </div>
-            </div>
         </div>
-        <div class="card-body">
             <div class="card-footer">
                  <a href="{{ url()->previous() }}" class="btn btn-default">Batal</a>
                 <button type="submit" class="btn btn-info  float-right"><i class="fas fa-plus"></i>

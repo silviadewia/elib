@@ -25,15 +25,15 @@
                             <div class="form-group">
                                 <label for="sampul">Sampul</label>
                                 <br>
-                                <input type="file" value="" id="sampul" name="sampul">
+                                <input type="file" id="sampul" name="sampul">
                             </div>
                             <div class="form-group">
                                 <label for="isbn">ISBN</label>
-                                <input type="number" class="form-control" value="" id="isbn" name="isbn" placeholder="Isbn" autocomplete="off">
+                                <input type="number" class="form-control" value="{{ old('isbn') }}" id="isbn" name="isbn" placeholder="Isbn" autocomplete="off">
                             </div>
                             <div class="form-group">
                                 <label for="judul">Judul</label>
-                                <input type="text" class="form-control" value="" id="judul" name="judul" placeholder="Judul" autocomplete="off">
+                                <input type="text" class="form-control" value="{{ old('judul') }}" id="judul" name="judul" placeholder="Judul" autocomplete="off">
                             </div>
                             <div class="form-group">
                                 <label>Kategori</label>
@@ -76,20 +76,20 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="tahun">Tahun</label>
-                                    <input type="number" class="form-control" value="" id="tahun" name="tahun" placeholder="Tahun" autocomplete="off">
+                                    <input type="number" class="form-control" value="{{ old('tahun') }}" id="tahun" name="tahun" placeholder="Tahun" autocomplete="off">
                                 </div>
                                 <div class="form-group">
                                     <label for="jumlah_buku">Jumlah Buku</label>
-                                    <input type="number" class="form-control" value="" id="jumah_buku" name="jumlah_buku" placeholder="Jumlah buku" autocomplete="off">
+                                    <input type="number" class="form-control" value="{{ old('jumlah_buku') }}" id="jumlah_buku" name="jumlah_buku" placeholder="Jumlah buku" autocomplete="off">
                                 </div>
                                 <div class="form-group">
                                     <label for="lampiran_buku">Lampiran Buku</label>
                                     <br>
-                                    <input type="file" value="" id="lampiran_buku" name="lampiran_buku">
+                                    <input type="file" id="lampiran_buku" name="lampiran_buku">
                                 </div>
                                 <div class="form-group">
                                     <label for="keterangan_lain">keterangan Lain</label>
-                                    <textarea input type="textarea" class="form-control" value="" id="jumah_buku" name="keterangan_lain" placeholder="keterangan lain" autocomplete="off"></textarea>
+                                    <textarea input type="textarea" class="form-control" value="{{ old('keterangan_lain') }}" id="keterangan_lain" name="keterangan_lain" placeholder="keterangan lain" autocomplete="off"></textarea>
                                 </div>
                             </div>
                         </div>

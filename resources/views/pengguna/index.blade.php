@@ -20,24 +20,10 @@
                 </div>
                 <div class="card-header">
                     <h5 class="card-title">
-                        <a href="{{ route('pengguna.create') }}" class="text-right btn btn-info "> Tambah Pengguna <i
-                                class="fas fa-plus"></i></a>
+                        <a href="{{ route('pengguna.create') }}" class="text-right btn btn-info "> Tambah Pengguna <i class="fas fa-plus"></i></a>
                     </h5>
                 </div>
                 <div class="card-body">
-                    <!--  <a href="{{ route('daftar.create') }}" class="btn btn-info "> Tambah Buku <i
-                                    class="fas fa-plus"></i></a>
-                          <div class="btn-group open">
-                                <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown"
-                                    aria-expanded="true">Sortir Berdasarkan
-                                    <span class="caret"></span>
-                                    <span class="sr-only">Toggle Dropdown</span>
-                                </button>
-                                <ul class="dropdown-menu" role="menu">
-                                    <li><a href="paket">Paket</a></li>
-                                    <li><a href="novel">Novel</a></li>
-                                </ul>
-                            </div> -->
                     <div class="table-responsive">
                         <table class="table table-bordered table-hover dataTable dtr-inline" width: 100%;
                             name="table-pengguna" id="table-pengguna">
@@ -63,10 +49,16 @@
                                     <td>{{ $value->nis }}</td>
                                     <td>{{ $value->nama_lengkap }}</td>
                                     <td>{{ $value->jurusan }}</td>
-                                    <td>{{ $value->username }}</td>
-                                    <td>{{ $value->level }}</td>
+                                    <td>{{ $value->name }}</td>
                                     <td>
-                                        @if($value->jenis_kelamin == "laki-laki")
+                                        @if($value->level == 0)
+                                        <span class="badge rounded-pill bg-primary">Admin </span>
+                                        @else
+                                        <span class="badge rounded-pill bg-secondary">Pengguna</span>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if($value->jenis_kelamin == "l")
                                         <span class="badge rounded-pill bg-primary">Laki - Laki </span>
                                         @else
                                         <span class="badge rounded-pill bg-secondary">Perempuan</span>
@@ -80,7 +72,7 @@
                                             <a href="{{ route('pengguna.edit', $value->id) }}"
                                                 class="btn btn-primary btn-sm"><i class="fas fa-pen"></i> </a>
                                             <a href="" class="btn btn-primary btn-sm">
-                                                <i class="fa fa-print"></i> Cetak Kartu</a>
+                                                <i class="fa fa-print"></i></a>
                                             <a href="{{ route('pengguna.show', $value->id) }}"
                                                 class="btn btn-info btn-sm"><i class="fa fa-eye"></i> </a>
                                             @csrf
