@@ -82,14 +82,14 @@ class BukuController extends Controller
         $pindahSampul =  $request->file('sampul')->move(public_path('sampul'), $namaSampul);
 
         if (!$pindahSampul) {
-            return redirect()->route('daftar.index')->with('failed', 'Gagal unggah gambar');
+            return redirect()->route('daftar.index')->with('failed', 'Gagal unggah gambar')->withInput();;
         }
 
         // pindahkan lampiran
         $pindahLampiran =  $request->file('lampiran_buku')->move(public_path('lampiran-buku'), $namaLampiran);
 
         if (!$pindahLampiran) {
-            return redirect()->route('daftar.index')->with('failed', 'Gagal unggah lampiran');
+            return redirect()->route('daftar.index')->with('failed', 'Gagal unggah lampiran')->withInput();
         }
 
         # olah sebelum insert
@@ -116,7 +116,7 @@ class BukuController extends Controller
         } catch (\Exception $e) { # jika gagal
             # kembalikan ke tampilan
             Log::critical("Gagal insert", [$e->getMessage()]);
-            return redirect()->route('daftar.index')->with('failed', 'Gagal insert buku');
+            return redirect()->route('daftar.create')->with('failed', 'Gagal insert buku')->withInput();;
         }
     }
 
@@ -127,11 +127,9 @@ class BukuController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($buku)
-    { 
-        $buku = Buku::findOrFail($buku); 
-        // Buku adalah model FindorFail tujuannya, CariatauGagal dari ID buku sample http://127.0.0.1:8000/buku/daftar/8
-        // 8 adalah ID buku
-        return view('buku.show',compact('buku'));
+    {
+        $buku = Buku::findOrFail($buku);
+        return view('buku.show', compact('buku'));
     }
 
     /**
@@ -239,13 +237,13 @@ class BukuController extends Controller
      */
     public function destroy(Buku $buku, $id)
     {
-         # coba update
-         try {
+        # coba update
+        try {
             # proses delete
-           $buku = Buku::findOrFail($id);
-           $buku->delete();
+            $buku = Buku::findOrFail($id);
+            $buku->delete();
             # kembalikan ke tampilan
-            return redirect()->route('daftar.index')->with('success', 'Hi '.Auth::user()->name.', Berhasil delete Buku');
+            return redirect()->route('daftar.index')->with('success', 'Hi ' . Auth::user()->name . ', Berhasil delete Buku');
         } catch (\Exception $e) { # jika gagal
             # kembalikan ke tampilan
             return redirect()->route('daftar.index')->with('failed', 'Gagal delete Buku');

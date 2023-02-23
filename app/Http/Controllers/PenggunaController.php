@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Pengguna;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Ramsey\Uuid\Uuid;
 
-class Penggunacontroller extends Controller
+class PenggunaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,9 +18,10 @@ class Penggunacontroller extends Controller
     public function index()
     {
         $data = [
-            'title' => 'Daftar Pengguna',
-            'pengguna' => Pengguna::all(),
+            'title' => 'Daftar User',
+            'pengguna' => User::all(),
         ];
+
         return view('pengguna.index', $data)->with('i');
     }
 
@@ -33,7 +34,7 @@ class Penggunacontroller extends Controller
     {
         $data = [
             'title' => 'Daftar pengguna',
-            'pengguna' => Pengguna::all(),
+            'pengguna' => User::all(),
         ];
 
         return view('pengguna.create', $data)->with('i');
@@ -49,18 +50,18 @@ class Penggunacontroller extends Controller
     {
         $request->validate([
             'nis' => 'required',
+            'username' => 'required',
             'nama_lengkap' => 'required',
             'jurusan' => 'required',
             'tempat_lahir' => 'required',
             'tanggal_lahir' => 'required',
-            'username' => 'required',
-            'password' => 'required',
             'level' => 'required',
             'jenis_kelamin' => 'required',
             'telepon' => 'required',
-            'email' => 'required',
             'foto' => 'required|image|max:2048',
-            'alamat' => 'required'
+            'alamat' => 'required',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|min:8',
         ]);
 
         # nama gambar uuid versi 4
@@ -75,25 +76,23 @@ class Penggunacontroller extends Controller
         # olah sebelum insert
         $insert = [
             'nis' => $request->input('nis'),
+            'name' => $request->input('username'),
             'nama_lengkap' => $request->input('nama_lengkap'),
             'jurusan' => $request->input('jurusan'),
             'tempat_lahir' => $request->input('tempat_lahir'),
             'tanggal_lahir' => $request->input('tanggal_lahir'),
-            'username' => $request->input('username'),
-            'password' => $request->input('password'),
             'level' => $request->input('level'),
             'jenis_kelamin' => $request->input('jenis_kelamin'),
             'telepon' => $request->input('telepon'),
-            'email' => $request->input('email'),
             'foto' => $foto,
             'alamat' => $request->input('alamat'),
-            'dibuat_oleh' => Auth::user()->name
+            'email' => $request->input('email'),
+            'password' => bcrypt($request->input('password')),
         ];
-
 
         try {
             # proses insert
-            Pengguna::create($insert);
+            User::create($insert);
             # kembalikan ke tampilan
             return redirect()->route('pengguna.index')->with('success', 'Hi' . Auth::user()->name . ', Berhasil tambah pengguna');
         } catch (\Exception $e) { # jika gagal
@@ -106,19 +105,18 @@ class Penggunacontroller extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Pengguna $pengguna
+     * @param  \App\Models\User $pengguna
      * @return \Illuminate\Http\Response
      */
-    public function show(Pengguna $pengguna)
+    public function show(User $pengguna)
     {
-
         return view('pengguna.show', compact('pengguna'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Pengguna  $pengguna
+     * @param  \App\Models\User  $pengguna
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -126,8 +124,8 @@ class Penggunacontroller extends Controller
         # kembalikan ke tampilan
         return view('pengguna.edit', [
             'title' => 'Edit pengguna',
-            'edit_pengguna' => Pengguna::where('id', $id)->first(),
-            'pengguna' => Pengguna::all(),
+            'edit_pengguna' => User::where('id', $id)->first(),
+            'pengguna' => User::all(),
         ]);
     }
 
@@ -135,10 +133,10 @@ class Penggunacontroller extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Pengguna  $pengguna
+     * @param  \App\Models\User  $pengguna
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Pengguna $pengguna)
+    public function update(Request $request, User $pengguna)
     {
         $request->validate([
             'nis' => 'required',
@@ -152,7 +150,7 @@ class Penggunacontroller extends Controller
             'jenis_kelamin' => 'required',
             'telepon' => 'required',
             'email' => 'required',
-            'foto' => 'required|image|max:2048',
+            // 'foto' => 'required|image|max:2048',
             'alamat' => 'required'
         ]);
 
@@ -162,42 +160,25 @@ class Penggunacontroller extends Controller
             'jurusan' => $request->input('jurusan'),
             'tempat_lahir' => $request->input('tempat_lahir'),
             'tanggal_lahir' => $request->input('tanggal_lahir'),
-            'username' => $request->input('username'),
+            'name' => $request->input('username'),
             'password' => $request->input('password'),
             'level' => $request->input('level'),
             'jenis_kelamin' => $request->input('jenis_kelamin'),
             'telepon' => $request->input('telepon'),
             'email' => $request->input('email'),
-            'foto' => $foto,
+            // 'foto' => $foto,
             'alamat' => $request->input('alamat'),
         ];
-
-        if ($request->hasFile('foto')) {
-
-            $request->validate([
-                'foto' => 'required|image'
-            ]);
-
-            $FotoBaru = Uuid::uuid4();
-            $pindahFoto =  $request->file('foto')->move(public_path('foto'), $FotoBaru);
-
-            if ($pindahSampul) {
-                File::delete(public_path('foto/' . $request->input('fotoLama')));
-
-                $update['foto'] = $FotoBaru;
-            } else {
-                return redirect()->route('pengguna.index')->with('failed', 'Gagal unggah foto');
-            }
-        }
 
         # coba update
         try {
             # proses update
-            $pengguna->where('id', $request->input('id'))->update($update);
+            User::where('id', $request->input('id'))->update($update);
             # kembalikan ke tampilan
             return redirect()->route('pengguna.index')->with('success', 'Hi ' . Auth::user()->name . ', Berhasil update pengguna');
         } catch (\Exception $e) { # jika gagal
             # kembalikan ke tampilan
+            Log::critical("Gagal update", [$e->getMessage()]);
             return redirect()->route('pengguna.index')->with('failed', 'Gagal update pengguna');
         }
     }
@@ -205,10 +186,10 @@ class Penggunacontroller extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Pengguna  $pengguna
+     * @param  \App\Models\User  $pengguna
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Pengguna $pengguna)
+    public function destroy(User $pengguna)
     {
         # coba update
         try {

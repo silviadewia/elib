@@ -30,18 +30,18 @@
                                                 <td colspan="3">Data Transaksi</td>
                                             </tr>
                                             <tr>
-                                                <td>No Peminjaman</td>
+                                                <td>No</td>
                                                 <td>:</td>
                                                 <td>
-                                                    <input type="text" value="" id="no_peminjaman" name="no_peminjaman"
+                                                    <input type="text" id="no_peminjaman" name="no_peminjaman"
                                                         class="form-control">
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td>Tgl Peminjaman</td>
+                                                <td>Tanggal</td>
                                                 <td>:</td>
                                                 <td>
-                                                    <input type="date" value="" id="tgl_peminjaman"
+                                                    <input type="date" id="tgl_peminjaman"
                                                         name="tgl_peminjaman" class="form-control">
                                                 </td>
                                             </tr>
@@ -49,7 +49,7 @@
                                                 <td>ID Anggota</td>
                                                 <td>:</td>
                                                 <td>
-                                                    <input type="number" value="" id="id_anggota" name="id_anggota"
+                                                    <input type="number" id="id_anggota" name="id_anggota"
                                                         class="form-control">
                                                 </td>
                                             </tr>
@@ -64,10 +64,10 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td>Lama Peminjaman</td>
+                                                <td>Lama</td>
                                                 <td>:</td>
                                                 <td>
-                                                    <input type="number" value="" id="lama" name="lama"
+                                                    <input type="number" id="lama" name="lama"
                                                         class="form-control">
                                                 </td>
                                         </tbody>
@@ -77,7 +77,7 @@
                             </tr>
                             <div class="col-sm-7">
                                 <div class="table-responsive">
-                                    <table class="table table-striped ">
+                                    <table class="table table-striped">
                                         <tbody>
                                             <tr style="background:#ffe599">
                                                 <td colspan="3">Pinjam Buku</td>
@@ -89,7 +89,7 @@
                                                     <div class="input-group">
                                                         <input type="text" class="form-control" autocomplete="off"
                                                             name="id_buku" id="id_buku"
-                                                            placeholder="Contoh ID Buku : BK001 atau ISBN" value="">
+                                                            placeholder="Contoh ID Buku : BK001 atau ISBN">
                                                     </div>
                                                 </td>
                                             </tr>
@@ -97,7 +97,7 @@
                                                 <td>Data Buku</td>
                                                 <td>:</td>
                                                 <td>
-                                                    <input type="text" value="" id="id_buku" name="id_buku"
+                                                    <input type="text" id="id_buku" name="id_buku"
                                                         class="form-control">
                                                 </td>
                                             </tr>
@@ -146,8 +146,8 @@ $('.pas-delete-metu-alert-cantik').click(function(event) {
     var name = $(this).data("name");
     event.preventDefault();
     Swal.fire({
-        title: "PERHATIAN",
-        text: "Setelah di hapus, anda tidak akan dapat memulihkan data ini!",
+        title:"PERHATIAN",
+        text:"Setelah di hapus, anda tidak akan dapat memulihkan data ini!",
         icon: 'question',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
