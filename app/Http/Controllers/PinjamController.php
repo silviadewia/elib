@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pinjam;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class PinjamController extends Controller
@@ -31,6 +32,7 @@ class PinjamController extends Controller
         $data = [
             'title' => 'Daftar pinjam',
             'pinjam' => Pinjam::all(),
+            'anggota' => User::where('level', '1')->get(),
         ];
 
         return view('pinjam.create', $data)->with('i');

@@ -30,14 +30,6 @@
                                                 <td colspan="3">Data Transaksi</td>
                                             </tr>
                                             <tr>
-                                                <td>No</td>
-                                                <td>:</td>
-                                                <td>
-                                                    <input type="text" id="no_peminjaman" name="no_peminjaman"
-                                                        class="form-control">
-                                                </td>
-                                            </tr>
-                                            <tr>
                                                 <td>Tanggal</td>
                                                 <td>:</td>
                                                 <td>
@@ -46,29 +38,33 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td>ID Anggota</td>
+                                                <td>Nama Anggota</td>
                                                 <td>:</td>
                                                 <td>
-                                                    <input type="number" id="id_anggota" name="id_anggota"
-                                                        class="form-control">
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Biodata</td>
-                                                <td>:</td>
-                                                <td>
-                                                    <div id="result_tunggu">
-                                                        <p style="color:red">* Belum Ada Hasil</p>
-                                                    </div>
-                                                    <div id="result"></div>
+                                                    <select class="form-control" id="anggota" name="anggota">
+                                                        <option value="">-- Pilih Anggota --</option>
+                                                        @foreach ($anggota as $item)
+                                                        <option value="{{ $item->id }}">
+                                                            {{ $item->name }}
+                                                        </option>
+                                                        @endforeach
+                                                    </select>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>Lama</td>
                                                 <td>:</td>
                                                 <td>
-                                                    <input type="number" id="lama" name="lama"
-                                                        class="form-control">
+                                                   <select class="form-control" id="lama" nama="lama">
+                                                         <option value="">-- Pilih Lama --</option>
+                                                         <option value="1">1 Hari</option>
+                                                         <option value="2">2 Hari</option>
+                                                         <option value="3">3 Hari</option>
+                                                         <option value="4">4 Hari</option>
+                                                         <option value="5">5 Hari</option>
+                                                         <option value="6">6 Hari</option>
+                                                         <option value="7">7 Hari</option>
+                                                   </select>
                                                 </td>
                                         </tbody>
                                     </table>
@@ -87,24 +83,16 @@
                                                 <td>:</td>
                                                 <td>
                                                     <div class="input-group">
-                                                        <input type="text" class="form-control" autocomplete="off"
-                                                            name="id_buku" id="id_buku"
-                                                            placeholder="Contoh ID Buku : BK001 atau ISBN">
+                                                        <select  class="form-control" name="id_buku" id="id_buku">
+                                                            <option value="">-- Pilih Buku --</option>
+                                                        </select>
                                                     </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Data Buku</td>
-                                                <td>:</td>
-                                                <td>
-                                                    <input type="text" id="id_buku" name="id_buku"
-                                                        class="form-control">
                                                 </td>
                                             </tr>
                                         </tbody>
                                     </table>
                                     <div class="table-responsive">
-                                        <table class="table table-bordered">
+                                        <table class="table table-bordered" name="daftar-pinjam" id="daftar-pinjam">
                                             <thead>
                                                 <tr>
                                                     <th>No</th>
@@ -141,6 +129,50 @@
 
 @section('js')
 <script>
+$(document).ready(function(){
+    $('#anggota').select2();
+
+    $('#id_buku').select2({
+        ajax: {
+            placeholder: 'Select an item',
+            url: '/api/get-buku',
+            dataType: 'json',
+            delay: 250,
+            processResults: function(data){
+                return {
+                    results: data.map(function(item){
+                        return {
+                            id: item.id,
+                            slug: item.penerbit,
+                            text: item.judul_buku,
+                        }
+                    })
+                }
+            },
+            cache: true
+        }
+    });
+    $('#id_buku').on("select2:select", function(event) {
+        var value = $(event.currentTarget).find("option:selected").val();
+        // append to table
+        var table = $('#daftar-pinjam');
+        var no = table.find('tr').length + 1;
+        var html = '<tr>';
+        html += '<td>' + no + '</td>';
+        html += '<td>' + event.currentTarget.selectedOptions[0].text + '</td>';
+        html += '<td>' + event.currentTarget.selectedOptions[0].dataset.slug + '</td>';
+        html += '<td><input type="number" name="jumlah[]" class="form-control" value="1" min="1" max="10"></td>';
+        html += '<td><button type="button" class="btn btn-danger btn-sm btn-delete"><i class="fas fa-trash"></i></button></td>';
+        html += '<input type="hidden" name="id_buku[]" value="' + value + '">';
+        html += '</tr>';
+        table.append(html);
+    });
+
+    $('#daftar-pinjam').on('click', '.btn-delete', function () {
+        $(this).closest('tr').remove();
+    });
+})
+   
 $('.pas-delete-metu-alert-cantik').click(function(event) {
     var form = $(this).closest("form");
     var name = $(this).data("name");
