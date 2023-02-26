@@ -33,7 +33,7 @@
                                                 <td>Tanggal</td>
                                                 <td>:</td>
                                                 <td>
-                                                    <input type="date" id="tgl_peminjaman"
+                                                    <input type="text" id="tgl_peminjaman"
                                                         name="tgl_peminjaman" class="form-control">
                                                 </td>
                                             </tr>
@@ -55,16 +55,8 @@
                                                 <td>Lama</td>
                                                 <td>:</td>
                                                 <td>
-                                                   <select class="form-control" id="lama" nama="lama">
-                                                         <option value="">-- Pilih Lama --</option>
-                                                         <option value="1">1 Hari</option>
-                                                         <option value="2">2 Hari</option>
-                                                         <option value="3">3 Hari</option>
-                                                         <option value="4">4 Hari</option>
-                                                         <option value="5">5 Hari</option>
-                                                         <option value="6">6 Hari</option>
-                                                         <option value="7">7 Hari</option>
-                                                   </select>
+                                                  <input type="text" id="lama"
+                                                        name="lama" class="form-control" readonly>
                                                 </td>
                                         </tbody>
                                     </table>
@@ -95,10 +87,9 @@
                                         <table class="table table-bordered" name="daftar-pinjam" id="daftar-pinjam">
                                             <thead>
                                                 <tr>
-                                                    <th>No</th>
+                                                    <th>ID</th>
                                                     <th>Title</th>
                                                     <th>Penerbit / Tahun</th>
-                                                    <th>Jml</th>
                                                     <th>Aksi</th>
                                                 </tr>
                                             </thead>
@@ -131,6 +122,21 @@
 <script>
 $(document).ready(function(){
     $('#anggota').select2();
+    $('#tgl_peminjaman').daterangepicker({
+        singleDatePicker: false,
+        showDropdowns: true,
+        minYear: 2023,
+        minDate: moment().add(1, 'days'),
+        maxDate: moment().add(7, 'days'),
+    });
+
+    // count base on range
+    $('#tgl_peminjaman').on('apply.daterangepicker', function(ev, picker) {
+        var start = picker.startDate;
+        var end = picker.endDate;
+        var days = end.diff(start, 'days');
+        $('#lama').val(days);
+    });
 
     $('#id_buku').select2({
         ajax: {
@@ -141,10 +147,10 @@ $(document).ready(function(){
             processResults: function(data){
                 return {
                     results: data.map(function(item){
+                        // return mapping data 
                         return {
                             id: item.id,
-                            slug: item.penerbit,
-                            text: item.judul_buku,
+                            text: item.judul_buku+ ' - ' + item.tahun_buku,
                         }
                     })
                 }
@@ -154,14 +160,22 @@ $(document).ready(function(){
     });
     $('#id_buku').on("select2:select", function(event) {
         var value = $(event.currentTarget).find("option:selected").val();
+        // check if the value exist 
+        var exist = $('#daftar-pinjam').find('input[name="id_buku[]"][value="' + value + '"]').length;
+        if (exist) {
+            return;
+        }
+
         // append to table
         var table = $('#daftar-pinjam');
         var no = table.find('tr').length + 1;
         var html = '<tr>';
         html += '<td>' + no + '</td>';
-        html += '<td>' + event.currentTarget.selectedOptions[0].text + '</td>';
-        html += '<td>' + event.currentTarget.selectedOptions[0].dataset.slug + '</td>';
-        html += '<td><input type="number" name="jumlah[]" class="form-control" value="1" min="1" max="10"></td>';
+
+        // sub text - penerbit / tahun
+        var subText = event.currentTarget.selectedOptions[0].text.split('-');
+        html += '<td>' + subText[0] + '</td>';
+        html += '<td>' + subText[1] + '</td>';
         html += '<td><button type="button" class="btn btn-danger btn-sm btn-delete"><i class="fas fa-trash"></i></button></td>';
         html += '<input type="hidden" name="id_buku[]" value="' + value + '">';
         html += '</tr>';

@@ -449,6 +449,26 @@ return [
                 ],
             ],
         ],
+        'DateRangePicker' => [
+            'active' => true,
+            'files' => [
+                [
+                    'type' => 'js',
+                    'asset' => true,
+                    'location' => 'vendor/moment/moment.min.js',
+                ],
+                [
+                    'type' => 'js',
+                    'asset' => true,
+                    'location' => 'vendor/daterangepicker/daterangepicker.js',
+                ],
+                [
+                    'type' => 'css',
+                    'asset' => true,
+                    'location' => 'vendor/daterangepicker/daterangepicker.css',
+                ],
+            ],
+        ],
         'Select2' => [
             'active' => true,
             'files' => [
@@ -456,11 +476,6 @@ return [
                     'type' => 'js',
                     'asset' => true,
                     'location' => '//cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js',
-                ],
-                [
-                    'type' => 'js',
-                    'asset' => true,
-                    'location' => '//cdn.jsdelivr.net/npm/select2-bootstrap4-theme@1.0.0/Gruntfile.min.js',
                 ],
                 [
                     'type' => 'css',
@@ -471,26 +486,6 @@ return [
                     'type' => 'css',
                     'asset' => true,
                     'location' => '//cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css',
-                ],
-            ],
-        ],
-        'DateRangePicker' => [
-            'active' => false,
-            'files' => [
-                [
-                    'type' => 'js',
-                    'asset' => true,
-                    'location' => '//cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js',
-                ],
-                [
-                    'type' => 'js',
-                    'asset' => true,
-                    'location' => '//cdn.jsdelivr.net/momentjs/latest/moment.min.js',
-                ],
-                [
-                    'type' => 'css',
-                    'asset' => true,
-                    'location' => '//cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css',
                 ],
             ],
         ],
