@@ -30,45 +30,33 @@
                                                 <td colspan="3">Data Transaksi</td>
                                             </tr>
                                             <tr>
-                                                <td>No</td>
-                                                <td>:</td>
-                                                <td>
-                                                    <input type="text" id="no_peminjaman" name="no_peminjaman"
-                                                        class="form-control">
-                                                </td>
-                                            </tr>
-                                            <tr>
                                                 <td>Tanggal</td>
                                                 <td>:</td>
                                                 <td>
-                                                    <input type="date" id="tgl_peminjaman"
+                                                    <input type="text" id="tgl_peminjaman"
                                                         name="tgl_peminjaman" class="form-control">
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td>ID Anggota</td>
+                                                <td>Nama Anggota</td>
                                                 <td>:</td>
                                                 <td>
-                                                    <input type="number" id="id_anggota" name="id_anggota"
-                                                        class="form-control">
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Biodata</td>
-                                                <td>:</td>
-                                                <td>
-                                                    <div id="result_tunggu">
-                                                        <p style="color:red">* Belum Ada Hasil</p>
-                                                    </div>
-                                                    <div id="result"></div>
+                                                    <select class="form-control" id="anggota" name="anggota">
+                                                        <option value="">-- Pilih Anggota --</option>
+                                                        @foreach ($anggota as $item)
+                                                        <option value="{{ $item->id }}">
+                                                            {{ $item->name }}
+                                                        </option>
+                                                        @endforeach
+                                                    </select>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>Lama</td>
                                                 <td>:</td>
                                                 <td>
-                                                    <input type="number" id="lama" name="lama"
-                                                        class="form-control">
+                                                  <input type="text" id="lama"
+                                                        name="lama" class="form-control" readonly>
                                                 </td>
                                         </tbody>
                                     </table>
@@ -87,30 +75,21 @@
                                                 <td>:</td>
                                                 <td>
                                                     <div class="input-group">
-                                                        <input type="text" class="form-control" autocomplete="off"
-                                                            name="id_buku" id="id_buku"
-                                                            placeholder="Contoh ID Buku : BK001 atau ISBN">
+                                                        <select  class="form-control" name="id_buku" id="id_buku">
+                                                            <option value="">-- Pilih Buku --</option>
+                                                        </select>
                                                     </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Data Buku</td>
-                                                <td>:</td>
-                                                <td>
-                                                    <input type="text" id="id_buku" name="id_buku"
-                                                        class="form-control">
                                                 </td>
                                             </tr>
                                         </tbody>
                                     </table>
                                     <div class="table-responsive">
-                                        <table class="table table-bordered">
+                                        <table class="table table-bordered" name="daftar-pinjam" id="daftar-pinjam">
                                             <thead>
                                                 <tr>
-                                                    <th>No</th>
+                                                    <th>ID</th>
                                                     <th>Title</th>
                                                     <th>Penerbit / Tahun</th>
-                                                    <th>Jml</th>
                                                     <th>Aksi</th>
                                                 </tr>
                                             </thead>
@@ -141,6 +120,73 @@
 
 @section('js')
 <script>
+$(document).ready(function(){
+    $('#anggota').select2();
+    $('#tgl_peminjaman').daterangepicker({
+        singleDatePicker: false,
+        showDropdowns: true,
+        minYear: 2023,
+        minDate: moment().add(1, 'days'),
+        maxDate: moment().add(7, 'days'),
+    });
+
+    // count base on range
+    $('#tgl_peminjaman').on('apply.daterangepicker', function(ev, picker) {
+        var start = picker.startDate;
+        var end = picker.endDate;
+        var days = end.diff(start, 'days');
+        $('#lama').val(days);
+    });
+
+    $('#id_buku').select2({
+        ajax: {
+            placeholder: 'Select an item',
+            url: '/api/get-buku',
+            dataType: 'json',
+            delay: 250,
+            processResults: function(data){
+                return {
+                    results: data.map(function(item){
+                        // return mapping data 
+                        return {
+                            id: item.id,
+                            text: item.judul_buku+ ' - ' + item.tahun_buku,
+                        }
+                    })
+                }
+            },
+            cache: true
+        }
+    });
+    $('#id_buku').on("select2:select", function(event) {
+        var value = $(event.currentTarget).find("option:selected").val();
+        // check if the value exist 
+        var exist = $('#daftar-pinjam').find('input[name="id_buku[]"][value="' + value + '"]').length;
+        if (exist) {
+            return;
+        }
+
+        // append to table
+        var table = $('#daftar-pinjam');
+        var no = table.find('tr').length + 1;
+        var html = '<tr>';
+        html += '<td>' + no + '</td>';
+
+        // sub text - penerbit / tahun
+        var subText = event.currentTarget.selectedOptions[0].text.split('-');
+        html += '<td>' + subText[0] + '</td>';
+        html += '<td>' + subText[1] + '</td>';
+        html += '<td><button type="button" class="btn btn-danger btn-sm btn-delete"><i class="fas fa-trash"></i></button></td>';
+        html += '<input type="hidden" name="id_buku[]" value="' + value + '">';
+        html += '</tr>';
+        table.append(html);
+    });
+
+    $('#daftar-pinjam').on('click', '.btn-delete', function () {
+        $(this).closest('tr').remove();
+    });
+})
+   
 $('.pas-delete-metu-alert-cantik').click(function(event) {
     var form = $(this).closest("form");
     var name = $(this).data("name");

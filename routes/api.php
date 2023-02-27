@@ -20,6 +20,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/buku', function(){
+Route::get('/get-buku', function(){
     return Buku::all();
 });
