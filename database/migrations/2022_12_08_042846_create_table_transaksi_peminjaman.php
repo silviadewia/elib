@@ -15,11 +15,11 @@ return new class extends Migration
     {
         Schema::create('table_pinjam', function (Blueprint $table) {
             $table->id();
-            $table->dateTime('tanggal');
             $table->unsignedBigInteger('id_anggota');
             $table->unsignedInteger('lama');
             $table->json('id_buku')->comment('json data, untuk simpan banyak buku');
-            $table->dateTime('tanggal_kembali');
+            $table->date('tanggal_pinjam');
+            $table->date('tanggal_kembali');
             $table->decimal('denda');
             $table->string('dibuat_oleh', 25);
             $table->timestamps();

@@ -20,7 +20,7 @@
                 </div>
 
                 <div class="card-body">
-                    <form action="{{ route('pinjam.store') }}" enctype="multipart/form-data" method="POST">
+                    <form>
                         <div class="row">
                             <div class="col-sm-5">
                                 <div class="table-responsive">
@@ -28,14 +28,6 @@
                                         <tbody>
                                             <tr style="background:#ffe599">
                                                 <td colspan="3">Data Transaksi</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Tanggal</td>
-                                                <td>:</td>
-                                                <td>
-                                                    <input type="text" id="tgl_peminjaman"
-                                                        name="tgl_peminjaman" class="form-control">
-                                                </td>
                                             </tr>
                                             <tr>
                                                 <td>Nama Anggota</td>
@@ -49,6 +41,14 @@
                                                         </option>
                                                         @endforeach
                                                     </select>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Tanggal</td>
+                                                <td>:</td>
+                                                <td>
+                                                    <input type="text" id="tgl_peminjaman"
+                                                        name="tgl_peminjaman" class="form-control">
                                                 </td>
                                             </tr>
                                             <tr>
@@ -103,7 +103,7 @@
                         <div class="card-body">
                             <div class="pull-right">
                                 <a href="{{ url()->previous() }}" class="btn btn-default">Batal</a>
-                                <button type="submit" class="btn btn-info  float-right"><i class="fas fa-plus"></i>
+                                <button id="simpan-nih" class="btn btn-info  float-right"><i class="fas fa-plus"></i>
                                     Simpan</button>
                             </div>
                         </div>
@@ -128,6 +128,7 @@ $(document).ready(function(){
         minYear: 2023,
         minDate: moment().add(1, 'days'),
         maxDate: moment().add(7, 'days'),
+        autoApply: true
     });
 
     // count base on range
@@ -184,6 +185,55 @@ $(document).ready(function(){
 
     $('#daftar-pinjam').on('click', '.btn-delete', function () {
         $(this).closest('tr').remove();
+    });
+
+    // do ajax submit
+    $('#simpan-nih').click(function(e){
+        e.preventDefault();
+        var form = $(this);
+        var url = '{{ route('pinjam.store') }}';
+        // convert date 
+        var date = $('#tgl_peminjaman').val().split(' - ');
+
+        var pinjam = {
+            _token: "{{ csrf_token() }}",
+            id_anggota: $('#anggota').val(),
+            tgl_peminjaman: date[0],
+            tgl_pengembalian: date[1],
+            lama: $('#lama').val(),
+            id_buku: $('#id_buku').val(),
+        };
+
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: pinjam,
+            success: function(response){
+                Swal.fire({
+                    title: 'Berhasil!',
+                    text: 'Data berhasil disimpan',
+                    icon: 'success',
+                    confirmButtonText: 'OK'
+                }).then((result) => {
+                    if (result.value) {
+                        window.location.href = '/pinjam';
+                    }
+                });
+            },
+            error: function(xhr){
+                var res = xhr.responseJSON;
+                if ($.isEmptyObject(res) == false) {
+                    $.each(res.errors, function(key, value){
+                        Swal.fire({
+                            title: 'Gagal!',
+                            text: value,
+                            icon: 'error',
+                            confirmButtonText: 'OK'
+                        });
+                    });
+                }
+            }
+        });
     });
 })
    
