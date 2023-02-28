@@ -12,10 +12,10 @@ class Pinjam extends Model
 
     protected $fillable = [
         'no_pinjaman',
-        'tgl_pinjaman',
         'id_anggota',
         'lama',
         'id_buku',
+        'tanggal_pinjam',
         'tanggal_kembali',
         'denda',
         'dibuat_oleh'

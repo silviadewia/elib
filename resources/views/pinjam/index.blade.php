@@ -84,67 +84,71 @@
                                     </tbody>
                                 </table>
                             </div>
+                            <center>
+                                <h4> -
+                                    Data Semua Peminjaman
+                                    -
+                                </h4>
+                            </center>
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-hover dataTable dtr-inline" width: 50%;
+                                    name="table-pinjam" id="table-pinjam">
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>No pinjaman</th>
+                                            <th>Tanggal pinjaman</th>
+                                            <th>Id Anggota</th>
+                                            <th>Lama pinjaman</th>
+                                            <th>Id Buku</th>
+                                            <th>Tanggal Kembali</th>
+                                            <th>Denda</th>
+                                            <th>Aksi</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($pinjam as $value)
+                                        <tr>
+                                            <td>{{ ++$i }}</td>
+                                            <td>EKB-{{ $value->id }}</td>
+                                            <td>{{ $value->tanggal_pinjam }}</td>
+                                            <td>{{ \App\Models\User::where('id', $value->id_anggota)->first()['name'] }}</td>
+                                            @php 
+                                            $buku = explode(',', $value->id_buku);
+                                            // find buku base on id
+                                            $buku = \App\Models\Buku::find($buku)->first();
+                                            @endphp
+                                            <td>{{ $buku->judul_buku }}</td>
+                                            <td>{{ $value->lama }}</td>
+                                            <td>{{ $value->id_buku }}<td>
+                                           
+                                            <td>{{ $value->tanggal_kembali }}</td>
+                                            <td>{{ $value->denda }}</td>
+                                            <td>
+                                                <form action="{{ route('pinjam.destroy', $value->id) }}" method="post">
+                                                    <a href="{{ route('pinjam.show', $value->id) }}"
+                                                        class="btn btn-info btn-sm"><i class="fa fa-eye"></i> </a>
+                                                    <a href="" class="btn btn-warning btn-sm" title="pengembalian buku">
+                                                        <i class="fa fa-sign-out"></i> Kembalikan</a>
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit"
+                                                        class="btn btn-danger btn-sm pas-delete-metu-alert-cantik">
+                                                        <i class="fas fa-trash"></i></button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
                     </div>
                     <br>
-                    </form>
-                    <center>
-                        <h4> -
-                            Data Semua Peminjaman
-                            -
-                        </h4>
-                    </center>
                 </div>
                 <br>
-                <div class="table-responsive">
-                    <table class="table table-bordered table-hover dataTable dtr-inline" width: 50%; name="table-pinjam"
-                        id="table-pinjam">
-                        <thead>
-                            <tr>
-                                <th>No</th>
-                                <th>No pinjaman</th>
-                                <th>Tanggal pinjaman</th>
-                                <th>Id Anggota</th>
-                                <th>Lama pinjaman</th>
-                                <th>Id Buku</th>
-                                <th>Tanggal Kembali</th>
-                                <th>Denda</th>
-                                <th>Aksi</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($pinjam as $value)
-                            <tr>
-                                <td>{{ ++$i }}</td>
-                                <td>{{ $value->no_pinjaman }}</td>
-                                <td>{{ $value->tgl_pinjaman }}</td>
-                                <td>{{ $value->id_anggota }}</td>
-                                <td>{{ $value->lama }}</td>
-                                <td>{{ $value->id_buku}}</td>
-                                <td>{{ $value->tanggal_kembali }}</td>
-                                <td>{{ $value->denda }}</td>
-                                <td>
-                                    <form action="{{ route('pinjam.destroy', $value->id) }}" method="post">
-                                        <a href="{{ route('pinjam.show', $value->id) }}" class="btn btn-info btn-sm"><i
-                                                class="fa fa-eye"></i> </a>
-                                        <a href=""
-                                            class="btn btn-warning btn-sm" title="pengembalian buku">
-                                            <i class="fa fa-sign-out"></i> Kembalikan</a>
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit"
-                                            class="btn btn-danger btn-sm pas-delete-metu-alert-cantik">
-                                            <i class="fas fa-trash"></i></button>
-                                    </form>
-                                </td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
             </div>
         </div>
     </div>
-</div>
 </div>
 @stop
 
@@ -193,7 +197,7 @@ const Toast = Swal.mixin({
 @if($message = Session::get('success'))
 Toast.fire('Sukses !!!', '{{ $message }}', 'success')
 @endif
-@if($errors->any())
+@if($errors -> any())
 Toast.fire('Eror !!!', '{{ $errors->first() }}', 'error')
 @endif
 </script>

@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Pinjam;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class PinjamController extends Controller
 {
@@ -47,25 +50,24 @@ class PinjamController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'no_pinjaman' => 'required',
-            'tgl_pinjaman' => 'required',
+            'tgl_peminjaman' => 'required|date',
+            'tgl_pengembalian' => 'required|date',
             'id_anggota' => 'required',
-            'lama' => 'required',
-            'id_buku' => 'required',
-            'tanggal_kembali' => 'required',
-            'denda' => 'required',
+            'lama' => 'required|min:1|max:3',
+            'id_buku' => 'required|json',
         ]);
 
          # olah sebelum insert
          $insert = [
-            'no_pinjaman' => $request->input('no_pinjaman'),
-            'tgl_pinjaman' => $request->input('tgl_pinjaman'),
+            'tanggal_pinjam' => Carbon::parse($request->input('tgl_peminjaman'))->toDateString(),
+            'tanggal_kembali' => Carbon::parse($request->input('tgl_pengembalian'))->toDateString(),
             'id_anggota' => $request->input('id_anggota'),
             'lama' => $request->input('lama'),
             'id_buku' => $request->input('id_buku'),
-            'tanggal_kembali' => $request->input('tanggal_kembali'),
-            'denda' => $request->input('denda'),
+            'denda' => 0,
+            'dibuat_oleh' => Auth::user()->name,
         ];
+
         try {
             # proses insert
             Pinjam::create($insert);
