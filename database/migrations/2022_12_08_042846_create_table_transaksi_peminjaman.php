@@ -20,6 +20,7 @@ return new class extends Migration
             $table->json('id_buku')->comment('json data, untuk simpan banyak buku');
             $table->date('tanggal_pinjam');
             $table->date('tanggal_kembali');
+            $table->unsignedBigInteger('status')->default(0)->comment('0: belum dikembalikan, 1: sudah dikembalikan, 2: telat dikembalikan');
             $table->decimal('denda');
             $table->string('dibuat_oleh', 25);
             $table->timestamps();

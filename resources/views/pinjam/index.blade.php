@@ -69,12 +69,22 @@
                                         </td>
                                         <td>{{ $value->tanggal_pinjam }}</td>
                                         <td>{{ $value->tanggal_kembali }}</td>
-                                        <td>{{ $value->denda }}</td>
+                                        <td>
+                                            @php 
+                                            if (Carbon\Carbon::parse($value->tanggal_kembali)->lt(Carbon\Carbon::now())) {
+                                                $denda = Carbon\Carbon::parse($value->tanggal_kembali)->diffInDays(Carbon\Carbon::now()) * 1000;
+                                                echo 'Rp. '.number_format($denda, 0, ',', '.');
+                                            } else {
+                                                echo 'Rp. 0';
+                                            }
+                                            @endphp
+                                        </td>
                                         <td>
                                             <form action="{{ route('pinjam.destroy', $value->id) }}" method="post">
-                                                <a href="{{ route('pinjam.show', $value->id) }}"
-                                                    class="btn btn-info btn-sm"><i class="fa fa-eye"></i> </a>
-                                                <a href="" class="btn btn-warning btn-sm" title="pengembalian buku">
+                                                <!-- <a href="{{ route('pinjam.show', $value->id) }}"
+                                                    class="btn btn-info btn-sm"><i class="fa fa-eye"></i> </a> -->
+                                                    <input type="hidden" name="dikembalikan" id="dikembalikan" value={{ $value->id }} >
+                                                <a id="kembalikan" class="btn btn-warning btn-sm" title="pengembalian buku">
                                                     <i class="fa fa-sign-out"></i> Kembalikan</a>
                                                 @csrf
                                                 @method('DELETE')
@@ -127,6 +137,55 @@ $('.pas-delete-metu-alert-cantik').click(function(event) {
     });
     return false;
 });
+
+$('#kembalikan').click(function(event) {
+    var form = $(this).closest("form");
+    var name = $(this).data("name");
+    event.preventDefault();
+    Swal.fire({
+        title: "PERHATIAN",
+        text: "Apakah anda yakin ingin mengembalikan buku ini?",
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yakin!',
+        cancelButtonText: 'Tidak!'
+    }).then((diHapus) => {
+       // ajax kembalikan
+       $.ajax({
+            url: "{{ route('dikembalikan') }}",
+            type: "POST",
+            data: {
+                "_token": "{{ csrf_token() }}",
+                "id": $('#dikembalikan').val()
+            },
+            success: function(response) {
+                Swal.fire({
+                    title: 'Sukses',
+                    text: 'Buku berhasil dikembalikan',
+                    icon: 'success',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+                setTimeout(function() {
+                    location.reload();
+                }, 1500);
+            },
+            error: function(response) {
+                Swal.fire({
+                    title: 'Gagal',
+                    text: 'Buku gagal dikembalikan',
+                    icon: 'error',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            }
+        });
+    });
+    return false;
+});
+
 const Toast = Swal.mixin({
     toast: true,
     position: 'top-end',
