@@ -20,7 +20,7 @@ class PinjamController extends Controller
     { 
         $data = [
             'title' => 'Daftar Pinjam',
-            'pinjam' => Pinjam::all(),
+            'pinjam' => Pinjam::where('status', '0')->get()
         ];
         return view('pinjam.index', $data)->with('i');
     }
@@ -111,7 +111,25 @@ class PinjamController extends Controller
      */
     public function update(Request $request, Pinjam $pinjam)
     {
-        //
+
+        $dikembalikan = [
+            'tanggal_kembali' => Carbon::now()->toDateString(),
+            'denda' => $request->input('denda')??0,
+            'status' => 1
+        ];
+
+        # coba update
+        try {
+            # proses update
+            Pinjam::where('id', $request->input('id'))->update($dikembalikan);
+            Log::info("Berhasil update", [$dikembalikan]);
+            # kembalikan ke tampilan
+            return redirect()->route('pinjam.index')->with('success', 'Berhasil update pinjam');
+        } catch (\Exception $e) { # jika gagal
+            # kembalikan ke tampilan
+            Log::critical("Gagal update", [$e->getMessage()]);
+            return redirect()->route('pinjam.index')->with('failed', 'Gagal update pinjam');
+        }
     }
 
     /**

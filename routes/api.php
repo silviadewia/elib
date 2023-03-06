@@ -25,3 +25,4 @@ Route::get('/get-buku', function(){
     return Buku::all();
 });
 Route::post('/simpan-pinjam', [PinjamController::class, 'store']);
+Route::post('/kembalikan', [PinjamController::class, 'update'])->name('dikembalikan');
