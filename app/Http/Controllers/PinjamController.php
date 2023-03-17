@@ -140,7 +140,15 @@ class PinjamController extends Controller
      */
     public function destroy(Pinjam $pinjam)
     {
-        //
+        # coba update
+        try {
+            # proses delete
+            $pinjam->delete();
+            # kembalikan ke tampilan
+            return redirect()->route('pinjam.index')->with('success', 'Hi '.Auth::user()->name.', Berhasil delete pinjam');
+        } catch (\Exception $e) { # jika gagal
+            # kembalikan ke tampilan
+            return redirect()->route('pinjam.index')->with('failed', 'Gagal delete pinjam');
+        }
     }
 }
-

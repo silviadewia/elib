@@ -71,8 +71,6 @@
                                         <form action="{{ route('pengguna.destroy', $value->id) }}" method="post">
                                             <a href="{{ route('pengguna.edit', $value->id) }}"
                                                 class="btn btn-primary btn-sm"><i class="fas fa-pen"></i> </a>
-                                            <a href="" class="btn btn-primary btn-sm">
-                                                <i class="fa fa-print"></i></a>
                                             <a href="{{ route('pengguna.show', $value->id) }}"
                                                 class="btn btn-info btn-sm"><i class="fa fa-eye"></i> </a>
                                             @csrf
