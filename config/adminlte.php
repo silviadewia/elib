@@ -351,10 +351,7 @@ return [
                     'text' => 'Pinjam',
                     'url'  => 'pinjam',
                 ],
-                [
-                    'text' => 'Dikembalikan',
-                    'url'  => 'dikembalikan',
-                ],
+
             ],
         ],
         [
@@ -366,11 +363,6 @@ return [
             'text' => 'Laporan',
             'url'  => 'laporan',
             'icon' => 'fas fa-file',
-        ],
-        [
-            'text' => 'Pengaturan',
-            'url'  => 'pengaturan',
-            'icon' => 'fas fa-cogs',
         ],
     ],
 
