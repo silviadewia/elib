@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Penerbit;
+use App\Models\Pinjam;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class LaporanController extends Controller
@@ -17,7 +19,7 @@ class LaporanController extends Controller
         $data = [
             'title' => 'Daftar Laporan'
         ];
-        return view('caribuku.index', $data);
+        return view('laporan.index', $data);
         //
     }
 
@@ -37,9 +39,36 @@ class LaporanController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Pinjam $pinjam)
     {
-        //
+        $request->validate([
+            'tgl_start' => 'required|date',
+            'tgl_end' => 'required|date',
+        ]);
+
+         # olah sebelum insert
+         $insert = [
+            'tgl_start' => Carbon::parse($request->input('tgl_start'))->toDateString(),
+            'tgl_end' => Carbon::parse($request->input('tgl_end'))->toDateString(),
+        ];
+
+        try {
+            // datatable result 
+            $get = $pinjam->where('tanggal_pinjam', '>=' ,$insert['tgl_start'])->where('tanggal_kembali', '<',$insert['tgl_end'])->get();
+            $result = [
+                "data" => $get,
+                "recordsTotal" => $get->count(),
+                "recordsFiltered" => $get->count(),
+            ];
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage(),
+                'data' => [],
+            ]);
+        }
+
+        return response()->json($result, 200, [], JSON_NUMERIC_CHECK);
     }
 
     /**

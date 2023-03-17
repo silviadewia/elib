@@ -1,9 +1,11 @@
 <?php
 
 use App\Http\Controllers\BukuController;
+use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\PinjamController;
 use App\Models\Buku;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,3 +28,9 @@ Route::get('/get-buku', function(){
 });
 Route::post('/simpan-pinjam', [PinjamController::class, 'store']);
 Route::post('/kembalikan', [PinjamController::class, 'update'])->name('dikembalikan');
+Route::post('/cari-laporan', [LaporanController::class, 'store'])->name('cari-laporan');
+Route::post('/cari-buku', function(Request $id_buku){
+    //json response
+    Log::info("id_buku: " ,[$id_buku->id_buku]);
+    return response()->json(Buku::find($id_buku->id_buku));
+})->name('cari-buku');
