@@ -40,8 +40,8 @@
                                 </div>
                                 <div>
                                     <label class="form-label">Username</label>
-                                    <input type="text" class="form-control" value="{{ $pengguna->username }}"
-                                        name="username" readonly>
+                                    <input type="text" class="form-control" value="{{ $pengguna->name }}"
+                                        name="name" readonly>
                                 </div>
                                 <div>
                                     <label class="form-label">Password</label>

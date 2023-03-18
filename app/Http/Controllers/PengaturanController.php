@@ -14,10 +14,15 @@ class PengaturanController extends Controller
      */
     public function index()
     {
+        
+        #variabel tampilan
         $data = [
-            'title' => 'Daftar Pengaturan'
+            'title' => 'Daftar Pengaturan',
+            'pengaturan' => Pengaturan::all(),
         ];
-        return view('Pengaturan.index', $data);
+
+        # kembalikan ke tampilan
+        return view('pengaturan.index', $data)->with('i'); 
     }
 
     /**
@@ -27,7 +32,15 @@ class PengaturanController extends Controller
      */
     public function create()
     {
-        //
+        {
+            # variable tampilan
+            $data = [
+                'title' => 'Daftar pengaturan'
+            ];
+    
+            # kembalikan ke tampilan
+            return view('pengaturan.index', $data);
+        }
     }
 
     /**
