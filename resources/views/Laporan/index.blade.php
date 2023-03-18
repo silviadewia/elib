@@ -17,10 +17,9 @@
                         Tabel Laporan
                     </h3>
                 </div>
-                <br>
                 <div class="box-body">
                     <div class="card-header">
-                        <form method="get" action="">
+                        <form>
                             <div class="table-responsive">
                                 <table class="table table-striped table-bordered">
                                     <tbody>
@@ -29,49 +28,23 @@
                                                 Pilih Bulan
                                             </th>
                                             <th>
-                                                Pilih Tahun
-                                            </th>
-                                            <th>
                                                 Aksi
                                             </th>
                                         </tr>
                                         <tr>
                                             <td>
-                                                <select name="bln" class="form-control" required="">
-                                                    <option selected="selected" value="" disabled="">Bulan</option>
-                                                    <option value="01"> Januari </option>
-                                                    <option value="02"> Februari </option>
-                                                    <option value="03"> Maret </option>
-                                                    <option value="04"> April </option>
-                                                    <option value="05"> Mei </option>
-                                                    <option value="06"> Juni </option>
-                                                    <option value="07"> Juli </option>
-                                                    <option value="08"> Agustus </option>
-                                                    <option value="09"> September </option>
-                                                    <option value="10"> Oktober </option>
-                                                    <option value="11"> November </option>
-                                                    <option value="12"> Desember </option>
-                                                </select>
+                                                <input type="text" id="tgl_laporan" name="tgl_laporan"
+                                                    class="form-control">
                                             </td>
                                             <td>
-                                                <select name="thn" class="form-control" required="">
-                                                    <option selected="selected">Tahun</option>
-                                                    <option value="2020">2020</option>
-                                                    <option value="2021">2021</option>
-                                                    <option value="2022">2022</option>
-                                                    <option value="2023">2023</option>
-                                                </select>
-                                            </td>
-                                            <td>
-                                                <input type="hidden" name="periode" value="ya">
-                                                <button class="btn btn-primary">
+                                                <a name="cari" id="cari" class="btn btn-primary">
                                                     <i class="fa fa-search"></i> Cari
-                                                </button>
-                                                <a href="" class="btn btn-success">
+                                                </a>
+                                                <a class="btn btn-success" id="refresh" name="refresh">
                                                     <i class="fa fa-refresh"></i> Refresh</a>
-                                                <a href="" class="btn btn-info"><i class="fa fa-download"></i>
+                                                <a class="btn btn-info"><i class="fa fa-download"></i>
                                                     Excel</a>
-                                                <a href="" target="_blank" class="btn btn-warning btn-md"><i
+                                                <a target="_blank" class="btn btn-warning btn-md"><i
                                                         class="fa fa-print"></i> Print </a>
                                             </td>
                                         </tr>
@@ -81,52 +54,143 @@
                     </div>
                     <br>
                     </form>
-                    <center>
-                        <h4> -
-                            Data Semua Laporan
-                            -
-                        </h4>
-                    </center>
-                </div>
-                <br>
-                <div class="table-responsive">
-                    <table class="table table-bordered table-hover dataTable dtr-inline" width: 50%; name="table-pinjam"
-                        id="table-pinjam">
-                        <thead>
-                            <tr>
-                                <th>No</th>
-                                <th>No pinjaman</th>
-                                <th>Tanggal pinjaman</th>
-                                <th>Id Anggota</th>
-                                <th>Lama pinjaman</th>
-                                <th>Id Buku</th>
-                                <th>Tanggal Kembali</th>
-                                <th>Denda</th>
-                                <th>Aksi</th>
-                            </tr>
-                        </thead>
-                       
-                    </table>
+                    <div class="container-fluid">
+                        <div class="card-header">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-hover dataTable dtr-inline" width: 50%;
+                                    name="table-pinjam" id="table-pinjam">
+                                    <thead>
+                                        <tr>
+                                            <th>No pinjaman</th>
+                                            <th>Tanggal pinjaman</th>
+                                            <th>Id Anggota</th>
+                                            <th>Lama pinjaman</th>
+                                            <th>Id Buku</th>
+                                            <th>Tanggal Kembali</th>
+                                            <th>Denda</th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-</div>
 @stop
-</div>
-
 
 @section('js')
 <script>
 $(document).ready(function() {
-    $('#table-pengguna').DataTable({
-        dom: 'Bfrtip',
-        buttons: [
-            'copy', 'csv', 'excel', 'pdf', 'print'
-        ]
+    $('#tgl_laporan').daterangepicker({
+        singleDatePicker: false,
+        showDropdowns: true,
+        minYear: 2023,
+        minDate: moment().add(-40, 'days'),
+        maxDate: moment().add(40, 'days'),
+        autoApply: true,
+        alwaysShowCalendars: true,
+        ranges: {
+            'Hari ini': [moment(), moment()],
+            'Kemarin': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+            '7 Hari terakhir': [moment().subtract(6, 'days'), moment()],
+            '30 Hari terakhir': [moment().subtract(29, 'days'), moment()],
+            'Bulan ini': [moment().startOf('month'), moment().endOf('month')],
+            'Bulan lalu': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month')
+                .endOf('month')
+            ]
+        },
     });
 });
+$('#cari').click(function() {
+    var date = $('#tgl_laporan').val().split(' - ');
+
+    var pinjam = {
+        _token: "{{ csrf_token() }}",
+        tgl_start: date[0],
+        tgl_end: date[1],
+    };
+
+    if (tgl_laporan != '') {
+        $('#table-pinjam').DataTable({
+            processing: true,
+            destroy: true,
+            serverSide: true,
+            ajax: {
+                url: "{{ route('cari-laporan') }}",
+                data: pinjam,
+                type: 'POST',
+
+            },
+            columns: [
+                {
+                    data: 'id',
+                    //callback 
+                    render: function(data, type, row) {
+                        return 'PJM'+data;
+                    },
+                    name: 'no_pinjam'
+                },
+                {
+                    data: 'tanggal_pinjam',
+                    name: 'tgl_pinjam'
+                },
+                {
+                    data: 'id_anggota',
+                    name: 'id_anggota'
+                },
+                {
+                    data: 'lama',
+                    name: 'lama_pinjam'
+                },
+                {
+                    data: 'id_buku',
+                    render: function(data, type, row) {
+                        html  = '';
+                        data = data.split(',');
+                        //each data and ajax
+                        $.each(data, function(index, value) {
+                            $.ajax({
+                                url: "{{ route('cari-buku') }}",
+                                type: 'POST',
+                                data: {
+                                    _token: "{{ csrf_token() }}",
+                                    id_buku: value
+                                },
+                                success: function(data) {
+                                   // return to htnl
+                                    html += '<span class="badge badge-primary">'+data+'</span> ';
+                                    return html;
+                                }
+                            });
+                        });
+                        return html;
+                    },
+                    name: 'id_buku'
+                },
+                {
+                    data: 'tanggal_kembali',
+                    name: 'tgl_kembali'
+                },
+                {
+                    data: 'denda',
+                    name: 'denda'
+                }
+            ]
+        });
+    } else {
+        alert('Pilih Bulan Terlebih Dahulu');
+    }
+});
+
+//refresh
+$('#refresh').click(function() {
+    $('#tgl_laporan').val('');
+    $('#table-pinjam').DataTable().destroy();
+});
+
 $('.pas-delete-metu-alert-cantik').click(function(event) {
     var form = $(this).closest("form");
     var name = $(this).data("name");
@@ -161,7 +225,7 @@ const Toast = Swal.mixin({
 @if($message = Session::get('success'))
 Toast.fire('Sukses !!!', '{{ $message }}', 'success')
 @endif
-@if($errors->any())
+@if($errors -> any())
 Toast.fire('Eror !!!', '{{ $errors->first() }}', 'error')
 @endif
 </script>
