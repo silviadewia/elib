@@ -110,7 +110,7 @@ class PenggunaController extends Controller
      */
     public function show(User $pengguna)
     {
-        return view('pengguna.show', compact('pengguna'));
+        return response()->json($pengguna);
     }
 
     /**
