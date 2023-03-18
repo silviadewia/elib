@@ -20,7 +20,8 @@
                 </div>
                 <div class="card-header">
                     <h5 class="card-title">
-                        <a href="{{ route('pengguna.create') }}" class="text-right btn btn-info "> Tambah Pengguna <i class="fas fa-plus"></i></a>
+                        <a href="{{ route('pengguna.create') }}" class="text-right btn btn-info "> Tambah Pengguna <i
+                                class="fas fa-plus"></i></a>
                     </h5>
                 </div>
                 <div class="card-body">
@@ -67,12 +68,17 @@
                                     <td>{{ $value->telepon}}</td>
                                     <td>{{ $value->email}}</td>
                                     <td>{{ $value->alamat }}</td>
-                                    <td> 
+                                    <td>
                                         <form action="{{ route('pengguna.destroy', $value->id) }}" method="post">
                                             <a href="{{ route('pengguna.edit', $value->id) }}"
                                                 class="btn btn-primary btn-sm"><i class="fas fa-pen"></i> </a>
-                                            <a href="{{ route('pengguna.show', $value->id) }}"
-                                                class="btn btn-info btn-sm"><i class="fa fa-eye"></i> </a>
+                                            <a href="" class="btn btn-primary btn-sm">
+                                                <i class="fa fa-print"></i></a>
+                                            <button type="button" class="btn btn-primary btn-sm" id="show" name="show"  data-toggle="modal"
+                                                data-target="#detailsModal"
+                                                data-url="{{ '/pengguna/'.$value->id }}" >
+                                                <i class="fa fa-eye"></i>
+                                            </button>
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit"
@@ -90,6 +96,37 @@
         </div>
     </div>
 </div>
+
+
+<div class="modal fade" id="detailsModal" tabindex="-1" aria-labelledby="detailsModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="detailsModalLabel">New message</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="nis" class="col-form-label">NIS :</label>
+                        <input type="text" class="form-control" id="nis">
+                    </div>
+                    <div class="form-group">
+                        <label for="nama-text" class="col-form-label">Nama Lengkap:</label>
+                        <textarea class="form-control" id="nama-text"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Send message</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 @stop
 
 @section('js')
@@ -101,7 +138,30 @@ $(document).ready(function() {
             'copy', 'csv', 'excel', 'pdf', 'print'
         ]
     });
+
+    $('#show').click(function() {
+        var url = $(this).data('url');
+        $.ajax({
+        url: url,
+            method: "GET",
+            dataType: "json",
+            success: function(html) {
+                console.log(html);
+                $('#nis').val(html.nis);
+                $('#nama_lengkap').val(html.nama_lengkap);
+                $('#jurusan').val(html.jurusan);
+                $('#name').val(html.name);
+                $('#level').val(html.level);
+                $('#jenis_kelamin').val(html.jenis_kelamin);
+                $('#telepon').val(html.telepon);
+                $('#email').val(html.email);
+                $('#alamat').val(html.alamat);
+                $('#showModal').modal('show');
+            }
+        })
+    });
 });
+
 $('.pas-delete-metu-alert-cantik').click(function(event) {
     var form = $(this).closest("form");
     var name = $(this).data("name");
@@ -136,7 +196,7 @@ const Toast = Swal.mixin({
 @if($message = Session::get('success'))
 Toast.fire('Sukses !!!', '{{ $message }}', 'success')
 @endif
-@if($errors->any())
+@if($errors -> any())
 Toast.fire('Eror !!!', '{{ $errors->first() }}', 'error')
 @endif
 </script>
