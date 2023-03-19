@@ -49,9 +49,4 @@ class NotificationsController extends Controller
             'dropdown'    => $dropdownHtml,
         ];
     }
-
-    public function show()
-    {
-        return view('notifications');
-    }
 }
