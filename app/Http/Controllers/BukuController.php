@@ -26,6 +26,10 @@ class BukuController extends Controller
         $data = [
             'title' => 'Daftar Buku',
             'buku' => Buku::all(),
+            'penerbit' => Penerbit::all(),
+            'kategori' => Kategori::all(),
+            'rak' => Rak::all(),
+            'pengarang' => Pengarang::all(),
         ];
         # kembalikan ke tampilan
         return view('buku.index', $data)->with('i');
