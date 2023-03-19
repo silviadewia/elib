@@ -177,3 +177,4 @@
                     @endif
                 </script>
             @stop
+            @include('wa')
