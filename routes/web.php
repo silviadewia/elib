@@ -27,12 +27,13 @@ Route::middleware('auth')->prefix('/buku')->group(function () {
     Route::resource('/pengarang', App\Http\Controllers\PengarangController::class);
     Route::resource('/rak', App\Http\Controllers\RakController::class);
     Route::resource('/penerbit', App\Http\Controllers\PenerbitController::class);
-    Route::resource('/daftar',  App\Http\Controllers\BukuController::class);
+    Route::resource('/daftar', App\Http\Controllers\BukuController::class);
+    Route::get('/buku-populer', [App\Http\Controllers\BukuController::class, 'populer']);
 });
 
 Route::resource('/pengguna', App\Http\Controllers\PenggunaController::class);
 Route::resource('/pinjam', App\Http\Controllers\PinjamController::class);
-Route::middleware('auth')->resource('/profile',  App\Http\Controllers\ProfileController::class);
+Route::middleware('auth')->resource('/profile', App\Http\Controllers\ProfileController::class);
 Route::middleware('auth')->get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])->name('home');
 Route::resource('/denda', App\Http\Controllers\DendaController::class);
 Route::middleware('auth')->get('/laporan', [App\Http\Controllers\LaporanController::class, 'index']);
