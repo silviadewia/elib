@@ -15,18 +15,18 @@ return new class extends Migration
     {
         Schema::create('table_buku', function (Blueprint $table) {
             $table->id();
-            $table->string('kategori', 25);
-            $table->string('rak', 25);
-            $table->string('pengarang', 25);
-            $table->string('penerbit', 25);
-            $table->string('judul_buku', 25);
+            $table->string('kategori');
+            $table->string('rak');
+            $table->string('pengarang');
+            $table->string('penerbit');
+            $table->string('judul_buku');
             $table->integer('tahun_buku')->unsigned();
             $table->integer('jumlah_buku')->unsigned();
             $table->integer('isbn')->unsigned();
             $table->string('sampul');
             $table->string('lampiran_buku');
             $table->text('keterangan_lain');
-            $table->string('dibuat_oleh', 25);
+            $table->string('dibuat_oleh');
             $table->timestamps();
         });
     }
