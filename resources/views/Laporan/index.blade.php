@@ -25,7 +25,10 @@
                                     <tbody>
                                         <tr>
                                             <th>
-                                                Pilih Bulan
+                                                Pilih Tanggal
+                                            </th>
+                                            <th>
+                                                Pilih Status Buku
                                             </th>
                                             <th>
                                                 Aksi
@@ -35,6 +38,14 @@
                                             <td>
                                                 <input type="text" id="tgl_laporan" name="tgl_laporan"
                                                     class="form-control">
+                                            </td>
+                                            <td>
+                                                <select name="status" id="status" class="form-control">
+                                                    <option value="">--Pilih Status--</option>
+                                                    <option value="0">Dipinjam</option>
+                                                    <option value="1">Dikembalikan</option>
+                                                    <option value="2">Denda</option>
+                                                </select>
                                             </td>
                                             <td>
                                                 <a name="cari" id="cari" class="btn btn-primary">
@@ -80,7 +91,7 @@
     </div>
 </div>
 @stop
-
+@include('wa')
 @section('js')
 <script>
 $(document).ready(function() {

@@ -91,6 +91,8 @@
 </section>
 @stop
 
+@include('wa')
+
 @section('js')
 <script>
 //jQuery Password Strength Checker

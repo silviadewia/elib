@@ -104,6 +104,8 @@
 </div>
 @stop
 
+@include('wa')
+
 @section('js')
 <script>
     $('.pas-delete-metu-alert-cantik').click(function(event) {

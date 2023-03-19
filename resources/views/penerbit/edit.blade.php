@@ -97,7 +97,7 @@
     </div>
 </div>
 @stop
-
+@include('wa')
 @section('js')
 <script>
     $(document).ready(function() {

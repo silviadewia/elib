@@ -106,6 +106,7 @@
 </div>
 @stop
 
+@include('wa')
 
 @section('js')
 <script>
