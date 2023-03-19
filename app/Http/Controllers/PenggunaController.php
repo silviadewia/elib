@@ -191,6 +191,11 @@ class PenggunaController extends Controller
      */
     public function destroy(User $pengguna)
     {
+        //dont delete selft
+        if ($pengguna->id == Auth::user()->id) {
+            return redirect()->route('pengguna.index')->with('failed', 'Gagal delete pengguna');
+        }
+
         # coba update
         try {
             # proses delete

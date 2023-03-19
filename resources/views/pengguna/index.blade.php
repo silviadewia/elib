@@ -102,7 +102,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="detailsModalLabel">New message</h5>
+                <h5 class="modal-title" id="detailsModalLabel">DETAILS</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -110,18 +110,45 @@
             <div class="modal-body">
                 <form>
                     <div class="form-group">
-                        <label for="nis" class="col-form-label">NIS :</label>
-                        <input type="text" class="form-control" id="nis">
+                        <label for="nis">NIS :</label>
+                        <input  class="form-control form-control-sm" id="nis" disabled>
                     </div>
                     <div class="form-group">
-                        <label for="nama-text" class="col-form-label">Nama Lengkap:</label>
-                        <textarea class="form-control" id="nama-text"></textarea>
+                        <label for="namalengkap">Nama Lengkap:</label>
+                        <input class="form-control form-control-sm" id="nama_lengkap" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label for="jurusan">Jurusan:</label>
+                        <input class="form-control form-control-sm" id="jurusan" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label for="username">Username:</label>
+                        <input class="form-control form-control-sm" id="username" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label for="level">Level:</label>
+                        <input class="form-control form-control-sm" id="level" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label for="nama-text">Jenis Kelamin:</label>
+                        <input class="form-control form-control-sm" id="jenis_kelamin" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label for="nama-text">Telepon:</label>
+                        <input class="form-control form-control-sm" id="telepon" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label for="nama-text">Email:</label>
+                        <input class="form-control form-control-sm" id="email" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label for="nama-text">Alamat:</label>
+                        <input class="form-control form-control-sm" id="alamat" disabled>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Send message</button>
             </div>
         </div>
     </div>
@@ -139,7 +166,7 @@ $(document).ready(function() {
         ]
     });
 
-    $('#show').click(function() {
+    $('[name=show]').click(function() {
         var url = $(this).data('url');
         $.ajax({
         url: url,
@@ -150,9 +177,18 @@ $(document).ready(function() {
                 $('#nis').val(html.nis);
                 $('#nama_lengkap').val(html.nama_lengkap);
                 $('#jurusan').val(html.jurusan);
-                $('#name').val(html.name);
-                $('#level').val(html.level);
-                $('#jenis_kelamin').val(html.jenis_kelamin);
+                $('#username').val(html.name);
+                // check level user 
+                if (html.level == 0) {
+                    $('#level').val("Admin");
+                } else {
+                    $('#level').val("Pengguna");
+                }
+                if (html.jenis_kelamin == 0) {
+                    $('#jenis_kelamin').val("Laki-Laki");
+                } else {
+                    $('#jenis_kelamin').val("Perempuan");
+                }
                 $('#telepon').val(html.telepon);
                 $('#email').val(html.email);
                 $('#alamat').val(html.alamat);
