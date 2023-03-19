@@ -43,5 +43,5 @@
         </div>
     </div>
 </div>
-
 @endsection
+@include('wa')

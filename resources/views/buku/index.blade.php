@@ -40,8 +40,7 @@
                                 </ul>
                             </div> -->
 
-                        <table class="table table-bordered table-hover dataTable dtr-inline" name="table-buku"
-                            id="table-buku">
+                        <table class="table table-bordered table-hover dataTable dtr-inline" name="table-buku" id="table-buku">
                             <thead>
                                 <tr>
                                     <th>No</th>
