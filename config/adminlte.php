@@ -312,8 +312,16 @@ return [
             'icon' => 'fas fa-tachometer-alt',
         ],
         [
+            'text' => 'Buku Populer',
+            'url'  => 'buku/buku-populer',
+            'icon' => 'fas fa-fw fa-book',
+            'can' => 'buku-populer',
+        ],
+
+        [
             'text'    => 'Buku',
             'icon'    => 'fas fa-fw fa-book',
+            'can' => 'buku',
             'submenu' => [
                 [
                     'text' => 'Tambah Buku',
@@ -341,10 +349,12 @@ return [
             'text' => 'Data Pengguna',
             'url'  => 'pengguna',
             'icon' => 'fas fa-user-friends',
+            'can' => 'pengguna',
         ],
         [
             'text' => 'Transaksi',
             'url'  => 'transaksi',
+            'can' => 'transaksi',
             'icon' => 'fas fa-window-restore',
             'submenu' =>  [
                 [
@@ -357,11 +367,13 @@ return [
         [
             'text' => 'Denda',
             'url'  => 'denda',
+            'can' => 'denda',
             'icon' => 'fas fa-file-invoice-dollar',
         ],
         [
             'text' => 'Laporan',
             'url'  => 'laporan',
+            'can' => 'laporan',
             'icon' => 'fas fa-file',
         ],
     ],
