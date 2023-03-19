@@ -29,7 +29,7 @@ class DashboardController extends Controller
         $data = [
             'count_kategori' => Kategori::count(),
             'count_denda' => Denda::count(),
-            'count_user' => User::count()
+            'count_user' => User::where('level', 1)->count()
         ];
 
         return view('home', $data);

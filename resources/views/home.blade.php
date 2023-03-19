@@ -7,12 +7,12 @@
         <div class="small-box bg-blue">
             <div class="inner">
                 <p>ANGGOTA</p>
-                <h3>15</h3>
+                <h3>{{ $count_user }}</h3>
             </div>
             <div class="icon">
                 <i class="fa fa-users"></i>
             </div>
-            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="/profile" class="small-box-footer">Profile ... <i class="fa fa-arrow-circle-right"></i></a>
         </div>
     </div>
     <div class="col-lg-4 col-xs-8">

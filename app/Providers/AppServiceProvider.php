@@ -33,6 +33,13 @@ class AppServiceProvider extends ServiceProvider
             return false;
         });
 
+        Gate::define('kategori', function($user){
+            if ($user->level == 0) {
+                return true;
+            }
+            return false;
+        });
+
         Gate::define('buku-populer', function($user){
             return true;
         });
