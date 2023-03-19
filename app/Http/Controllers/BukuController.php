@@ -145,6 +145,10 @@ class BukuController extends Controller
             'title' => 'Edit buku',
             'edit_buku' => Buku::where('id', $id)->first(),
             'buku' => Buku::all(),
+            'penerbit' => Penerbit::all(),
+            'kategori' => Kategori::all(),
+            'rak' => Rak::all(),
+            'pengarang' => Pengarang::all(),
         ]);
     }
 
