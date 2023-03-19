@@ -18,6 +18,7 @@ class Pinjam extends Model
         'tanggal_pinjam',
         'tanggal_kembali',
         'denda',
+        'status',
         'dibuat_oleh'
     ];
 }

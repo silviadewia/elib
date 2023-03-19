@@ -66,6 +66,7 @@ class PinjamController extends Controller
             'id_buku' => $request->input('id_buku'),
             'denda' => 0,
             'dibuat_oleh' => Auth::user()->name,
+            'status' => 0,
         ];
 
         try {
