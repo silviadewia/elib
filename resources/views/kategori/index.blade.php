@@ -1,3 +1,4 @@
+@can('kategori')
 @extends('adminlte::page')
 
 @section('title', $title)
@@ -137,3 +138,6 @@
     @endif
 </script>
 @stop
+@else
+<script>window.location = "/dashboard";</script>
+@endcan

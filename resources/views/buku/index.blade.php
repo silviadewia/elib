@@ -1,3 +1,4 @@
+@can('buku')
 @extends('adminlte::page')
 
 @section('title', $title)
@@ -157,3 +158,4 @@ Toast.fire('Eror !!!', '{{ $errors->first() }}', 'error')
 @endif
 </script>
 @stop
+@endcan
