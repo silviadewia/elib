@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Buku;
 use App\Models\Kategori;
 use App\Models\User;
 use App\Models\Denda;
@@ -29,7 +30,11 @@ class DashboardController extends Controller
         $data = [
             'count_kategori' => Kategori::count(),
             'count_denda' => Denda::count(),
-            'count_user' => User::where('level', 1)->count()
+            'count_user' => User::where('level', 1)->count(),
+            'buku_chart' => Buku::select(\DB::raw("COUNT(*) as count"))
+            ->whereYear('created_at', date('Y'))
+            ->groupBy(\DB::raw("Month(created_at)"))
+            ->pluck('count'),
         ];
 
         return view('home', $data);

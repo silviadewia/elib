@@ -72,28 +72,28 @@
                                 <td>{{ $value->judul_buku }}</td>
                                 <td>
                                     @foreach ($kategori as $kat)
-                                        @if($kat->id == $value->id)
+                                        @if($kat->id == $value->kategori)
                                             {{ $kat->nama }}
                                         @endif
                                     @endforeach
                                 </td>
                                 <td>
                                     @foreach ($rak as $r)
-                                        @if($r->id == $value->id)
+                                        @if($r->id == $value->rak)
                                             {{ $r->nama }}
                                         @endif
                                     @endforeach
                                 </td>
                                 <td>
                                     @foreach ($penerbit as $p)
-                                        @if($p->id == $value->id)
+                                        @if($p->id == $value->penerbit)
                                             {{ $p->nama }}
                                         @endif
                                     @endforeach
                                 </td>
                                 <td>
                                     @foreach ($pengarang as $peng)
-                                        @if($peng->id == $value->id)
+                                        @if($peng->id == $value->pengarang)
                                             {{ $peng->nama }}
                                         @endif
                                     @endforeach
