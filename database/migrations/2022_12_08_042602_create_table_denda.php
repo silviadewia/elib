@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('table_denda', function (Blueprint $table) {
             $table->id();
-            $table->decimal('harga',$precision = 10, $scale = 3 );
+            $table->decimal('harga',$precision = 10, $scale = 2 );
             $table->enum('status', ['aktif','tidak']);
             $table->string('dibuat_oleh', 25);
             $table->timestamps();

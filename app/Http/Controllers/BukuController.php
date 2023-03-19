@@ -253,4 +253,25 @@ class BukuController extends Controller
             return redirect()->route('daftar.index')->with('failed', 'Gagal delete Buku');
         }
     }
+
+    /**
+     * Popular Buku
+     * 
+     * @param \App\Models\Buku $buku
+     * @return \Illuminate\Http\Response
+     */
+
+    public function populer()
+    {
+        
+        $buku = Buku::orderBy('created_at', 'desc')->get();
+
+        $data = [
+            'title' => 'Buku Populer',
+            'populer' => $buku,
+            'pengarang' => Pengarang::all(),
+        ];
+
+        return view('buku.populer', $data)->with('i');
+    }
 }

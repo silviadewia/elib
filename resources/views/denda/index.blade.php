@@ -73,7 +73,7 @@
                             @foreach($denda as $value)
                             <tr>
                                 <td>{{ ++$i }}</td>
-                                <td>{{ $value->harga }}</td>
+                                <td>Rp. {{ $value->harga }}</td>
                                 <td>
                                 @if($value->status == 'aktif')
                                 <button class="btn btn-success btn-sm">AKTIF</button>
