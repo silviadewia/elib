@@ -26,20 +26,6 @@
                     </h5>
                 </div>
                 <div class="card-body">
-                    <!--  <a href="{{ route('daftar.create') }}" class="btn btn-info "> Tambah Buku <i
-                                    class="fas fa-plus"></i></a>
-                          <div class="btn-group open">
-                                <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown"
-                                    aria-expanded="true">Sortir Berdasarkan
-                                    <span class="caret"></span>
-                                    <span class="sr-only">Toggle Dropdown</span>
-                                </button>
-                                <ul class="dropdown-menu" role="menu">
-                                    <li><a href="paket">Paket</a></li>
-                                    <li><a href="novel">Novel</a></li>
-                                </ul>
-                            </div> -->
-
                     <table class="table table-bordered table-hover dataTable dtr-inline" name="table-buku"
                         id="table-buku">
                         <thead>
@@ -113,7 +99,7 @@
                                             class="btn btn-primary btn-sm"><i class="fas fa-pen"></i> </a>
                                         <button type="button" class="btn btn-primary btn-sm" id="show" name="show"
                                             data-toggle="modal" data-target="#detailsModal"
-                                            data-url="{{ '/api/cari-buku/' }}" data-value="{{ $value->id }}">
+                                            data-url="{{ route('cari-buku') }}" data-value="{{ $value->id }}">
                                             <i class="fa fa-eye"></i>
                                         </button>
                                         @csrf
