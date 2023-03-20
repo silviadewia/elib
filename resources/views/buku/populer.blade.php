@@ -1,4 +1,4 @@
-@can('buku')
+@can('buku-populer')
 @extends('adminlte::page')
 
 @section('title', $title)
