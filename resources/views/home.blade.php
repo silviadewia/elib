@@ -53,7 +53,8 @@
 @include('wa')
 
 @section('js')
-<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="//code.highcharts.com/highcharts.js"></script>
+<script src="//code.highcharts.com/modules/accessibility.js"></script>
 <script type="text/javascript">
 var userData = <?php echo json_encode($buku_chart)?>;
 Highcharts.chart('container', {
