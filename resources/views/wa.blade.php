@@ -18,6 +18,6 @@
     margin-top: 16px;
 }
 </style>
-<a href="https://api.whatsapp.com/send?phone=6283878799118&text=Halo%2C%20saya%20ada%20kendala%2C%20boleh%20dibantu%3F%0ATerima%20kasiih" class="float" target="_blank">
+<a href="https://api.whatsapp.com/send?phone=6283878799118&text=Hallo%2C%20saya%20pengguna%20E-%20Library%20Eskasaba%20saya%20butuh%20bantuan!" class="float" target="_blank">
 <i class="fab fa-whatsapp my-float"></i>
 </a>

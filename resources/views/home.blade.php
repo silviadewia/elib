@@ -56,7 +56,7 @@
 <script src="//code.highcharts.com/highcharts.js"></script>
 <script src="//code.highcharts.com/modules/accessibility.js"></script>
 <script type="text/javascript">
-var userData =  {{ Js::from($buku_chart) }};
+var userData =  {{ json_encode($buku_chart) }};
 Highcharts.chart('container', {
     title: {
         text: 'CHART BUKU'

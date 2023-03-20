@@ -63,7 +63,7 @@ return [
     |
     */
 
-    'logo' => '<b>Admin</b>Eskasaba',
+    'logo' => '<h3><b>ESKASABA</b></h3>',
     'logo_img' => 'img/logo-elib.png',
     'logo_img_class' => 'brand-image img-square elevation-3',
     'logo_img_xl' => null,

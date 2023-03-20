@@ -7,7 +7,7 @@ use App\Models\Kategori;
 use App\Models\User;
 use App\Models\Denda;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\DB;
 class DashboardController extends Controller
 {
     /**
@@ -27,15 +27,19 @@ class DashboardController extends Controller
      */
     public function index()
     {
+        DB::enableQueryLog();
+
         $data = [
             'count_kategori' => Kategori::count(),
             'count_denda' => Denda::count(),
             'count_user' => User::where('level', 1)->count(),
-            'buku_chart' => Buku::select(\DB::raw("COUNT(*) as count"))
+            'buku_chart' => Buku::select(DB::raw("COUNT(*) as count"))
             ->whereYear('created_at', date('Y'))
-            ->groupBy(\DB::raw("Month(created_at)"))
+            ->groupBy(DB::raw("Month(created_at)"))
             ->pluck('count'),
         ];
+
+        // dd(DB::getQueryLog());
 
         return view('home', $data);
     }

@@ -122,6 +122,7 @@ $('#cari').click(function() {
         _token: "{{ csrf_token() }}",
         tgl_start: date[0],
         tgl_end: date[1],
+        tipe: $('#status').val()
     };
 
     if (tgl_laporan != '') {
@@ -150,6 +151,7 @@ $('#cari').click(function() {
                 },
                 {
                     data: 'id_anggota',
+                    // find anggota from ID 
                     name: 'id_anggota'
                 },
                 {
@@ -158,27 +160,6 @@ $('#cari').click(function() {
                 },
                 {
                     data: 'id_buku',
-                    render: function(data, type, row) {
-                        html  = '';
-                        data = data.split(',');
-                        //each data and ajax
-                        $.each(data, function(index, value) {
-                            $.ajax({
-                                url: "{{ route('cari-buku') }}",
-                                type: 'POST',
-                                data: {
-                                    _token: "{{ csrf_token() }}",
-                                    id_buku: value
-                                },
-                                success: function(data) {
-                                   // return to htnl
-                                    html += '<span class="badge badge-primary">'+data+'</span> ';
-                                    return html;
-                                }
-                            });
-                        });
-                        return html;
-                    },
                     name: 'id_buku'
                 },
                 {
