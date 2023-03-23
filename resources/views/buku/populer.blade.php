@@ -12,7 +12,6 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.css">
 <style>
-
 .tag {
     text-align: center;
     font-size: 1.1rem
@@ -59,9 +58,8 @@
 }
 
 .owl-carousel .owl-item img {
-    width: 45px !important;
-    height: 45px;
-    border-radius: 50%;
+    width: 500px !important;
+    height: 150px;
     object-fit: cover
 }
 
@@ -93,14 +91,17 @@
                         <div class="owl-item">
                             <div class="card d-flex flex-column">
                                 <div class="main font-weight-bold pb-2 pt-1">{{ $item->judul_buku }}</div>
+                                <div class="container">
+                                    <img src="/sampul/{{ $item->sampul }}" class="img-thumbnail">
+                                </div>
                                 <div class="testimonial"> {{ $item->keterangan_lain }}</div>
                                 <div class="d-flex flex-row profile pt-4 mt-auto">
                                     <div class="d-flex flex-column pl-2">
                                         <div class="name">
                                             @foreach ($pengarang as $cari)
-                                                @if ($cari->id == $item->pengarang)
-                                                {{ $cari->nama }}
-                                                @endif
+                                            @if ($cari->id == $item->pengarang)
+                                            {{ $cari->nama }}
+                                            @endif
                                             @endforeach
                                         </div>
                                         <p class="text-muted designation">{{ $item->tahun_buku }}</p>
@@ -134,7 +135,5 @@ $(document).ready(function() {
     });
 });
 </script>
-
 @stop
-
 @endcan

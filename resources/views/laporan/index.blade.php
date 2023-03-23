@@ -53,9 +53,9 @@
                                                 </a>
                                                 <a class="btn btn-success" id="refresh" name="refresh">
                                                     <i class="fa fa-refresh"></i> Refresh</a>
-                                                <a class="btn btn-info"><i class="fa fa-download"></i>
+                                                <a class="btn btn-info" id="excel" name="excel"><i class="fa fa-download"></i>
                                                     Excel</a>
-                                                <a target="_blank" class="btn btn-warning btn-md"><i
+                                                <a class="btn btn-warning btn-md" id="print" name="print" ><i
                                                         class="fa fa-print"></i> Print </a>
                                             </td>
                                         </tr>
