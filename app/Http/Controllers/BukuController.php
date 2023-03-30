@@ -267,7 +267,7 @@ class BukuController extends Controller
 
     public function populer()
     {
-        
+
         $buku = Buku::orderBy('created_at', 'desc')->get();
 
         $data = [
