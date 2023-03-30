@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
             [
                 'name' => 'silvia',
                 'email' => 'callmesil@gmail.com',
+                'nis' => 1234,
                 'password' => Hash::make('kacangbawang'),
                 'created_at' => Carbon::now()->toDateTimeLocalString(),
                 'updated_at' => Carbon::now()->toDateTimeLocalString()
@@ -30,6 +31,7 @@ class DatabaseSeeder extends Seeder
             [
                 'name' => 'nawang',
                 'email' => 'callmenaw@gmail.com',
+                'nis' => 1235,
                 'password' => Hash::make('kacangbawang'),
                 'created_at' => Carbon::now()->toDateTimeLocalString(),
                 'updated_at' => Carbon::now()->toDateTimeLocalString()
@@ -37,6 +39,7 @@ class DatabaseSeeder extends Seeder
             [
                 'name' => 'ardan',
                 'email' => 'callmedan@gmail.com',
+                'nis' => 1236,
                 'password' => Hash::make('kacangbawang'),
                 'created_at' => Carbon::now()->toDateTimeLocalString(),
                 'updated_at' => Carbon::now()->toDateTimeLocalString()
@@ -44,6 +47,7 @@ class DatabaseSeeder extends Seeder
             [
                 'name' => 'herman',
                 'email' => 'callmeman@gmail.com',
+                'nis' => 1237,
                 'password' => Hash::make('kacangbawang'),
                 'created_at' => Carbon::now()->toDateTimeLocalString(),
                 'updated_at' => Carbon::now()->toDateTimeLocalString()

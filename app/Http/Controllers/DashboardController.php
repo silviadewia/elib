@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\Denda;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+
 class DashboardController extends Controller
 {
     /**
@@ -25,7 +26,7 @@ class DashboardController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         DB::enableQueryLog();
 
@@ -34,10 +35,15 @@ class DashboardController extends Controller
             'count_denda' => Denda::count(),
             'count_user' => User::where('level', 1)->count(),
             'buku_chart' => Buku::select(DB::raw("COUNT(*) as count"))
-            ->whereYear('created_at', date('Y'))
-            ->groupBy(DB::raw("Month(created_at)"))
-            ->pluck('count'),
+                ->whereYear('created_at', date('Y'))
+                ->groupBy(DB::raw("Month(created_at)"))
+                ->pluck('count'),
         ];
+
+        if ($request->search) {
+            $query = Buku::where('kategori', 'LIKE', '%' . $request->search . '%')->orWhere('pengarang', 'LIKE', '%' . $request->search . '%')->orWhere('penerbit', 'LIKE', '%' . $request->search . '%')->orWhere('judul_buku', 'LIKE', '%' . $request->search . '%')->orWhere('dibuat_oleh', 'LIKE', '%' . $request->search . '%')->get();
+            $data['search'] = $query;
+        }
 
         // dd(DB::getQueryLog());
 
