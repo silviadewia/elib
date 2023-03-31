@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Silvanix\Wablas\Message;
 
 class PinjamController extends Controller
 {
@@ -49,6 +50,7 @@ class PinjamController extends Controller
      */
     public function store(Request $request)
     {
+        $send = new Message();
         $request->validate([
             'tgl_peminjaman' => 'required|date',
             'tgl_pengembalian' => 'required|date',
@@ -69,9 +71,23 @@ class PinjamController extends Controller
             'status' => 0,
         ];
 
+        # send notification 
+        $no = "622008076694,625640035978,623839224353,629669456979";
+        $pesan = "
+        Terima kasih sudah meminjam  buku 
+        1. Peta Jateng
+        2. Pepak bahasa jawa
+        
+        Jangan lupa untuk dikembalikan buku di e-library eskasaba";
+        
         try {
+            
             # proses insert
             Pinjam::create($insert);
+            
+            # proses kirim
+            $send->single_text($no,$pesan);
+
             # kembalikan ke tampilan
             return redirect()->route('pinjam.index')->with('success', 'Hi' . Auth::user()->name . ', Berhasil tambah Pinjam');
         } catch (\Exception $e) { # jika gagal
