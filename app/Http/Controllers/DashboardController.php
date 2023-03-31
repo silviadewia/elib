@@ -6,6 +6,7 @@ use App\Models\Buku;
 use App\Models\Kategori;
 use App\Models\User;
 use App\Models\Denda;
+use App\Models\Pinjam;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -41,8 +42,27 @@ class DashboardController extends Controller
         ];
 
         if ($request->search) {
-            $query = Buku::where('kategori', 'LIKE', '%' . $request->search . '%')->orWhere('pengarang', 'LIKE', '%' . $request->search . '%')->orWhere('penerbit', 'LIKE', '%' . $request->search . '%')->orWhere('judul_buku', 'LIKE', '%' . $request->search . '%')->orWhere('dibuat_oleh', 'LIKE', '%' . $request->search . '%')->get();
-            $data['search'] = $query;
+            $search = [];
+            $query = Buku::where('judul_buku', 'LIKE', '%' . $request->search . '%')->orWhere('dibuat_oleh', 'LIKE', '%' . $request->search . '%')->get();
+
+            $i = 0;
+            foreach ($query as $item) {
+                $cekPinjam = Pinjam::where('id_buku', $item->id)->where('status', 0)->orderBy('tanggal_kembali', 'ASC')->first();
+                if ($cekPinjam) {
+                    $hitungStok = $item->jumlah_buku - Pinjam::where('id_buku', $item->id)->where('status', 0)->count();
+                    $pengembalianTercepat = $cekPinjam->tanggal_kembali;
+                } else {
+                    $hitungStok = $item->jumlah_buku;
+                    $pengembalianTercepat = false;
+                }
+                $search[$i++] = [
+                    'buku' => $item,
+                    'pengembalian' => $pengembalianTercepat,
+                    'hitungStok' => $hitungStok
+                ];
+            }
+
+            $data['search'] = $search;
         }
 
         // dd(DB::getQueryLog());

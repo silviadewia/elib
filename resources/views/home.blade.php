@@ -52,7 +52,8 @@
                         <form action="" method="get">
                             <div class="d-flex justify-content-center px-9">
                                 <div class="search">
-                                    <input type="text" class="search-input" placeholder="Search..." name="search">
+                                    <input type="text" class="search-input" placeholder="Search..." name="search"
+                                        value="{{ Request::get('search') }}">
                                     <button type="submit" class="search-icon"><i class="fa fa-search"></i></button>
                                 </div>
                             </div>
@@ -163,23 +164,33 @@
                         </style>
                         <div class="row mt-4 g-1 px-4 mb-5">
 
-                            @forelse ($search as $item)
-                                <div class="col-md-2">
-                                    <a href="/buku/{{ $item->id }}">
+                            @if (Request::get('search'))
+                                @forelse ($search as $item)
+                                    <div class="col-md-2">
                                         <div class="card-inner p-6 d-flex flex-column align-items-center"> <img
-                                                src="/sampul/{{ $item->sampul }}" width="150px" height="150px"
+                                                src="/sampul/{{ $item['buku']->sampul }}" width="150px" height="150px"
                                                 objectfit="contain;">
-                                            <div class="text-center mg-text"> <span
-                                                    class="mg-text">{{ $item->judul_buku }}</span>
+                                            <div class="text-center mg-text">
+                                                <span class="mg-text">{{ $item['buku']->judul_buku }}</span> <br>
+                                                @if ($item['hitungStok'] !== 0)
+                                                    <span class="mg-text">Stok : {{ $item['hitungStok'] }}</span>
+                                                @else
+                                                    <span class="mg-text">Pengembalian tercepat :
+                                                        {{ $item['pengembalian'] }}</span>
+                                                @endif
                                             </div>
                                         </div>
-                                    </a>
-                                </div>
-                            @empty
+                                    </div>
+                                @empty
+                                    <div class="col-12 text-center">
+                                        Buku tidak ditemukan
+                                    </div>
+                                @endforelse
+                            @else
                                 <div class="col-12 text-center">
-                                    Buku tidak ditemukan
+
                                 </div>
-                            @endforelse
+                            @endif
 
                         </div>
                     </div>
