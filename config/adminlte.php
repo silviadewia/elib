@@ -303,10 +303,6 @@ return [
 
         // Sidebar items:
         [
-            'type' => 'sidebar-menu-search',
-            'text' => 'search',
-        ],
-        [
             'text' => 'Dashboard',
             'url'  => 'dashboard',
             'icon' => 'fas fa-tachometer-alt',

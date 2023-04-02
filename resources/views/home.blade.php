@@ -4,11 +4,11 @@
     <div class="containe-fluid">
         @if (Auth::user()->level == 1)
             <div class="row">
-                <div class="col-lg-4 col-xs-8">
+                <div class="col-lg-6 col-xs-6">
                     <div class="small-box bg-blue">
                         <div class="inner">
                             <p>Profile</p>
-                            <h3>{{ $count_user }}</h3>
+                            <h4>{{ $count_user }} Pengguna</h4>
                         </div>
                         <div class="icon">
                             <i class="fa fa-users"></i>
@@ -16,31 +16,17 @@
                         <a href="/profile" class="small-box-footer">Profile ... <i class="fa fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
-                <div class="col-lg-4 col-xs-8">
+                <div class="col-lg-6 col-xs-8">
 
                     <div class="small-box bg-green">
                         <div class="inner">
                             <p>Buku Peminjaman Anda</p>
-                            <h3>{{ $count_denda }}</h3>
+                            <h4>{{ $count_pinjam }} Pinjam </h4>
                         </div>
                         <div class="icon">
                             <i class="fa fa-bars"></i>
                         </div>
                         <a href="{{ route('pinjam.index') }}" class="small-box-footer">Selengkapnya ... <i
-                                class="fa fa-arrow-circle-right"></i></a>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-xs-8">
-
-                    <div class="small-box bg-red">
-                        <div class="inner">
-                            <p>DENDA</p>
-                            <h3>{{ $count_denda }}</h3>
-                        </div>
-                        <div class="icon">
-                            <i class="fa fa-book"></i>
-                        </div>
-                        <a href="{{ route('denda.index') }}" class="small-box-footer">Selengkapnya ... <i
                                 class="fa fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
@@ -202,13 +188,13 @@
         <div class="col-lg-4 col-xs-8">
             <div class="small-box bg-blue">
                 <div class="inner">
-                    <p>Profile</p>
-                    <h3>{{ $count_user }}</h3>
+                    <p>Pengguna</p>
+                    <h4>{{ $count_user }} Pengguna</h4>
                 </div>
                 <div class="icon">
                     <i class="fa fa-users"></i>
                 </div>
-                <a href="/profile" class="small-box-footer">Profile ... <i class="fa fa-arrow-circle-right"></i></a>
+                <a href="{{ route('pengguna.index') }}"  class="small-box-footer">Selengkapnya ... <i class="fa fa-arrow-circle-right"></i></a>
             </div>
         </div>
         <div class="col-lg-4 col-xs-8">
@@ -216,7 +202,7 @@
             <div class="small-box bg-red">
                 <div class="inner">
                     <p>DENDA</p>
-                    <h3>{{ $count_denda }}</h3>
+                    <h4>{{ $count_denda }} Denda</h4>
                 </div>
                 <div class="icon">
                     <i class="fa fa-book"></i>
@@ -231,7 +217,7 @@
             <div class="small-box bg-yellow">
                 <div class="inner">
                     <p>KATEGORI</p>
-                    <h3>{{ $count_kategori }}</h3>
+                    <h4>{{ $count_kategori }} Kategori</h4>
                 </div>
                 <div class="icon">
                     <i class="fa fa-list"></i>

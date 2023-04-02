@@ -17,12 +17,14 @@
                         Tabel Pinjam
                     </h3>
                 </div>
+                @if(Auth::user()->level == '0')
                 <div class="card-header">
                     <h5 class="card-title">
                         <a href="{{ route('pinjam.create') }}" class="text-right btn btn-info "> Tambah pinjam <i
                                 class="fas fa-plus"></i></a>
                     </h5>
                 </div>
+		@endif
                 <br>
                 <div class="box-body">
                     <div class="card-header">
@@ -45,7 +47,9 @@
                                         <th>Tanggal Pinjaman</th>
                                         <th>Tanggal Kembali</th>
                                         <th>Denda</th>
+                                        @if(Auth::user()->level == '0')
                                         <th>Aksi</th>
+                                        @endif
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -79,6 +83,7 @@
                                             }
                                             @endphp
                                         </td>
+                                        @if(Auth::user()->level == '0')
                                         <td>
                                             <form action="{{ route('pinjam.destroy', $value->id) }}" method="post">
                                                 <!-- <a href="{{ route('pinjam.show', $value->id) }}"
@@ -93,6 +98,7 @@
                                                     <i class="fas fa-trash"></i></button>
                                             </form>
                                         </td>
+                                        @endif
                                     </tr>
                                     @endforeach
                                 </tbody>

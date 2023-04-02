@@ -51,12 +51,6 @@
                                                 <a name="cari" id="cari" class="btn btn-primary">
                                                     <i class="fa fa-search"></i> Cari
                                                 </a>
-                                                <a class="btn btn-success" id="refresh" name="refresh">
-                                                    <i class="fa fa-refresh"></i> Refresh</a>
-                                                <a class="btn btn-info" id="excel" name="excel"><i class="fa fa-download"></i>
-                                                    Excel</a>
-                                                <a class="btn btn-warning btn-md" id="print" name="print" ><i
-                                                        class="fa fa-print"></i> Print </a>
                                             </td>
                                         </tr>
                                     </tbody>

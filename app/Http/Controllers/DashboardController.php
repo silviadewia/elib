@@ -9,6 +9,7 @@ use App\Models\Denda;
 use App\Models\Pinjam;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Symfony\Component\HttpKernel\Profiler\Profile;
 
 class DashboardController extends Controller
 {
@@ -32,6 +33,7 @@ class DashboardController extends Controller
         DB::enableQueryLog();
 
         $data = [
+            'count_pinjam' => Pinjam::count(),
             'count_kategori' => Kategori::count(),
             'count_denda' => Denda::count(),
             'count_user' => User::where('level', 1)->count(),
