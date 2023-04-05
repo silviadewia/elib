@@ -4,7 +4,7 @@
     width: 60px;
     height: 60px;
     bottom: 40px;
-    left: 40px;
+    right: 60px;
     background-color: #25d366;
     color: #FFF;
     border-radius: 50px;

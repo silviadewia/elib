@@ -66,11 +66,11 @@
                                     name="table-pinjam" id="table-pinjam">
                                     <thead>
                                         <tr>
-                                            <th>No pinjaman</th>
+                                            <th>No Pinjam</th>
                                             <th>Tanggal pinjaman</th>
-                                            <th>Id Anggota</th>
+                                            <th>Nama Anggota</th>
                                             <th>Lama pinjaman</th>
-                                            <th>Id Buku</th>
+                                            <th>Nama Buku</th>
                                             <th>Tanggal Kembali</th>
                                             <th>Denda</th>
                                         </tr>
@@ -144,9 +144,9 @@ $('#cari').click(function() {
                     name: 'tgl_pinjam'
                 },
                 {
-                    data: 'id_anggota',
+                    data: 'nama_lengkap',
                     // find anggota from ID 
-                    name: 'id_anggota'
+                    name: 'nama_lengkap'
                 },
                 {
                     data: 'lama',

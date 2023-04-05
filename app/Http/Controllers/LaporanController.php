@@ -54,7 +54,10 @@ class LaporanController extends Controller
 
         try {
             // datatable result 
-            $get = $pinjam->where('tanggal_pinjam', '>=' ,$insert['tgl_start'])->where('tanggal_kembali', '<',$insert['tgl_end'])->get();
+            $get = $pinjam
+                    ->join('users', 'users.id', '=', 'table_pinjam.id_anggota')
+                    ->where('tanggal_pinjam', '>=' ,$insert['tgl_start'])->where('tanggal_kembali', '<',$insert['tgl_end'])->get();
+
             $result = [
                 "data" => $get,
                 "recordsTotal" => $get->count(),
