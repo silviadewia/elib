@@ -7,13 +7,12 @@
                 <div class="col-lg-6 col-xs-6">
                     <div class="small-box bg-blue">
                         <div class="inner">
-                            <p>Profile</p>
-                            <h4>{{ $count_user }} Pengguna</h4>
+                            <p>Total Buku</p>
+                            <h4>{{ $count_buku }} Buku</h4>
                         </div>
                         <div class="icon">
                             <i class="fa fa-users"></i>
                         </div>
-                        <a href="/profile" class="small-box-footer">Profile ... <i class="fa fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
                 <div class="col-lg-6 col-xs-8">
@@ -26,8 +25,6 @@
                         <div class="icon">
                             <i class="fa fa-bars"></i>
                         </div>
-                        <a href="{{ route('pinjam.index') }}" class="small-box-footer">Selengkapnya ... <i
-                                class="fa fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
             </div>
