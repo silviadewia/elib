@@ -30,12 +30,14 @@ class DashboardController extends Controller
      */
     public function index(Request $request)
     {
-        DB::enableQueryLog();
+        $level = \Auth::user()->level;
+        $id_anggota = \Auth::user()->id;
 
         $data = [
             'count_pinjam' => Pinjam::count(),
             'count_kategori' => Kategori::count(),
             'count_denda' => Denda::count(),
+            'count_buku' => Buku::count(),
             'count_user' => User::where('level', 1)->count(),
             'buku_chart' => Buku::select(DB::raw("COUNT(*) as count"))
                 ->whereYear('created_at', date('Y'))
@@ -49,7 +51,13 @@ class DashboardController extends Controller
 
             $i = 0;
             foreach ($query as $item) {
-                $cekPinjam = Pinjam::where('id_buku', $item->id)->where('status', 0)->orderBy('tanggal_kembali', 'ASC')->first();
+
+                if($level == 1) {
+                    $cekPinjam = Pinjam::where('id_buku', $item->id)->where('id_anggota', $id_anggota)->orderBy('tanggal_kembali', 'ASC')->first();
+                }else{
+                    $cekPinjam = Pinjam::where('id_buku', $item->id)->where('status', 0)->orderBy('tanggal_kembali', 'ASC')->first();
+                }
+
                 if ($cekPinjam) {
                     $hitungStok = $item->jumlah_buku - Pinjam::where('id_buku', $item->id)->where('status', 0)->count();
                     $pengembalianTercepat = $cekPinjam->tanggal_kembali;
@@ -66,8 +74,6 @@ class DashboardController extends Controller
 
             $data['search'] = $search;
         }
-
-        // dd(DB::getQueryLog());
 
         return view('home', $data);
     }
