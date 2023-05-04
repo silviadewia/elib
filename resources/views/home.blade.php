@@ -13,6 +13,7 @@
                         <div class="icon">
                             <i class="fa fa-users"></i>
                         </div>
+                        <a href="/buku/buku-populer" class="small-box-footer">Buku<i class="fa fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
                 <div class="col-lg-6 col-xs-8">
@@ -25,6 +26,8 @@
                         <div class="icon">
                             <i class="fa fa-bars"></i>
                         </div>
+                        <a href="{{ route('pinjam.index') }}" class="small-box-footer">Selengkapnya ... <i
+                                class="fa fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
             </div>
